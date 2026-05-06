@@ -69,12 +69,12 @@ nav.scrolled{
   border-bottom:1px solid var(--line);
   padding:1rem 4rem
 }
-.n-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
-.n-emblem{width:42px;height:42px;flex-shrink:0;position:relative}
+.n-logo{display:flex;align-items:center;gap:16px;text-decoration:none}
+.n-emblem{width:58px;height:58px;flex-shrink:0;position:relative}
 .n-emblem svg{width:100%;height:100%}
-.n-wordmark{display:flex;flex-direction:column;gap:2px}
-.n-wordmark strong{font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--white)}
-.n-wordmark span{font-family:'Fira Code',monospace;font-size:.5rem;font-weight:300;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.n-wordmark{display:flex;flex-direction:column;gap:3px}
+.n-wordmark strong{font-family:'Cabinet Grotesk',sans-serif;font-size:1.2rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--white)}
+.n-wordmark span{font-family:'Fira Code',monospace;font-size:.56rem;font-weight:300;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 .n-links{display:flex;gap:2.5rem;list-style:none}
 .n-links a{font-family:'Fira Code',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;position:relative}
 .n-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold2);transform:scaleX(0);transition:transform .2s;transform-origin:left}
@@ -574,6 +574,65 @@ footer{
 .f-tagline{font-family:'Fraunces',serif;font-style:italic;font-size:.9rem;color:var(--foam);opacity:.45}
 
 /* ═══════════════════════════════════════
+   WHATSAPP FLOAT BUTTON
+═══════════════════════════════════════ */
+.wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:9000;
+  width:58px;height:58px;border-radius:50%;
+  background:#25d366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 24px rgba(37,211,102,.45);
+  text-decoration:none;transition:all .25s;cursor:none
+}
+.wa-float:hover{background:#20ba58;transform:scale(1.1);box-shadow:0 10px 34px rgba(37,211,102,.6)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+.wa-tooltip{
+  position:absolute;right:70px;top:50%;transform:translateY(-50%);
+  background:rgba(1,11,20,.9);border:1px solid rgba(37,211,102,.3);border-radius:3px;
+  padding:.4rem .9rem;font-family:'Fira Code',monospace;font-size:.6rem;
+  color:#25d366;letter-spacing:.08em;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity .2s
+}
+.wa-float:hover .wa-tooltip{opacity:1}
+
+/* ═══════════════════════════════════════
+   SUSTAINABILITY SECTION
+═══════════════════════════════════════ */
+#sustainability{background:linear-gradient(160deg,#020e18 0%,#041c2a 50%,#020e18 100%);overflow:hidden}
+#sustainability::before{
+  content:'';position:absolute;top:-300px;left:-200px;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(8,196,168,.06) 0%,transparent 65%);
+  pointer-events:none
+}
+.sus-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;max-width:1200px;align-items:center}
+.sus-cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.sus-card{
+  padding:1.5rem 1.4rem;background:var(--faint);border:1px solid var(--line);
+  border-radius:6px;transition:all .3s;position:relative;overflow:hidden
+}
+.sus-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--teal),transparent);
+  transform:scaleX(0);transition:transform .3s;transform-origin:left
+}
+.sus-card:hover{background:rgba(8,196,168,.06);border-color:rgba(8,196,168,.2);transform:translateY(-3px)}
+.sus-card:hover::before{transform:scaleX(1)}
+.sus-icon{font-size:1.8rem;margin-bottom:.8rem;display:block}
+.sus-card-title{font-family:'Cabinet Grotesk',sans-serif;font-size:.82rem;font-weight:700;
+  color:var(--teal2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.sus-card-txt{font-family:'Fira Code',monospace;font-size:.64rem;font-weight:300;
+  color:var(--muted);line-height:1.85}
+.sus-body{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:300;color:var(--foam);line-height:1.8}
+.sus-body p{margin-bottom:1.2rem}
+.sus-body strong{font-weight:400;color:var(--teal2)}
+.sus-stat-row{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.sus-stat{text-align:center}
+.sus-stat strong{display:block;font-family:'Fraunces',serif;font-size:2.2rem;font-weight:700;
+  color:var(--teal2);line-height:1}
+.sus-stat span{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted)}
+/* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media(max-width:1024px){
@@ -581,7 +640,7 @@ footer{
   nav.scrolled{padding-left:2rem;padding-right:2rem}
   .hero{padding-left:2rem;padding-right:2rem}
   .n-links{display:none}
-  .about-grid,.exp-grid,.dsm-wrap,.founder-wrap,.contact-grid{grid-template-columns:1fr;gap:3.5rem}
+  .about-grid,.exp-grid,.dsm-wrap,.founder-wrap,.contact-grid,.sus-grid{grid-template-columns:1fr;gap:3.5rem}
   .rm-grid{grid-template-columns:1fr}
   .svc-block{flex-direction:column!important;padding-top:4rem;padding-bottom:4rem}
   .svc-visual{margin-top:2rem;width:100%}
@@ -593,6 +652,7 @@ footer{
   #about .bg-word{display:none}
   .hero-coords{display:none}
   .frm-row{grid-template-columns:1fr}
+  .wa-float{bottom:1.2rem;right:1.2rem;width:52px;height:52px}
 }
 </style>
 </head>
@@ -605,12 +665,12 @@ footer{
 <nav id="nav">
   <a href="#" class="n-logo">
     <div class="n-emblem">
-      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1.5" y="1.5" width="39" height="39" rx="3" stroke="#c8960c" stroke-width="1.2"/>
-        <line x1="21" y1="7" x2="21" y2="24" stroke="#c8960c" stroke-width="1.3" stroke-linecap="round"/>
-        <path d="M21 7 L11 22 L21 22 Z" fill="rgba(200,150,12,.4)"/>
-        <path d="M5 30 C9 25 13 29 17 26 C21 23 25 28 29 25 C33 22 37 27 41 24" stroke="#4bbcd8" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M5 34 C9 30 13 33 17 31 C21 29 25 33 29 31 C33 29 37 32 41 30" stroke="rgba(75,188,216,.45)" stroke-width="1" fill="none" stroke-linecap="round"/>
+      <svg viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/>
+        <line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/>
+        <path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="n-wordmark">
@@ -623,6 +683,7 @@ footer{
     <li><a href="#services">Services</a></li>
     <li><a href="#expertise">Expertise</a></li>
     <li><a href="#dsm">Deep Sea</a></li>
+    <li><a href="#sustainability">Sustainability</a></li>
     <li><a href="#founder">Team</a></li>
     <li><a href="#roadmap">Vision</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -794,7 +855,7 @@ footer{
     </div>
     <div class="svc-visual">
       <div class="vessel-card">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=700&q=80" alt="Semi-industrial fishing vessel" onerror="this.style.display='none'">
+        <img src="https://i.ibb.co/Z9CGbzv/Chat-GPT-Image-May-6-2026-11-57-18-PM.png" alt="Semi-industrial fishing vessel">
         <div class="vessel-card-body">
           <div class="vessel-card-title">Commercial Fishing Vessel — GRP Series</div>
           <div class="vessel-card-sub">Designed for East African coastal operations</div>
@@ -913,8 +974,8 @@ footer{
     <div class="svc-content">
       <div class="svc-num-big">03</div>
       <div class="svc-eyebrow">Service 03</div>
-      <h3 class="svc-h">Modular Manned<br><em>Mini-Submersibles</em><br>& ROV Systems</h3>
-      <p class="svc-p">Bahari BlueTech is developing design capability for modular manned mini-submersibles and Remotely Operated Vehicles (ROVs) engineered for shallow-water inspection, aquaculture monitoring, reef survey, and research operations in East African coastal and offshore environments. These platforms address a structural gap: African research institutions, port authorities, and aquaculture operators currently have no access to locally designed or maintained underwater observation systems. Bahari BlueTech's submersible design programme targets operational depths from 0 to 600 metres, with vessels optimised for tropical coral reef environments, limited-infrastructure deployment, and multi-mission reconfiguration.</p>
+      <h3 class="svc-h">Modular Unmanned<br><em>ROV Systems</em><br>& Subsea Technology</h3>
+      <p class="svc-p">Bahari BlueTech is developing design capability for modular Unmanned Remotely Operated Vehicles (ROVs) engineered for shallow-water inspection, aquaculture monitoring, reef survey, and research operations in East African coastal and offshore environments. These platforms address a structural gap: African research institutions, port authorities, and aquaculture operators currently have no access to locally designed or maintained underwater observation systems. Bahari BlueTech's ROV design programme targets operational depths from 0 to 600 metres, with vehicles optimised for tropical coral reef environments, limited-infrastructure deployment, and multi-mission reconfiguration.</p>
       <div class="svc-tags">
         <span class="stag">Mini-Sub Design</span>
         <span class="stag">ROV Systems</span>
@@ -927,7 +988,7 @@ footer{
     </div>
     <div class="svc-visual">
       <div class="sub-visual">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Shinkai_6500_p1.jpg/1280px-Shinkai_6500_p1.jpg" alt="Manned research submersible" onerror="this.src='';this.style.background='var(--mid)';this.style.height='300px'">
+        <img src="https://i.ibb.co/MDm3sFBG/Chat-GPT-Image-May-7-2026-12-21-54-AM.png" alt="Unmanned ROV system" onerror="this.src='';this.style.background='var(--mid)';this.style.height='300px'">
         <div class="sub-glow"></div>
         <div class="biolum-particles" id="biolum"></div>
         <div class="depth-badge">
@@ -962,7 +1023,7 @@ footer{
         <div class="design-card">
           <div class="dc-label">// Vessel Design — Active File</div>
           <div class="dc-visual">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" alt="Engineering design work" onerror="this.style.display='none'">
+            <img src="https://i.ibb.co/tT2pKTDp/Chat-GPT-Image-May-7-2026-01-08-00-AM.png" alt="Marine engineering design work">
             <div class="dc-overlay"></div>
           </div>
           <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
@@ -1160,8 +1221,8 @@ footer{
   <h2 class="sec-title">The team behind <em>Bahari BlueTech.</em></h2>
   <div class="founder-wrap reveal">
     <div class="founder-img-block">
-      <div class="founder-avatar">
-        <img src="https://i.ibb.co/QFn6QWzD/Chat-GPT-Image-May-6-2026-10-56-05-PM.png" alt="Founder of Bahari BlueTech" style="width:100%; height:100%; object-fit:cover;"> 
+      <div class="founder-avatar" style="background:none">
+        <img src="https://i.ibb.co/QFn6QWzD/Chat-GPT-Image-May-6-2026-10-56-05-PM.png" alt="Cyril Kariuki — Founder & Marine Engineer" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:8px">
         <div class="founder-frame"></div>
       </div>
       <div class="founder-title-card">
@@ -1189,6 +1250,57 @@ footer{
         <a href="https://www.linkedin.com/in/cyril-kariuki-marine109/" target="_blank" rel="noopener" class="btn-sec" style="font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(160,212,232,.2);color:var(--foam);padding:.7rem 1.5rem;border-radius:2px;text-decoration:none;transition:all .25s">
           LinkedIn Profile →
         </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SUSTAINABILITY ══════════ -->
+<section id="sustainability">
+  <div class="eyebrow">Our commitment</div>
+  <h2 class="sec-title">Engineering for the <em>ocean's future,</em><br>not just the present.</h2>
+  <div class="sus-grid reveal">
+    <div>
+      <div class="sus-body">
+        <p>Bahari BlueTech operates with a fundamental conviction: that the blue economy can only be truly sustainable if the engineering practices that build it are responsible, circular, and forward-thinking. The company integrates environmental responsibility into every stage of its design, fabrication, and advisory work.</p>
+        <p>From the choice of materials in vessel construction to the governance frameworks the company advocates for at the policy level, <strong>sustainability is not an add-on — it is embedded in Bahari BlueTech's technical DNA.</strong></p>
+      </div>
+      <div class="sus-stat-row">
+        <div class="sus-stat"><strong>0</strong><span>Toxic coatings in vessel specs</span></div>
+        <div class="sus-stat"><strong>100%</strong><span>Circular design principles</span></div>
+        <div class="sus-stat"><strong>↓60%</strong><span>GRP waste target vs traditional build</span></div>
+      </div>
+    </div>
+    <div class="sus-cards">
+      <div class="sus-card">
+        <span class="sus-icon">♻️</span>
+        <div class="sus-card-title">Recycled Materials</div>
+        <div class="sus-card-txt">Bahari BlueTech actively researches the use of recycled plastics and reclaimed composite materials in fiberglass vessel construction — reducing ocean plastic waste by integrating it back into marine manufacturing.</div>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">🌊</span>
+        <div class="sus-card-title">Marine Pollution Reduction</div>
+        <div class="sus-card-txt">All vessel and aquaculture designs are engineered to minimise environmental discharge, antifouling chemical use, and sediment disruption — protecting the coastal ecosystems on which communities depend.</div>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">🔄</span>
+        <div class="sus-card-title">Circular Economy Design</div>
+        <div class="sus-card-txt">Equipment and vessel designs are modular, repairable, and end-of-life recyclable. Bahari BlueTech builds for longevity, reducing the replacement cycle burden on coastal fishing communities.</div>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">🐠</span>
+        <div class="sus-card-title">Responsible Ocean Use</div>
+        <div class="sus-card-txt">The company's IMTA aquaculture systems are designed as closed-loop, multi-species ecosystems that mimic natural marine nutrient cycles — producing food while restoring coastal water quality.</div>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">⚡</span>
+        <div class="sus-card-title">Low-Carbon Engineering</div>
+        <div class="sus-card-txt">Vessel designs incorporate fuel optimisation modelling, hull efficiency analysis, and readiness for hybrid-electric propulsion — positioning client fleets for the low-carbon maritime transition.</div>
+      </div>
+      <div class="sus-card">
+        <span class="sus-icon">🌍</span>
+        <div class="sus-card-title">Blue Economy Leadership</div>
+        <div class="sus-card-txt">Through governance advisory work, Bahari BlueTech advocates for robust marine spatial planning and responsible seabed resource governance that protects Africa's ocean ecosystems for future generations.</div>
       </div>
     </div>
   </div>
@@ -1291,7 +1403,11 @@ footer{
       </div>
       <div>
         <div class="ci-lbl">Email</div>
-        <div class="ci-val">info@bahariblutech.co.ke</div>
+        <div class="ci-val">cyrilmarine002@gmail.com</div>
+      </div>
+      <div>
+        <div class="ci-lbl">WhatsApp</div>
+        <div class="ci-val"><a href="https://wa.me/254726637070" style="color:var(--teal2);text-decoration:none">+254 726 637 070</a></div>
       </div>
       <div>
         <div class="ci-lbl">Languages</div>
@@ -1328,10 +1444,20 @@ footer{
   <div class="f-left">
     <span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya · All rights reserved</span>
     <div class="f-sep"></div>
-    <span class="f-copy">info@bahariblutech.co.ke</span>
+    <span class="f-copy">cyrilmarine002@gmail.com</span>
+    <div class="f-sep"></div>
+    <span class="f-copy">+254 726 637 070</span>
   </div>
   <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
 </footer>
+
+<!-- ══════════ WHATSAPP FLOAT ══════════ -->
+<a href="https://wa.me/254726637070" target="_blank" rel="noopener" class="wa-float" title="Chat on WhatsApp">
+  <div class="wa-tooltip">Chat on WhatsApp</div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
 
 <!-- ══════════════════════════════════════
    JAVASCRIPT
