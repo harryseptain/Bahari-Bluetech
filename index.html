@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahari BlueTech | Marine Engineering & Ocean Innovation — Mombasa, Kenya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root{
+  --void:#010b14;
+  --abyss:#020f1e;
+  --deep:#041828;
+  --ocean:#062038;
+  --mid:#08304e;
+  --brine:#0e4d70;
+  --steel:#1a7090;
+  --horizon:#2896b8;
+  --sky:#4bbcd8;
+  --foam:#a0d4e8;
+  --mist:#d4eaf5;
+  --white:#f0eee8;
+  --gold:#c8960c;
+  --gold2:#e8b830;
+  --gold3:#f5d060;
+  --teal:#08c4a8;
+  --teal2:#20e8cc;
+  --bio:#00ff9f;  /* bioluminescence */
+  --bio2:#40ffca;
+  --muted:#4a7a94;
+  --line:rgba(160,212,232,.08);
+  --lineg:rgba(160,212,232,.14);
+  --faint:rgba(160,212,232,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
+body{background:var(--void);color:var(--white);font-family:'Cabinet Grotesk',sans-serif;overflow-x:hidden;cursor:none}
+img{max-width:100%;display:block}
+a{cursor:none}
+button{cursor:none}
+
+/* ═══ CURSOR ═══ */
+#c1,#c2{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s,border-color .2s}
+#c1{width:9px;height:9px;background:var(--gold2)}
+#c2{width:40px;height:40px;border:1px solid rgba(232,184,48,.3);background:transparent;transition:transform .18s,width .25s,height .25s}
+.c-big #c1{width:18px;height:18px;background:var(--teal2)}
+.c-big #c2{width:60px;height:60px;border-color:rgba(32,232,204,.4)}
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--abyss)}
+::-webkit-scrollbar-thumb{background:var(--brine);border-radius:2px}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:1.4rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s
+}
+nav.scrolled{
+  background:rgba(1,11,20,.9);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+  padding:1rem 4rem
+}
+.n-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.n-emblem{width:42px;height:42px;flex-shrink:0;position:relative}
+.n-emblem svg{width:100%;height:100%}
+.n-wordmark{display:flex;flex-direction:column;gap:2px}
+.n-wordmark strong{font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--white)}
+.n-wordmark span{font-family:'Fira Code',monospace;font-size:.5rem;font-weight:300;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.n-links{display:flex;gap:2.5rem;list-style:none}
+.n-links a{font-family:'Fira Code',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;position:relative}
+.n-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold2);transform:scaleX(0);transition:transform .2s;transform-origin:left}
+.n-links a:hover{color:var(--gold2)}
+.n-links a:hover::after{transform:scaleX(1)}
+.n-cta{
+  font-family:'Fira Code',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(200,150,12,.4);padding:.55rem 1.4rem;border-radius:2px;
+  text-decoration:none;transition:all .25s;position:relative;overflow:hidden
+}
+.n-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform .25s;z-index:-1}
+.n-cta:hover{color:var(--void);border-color:var(--gold)}
+.n-cta:hover::before{transform:translateX(0)}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero{
+  min-height:100vh;position:relative;display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;padding:0 4rem;overflow:hidden
+}
+#hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-gradient{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 40%,rgba(8,48,78,.5) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 50% at 15% 70%,rgba(8,196,168,.06) 0%,transparent 60%),
+    linear-gradient(180deg,rgba(1,11,20,.6) 0%,rgba(1,11,20,.2) 50%,rgba(1,11,20,.9) 100%)
+}
+.hero-content{position:relative;z-index:3;max-width:820px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2rem;
+  opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both .2s
+}
+.hero-tag::before{content:'';width:36px;height:1px;background:var(--gold);opacity:.6}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--teal2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.hero-h1{
+  font-family:'Fraunces',serif;font-size:clamp(3.5rem,9vw,8.5rem);font-weight:300;
+  line-height:.9;letter-spacing:-.025em;margin-bottom:2.2rem;
+  opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both .4s
+}
+.hero-h1 .it{font-style:italic;color:var(--sky)}
+.hero-h1 .gd{color:var(--gold3)}
+.hero-h1 .sm{font-size:55%;vertical-align:super;color:var(--teal)}
+.hero-sub{
+  font-family:'Fira Code',monospace;font-size:.78rem;font-weight:300;line-height:2;
+  color:var(--foam);max-width:520px;margin-bottom:3rem;
+  opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both .6s
+}
+.hero-actions{
+  display:flex;gap:1.5rem;align-items:center;
+  opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both .8s
+}
+.btn-prim{
+  font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--gold2);color:var(--void);padding:.95rem 2.4rem;border-radius:2px;
+  text-decoration:none;font-weight:500;transition:all .25s;position:relative;overflow:hidden
+}
+.btn-prim::after{content:'→';position:absolute;right:-1.5rem;top:50%;transform:translateY(-50%);transition:right .25s}
+.btn-prim:hover{background:var(--gold3);padding-right:3rem}
+.btn-prim:hover::after{right:.9rem}
+.btn-sec{
+  font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(160,212,232,.2);color:var(--foam);padding:.95rem 2.4rem;border-radius:2px;
+  text-decoration:none;transition:all .25s
+}
+.btn-sec:hover{border-color:var(--teal);color:var(--teal2)}
+
+/* Floating depth markers */
+.depth-marks{position:absolute;right:4rem;top:50%;transform:translateY(-50%);z-index:3;
+  display:flex;flex-direction:column;gap:1.5rem;align-items:flex-end}
+.dm{display:flex;align-items:center;gap:.7rem;font-family:'Fira Code',monospace;font-size:.55rem;
+  letter-spacing:.14em;color:rgba(160,212,232,.3);text-transform:uppercase}
+.dm::after{content:'';width:24px;height:1px;background:currentColor}
+.dm.active{color:var(--gold2)}
+.dm.active::after{width:48px;background:var(--gold2)}
+
+/* Coords */
+.hero-coords{
+  position:absolute;bottom:3rem;right:4rem;z-index:3;
+  font-family:'Fira Code',monospace;font-size:.56rem;color:var(--muted);
+  letter-spacing:.1em;line-height:2;text-align:right
+}
+.hero-coords strong{color:var(--teal);font-weight:400}
+
+/* Ocean waves at bottom */
+.hero-waves-svg{position:absolute;bottom:0;left:0;right:0;z-index:2;overflow:hidden;height:180px}
+.hero-waves-svg svg{width:100%;height:100%}
+
+/* Scroll hint */
+.scroll-hint{
+  position:absolute;bottom:2.5rem;left:4rem;z-index:3;
+  display:flex;align-items:center;gap:.8rem;
+  font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted)
+}
+.sh-line{width:1px;height:48px;background:linear-gradient(var(--muted),transparent);animation:shLine 2s ease-in-out infinite}
+@keyframes shLine{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.15)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════════════
+   TICKER
+═══════════════════════════════════════ */
+.ticker{overflow:hidden;background:var(--gold2);padding:.65rem 0;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 40s linear infinite}
+.ti{font-family:'Fira Code',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--void);padding:0 2.5rem;font-weight:500}
+.tsep{opacity:.3;padding:0 .5rem}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════
+   METRICS BAND
+═══════════════════════════════════════ */
+.metrics-band{background:var(--abyss);padding:0}
+.metrics-inner{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--line)}
+.met{
+  padding:2.4rem 2rem;text-align:center;border-right:1px solid var(--line);
+  transition:background .3s;position:relative;overflow:hidden
+}
+.met:last-child{border-right:none}
+.met::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+  transform:scaleX(0);transition:transform .4s}
+.met:hover{background:var(--faint)}
+.met:hover::before{transform:scaleX(1)}
+.met-n{font-family:'Fraunces',serif;font-size:2.9rem;font-weight:700;color:var(--gold2);display:block;line-height:1}
+.met-l{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);margin-top:.5rem;display:block;line-height:1.65}
+
+/* ═══════════════════════════════════════
+   SHARED SECTION STYLES
+═══════════════════════════════════════ */
+section{padding:8rem 4rem;position:relative}
+.eyebrow{
+  font-family:'Fira Code',monospace;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:.8rem;margin-bottom:1rem
+}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);opacity:.55}
+.sec-title{
+  font-family:'Fraunces',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:300;
+  line-height:1.04;letter-spacing:-.015em;margin-bottom:1.5rem
+}
+.sec-title em{font-style:italic;color:var(--sky)}
+.sec-title .gc{color:var(--gold3)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.on{opacity:1;transform:translateY(0)}
+.reveal-d{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1) .18s,transform .9s cubic-bezier(.16,1,.3,1) .18s}
+.reveal-d.on{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+#about{background:var(--abyss);overflow:hidden}
+#about .bg-word{
+  position:absolute;right:-3rem;top:45%;transform:translateY(-50%);
+  font-family:'Cabinet Grotesk',sans-serif;font-size:15rem;font-weight:900;
+  color:rgba(160,212,232,.025);pointer-events:none;letter-spacing:-.05em;line-height:1;
+  user-select:none
+}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:6rem;max-width:1200px;align-items:start}
+.about-body{font-family:'Fraunces',serif;font-size:1.22rem;font-weight:300;line-height:1.8;color:var(--foam)}
+.about-body p{margin-bottom:1.3rem}
+.about-body strong{font-weight:400;color:var(--gold3)}
+.pillars{display:flex;flex-direction:column;gap:.6rem}
+.pillar{
+  padding:1.4rem 1.6rem;border-left:3px solid var(--gold);background:var(--faint);
+  border-radius:0 4px 4px 0;transition:all .3s;position:relative;overflow:hidden
+}
+.pillar::after{content:'';position:absolute;inset:0;background:rgba(8,196,168,.04);
+  transform:translateX(-100%);transition:transform .3s}
+.pillar:hover{border-left-color:var(--teal2);padding-left:2rem}
+.pillar:hover::after{transform:translateX(0)}
+.p-name{font-family:'Cabinet Grotesk',sans-serif;font-size:.82rem;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--gold2);margin-bottom:.35rem}
+.p-txt{font-family:'Fira Code',monospace;font-size:.67rem;font-weight:300;color:var(--muted);line-height:1.8}
+
+/* ═══════════════════════════════════════
+   SERVICES - FULL INTERACTIVE
+═══════════════════════════════════════ */
+#services{background:var(--void);padding-bottom:0}
+.svc-intro-txt{
+  font-family:'Fraunces',serif;font-size:1.15rem;font-weight:300;
+  color:var(--foam);line-height:1.85;max-width:600px;margin-bottom:5rem
+}
+
+/* SERVICE 1 — FISHING VESSELS */
+.svc-block{min-height:100vh;display:flex;align-items:center;position:relative;
+  padding:6rem 4rem;overflow:hidden}
+.svc-block.alt{flex-direction:row-reverse}
+.svc-bg-canvas{position:absolute;inset:0;z-index:0}
+
+/* Ocean wave bg for fishing vessel */
+.svc-block--vessel{background:linear-gradient(135deg,var(--deep) 0%,var(--ocean) 50%,var(--mid) 100%)}
+.svc-block--imta{background:linear-gradient(135deg,var(--void) 0%,#031520 50%,#042028 100%)}
+.svc-block--sub{background:linear-gradient(180deg,#010a10 0%,#000d15 50%,#000810 100%)}
+.svc-block--design{background:linear-gradient(135deg,var(--deep) 0%,var(--abyss) 100%)}
+.svc-block--governance{background:linear-gradient(135deg,var(--abyss) 0%,var(--deep) 100%)}
+
+.svc-content{position:relative;z-index:2;flex:1;max-width:520px}
+.svc-visual{position:relative;z-index:2;flex:1;display:flex;justify-content:center;align-items:center}
+.svc-num-big{
+  font-family:'Fraunces',serif;font-size:10rem;font-weight:700;
+  color:rgba(160,212,232,.05);position:absolute;top:-2rem;left:-1rem;
+  line-height:1;pointer-events:none;letter-spacing:-.04em
+}
+.svc-eyebrow{font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.7rem}
+.svc-eyebrow::before{content:'';width:20px;height:1px;background:var(--teal)}
+.svc-h{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;
+  line-height:1.1;letter-spacing:-.01em;margin-bottom:1.2rem}
+.svc-h em{font-style:italic;color:var(--sky)}
+.svc-p{font-family:'Fira Code',monospace;font-size:.72rem;font-weight:300;
+  color:var(--muted);line-height:2;margin-bottom:1.8rem}
+.svc-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.8rem}
+.stag{font-family:'Fira Code',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal);border:1px solid rgba(8,196,168,.22);padding:.2rem .65rem;border-radius:2px;
+  transition:all .2s}
+.stag:hover{background:rgba(8,196,168,.12);border-color:var(--teal2)}
+.svc-learn{display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(232,184,48,.3);
+  padding-bottom:.2rem;transition:all .2s}
+.svc-learn:hover{color:var(--gold3);border-bottom-color:var(--gold3);gap:1rem}
+
+/* Vessel card visual */
+.vessel-card{
+  width:480px;max-width:90%;
+  background:rgba(6,32,56,.6);border:1px solid var(--lineg);border-radius:8px;
+  overflow:hidden;backdrop-filter:blur(8px);
+  box-shadow:0 40px 80px rgba(0,0,0,.5);
+  transition:transform .4s;position:relative
+}
+.vessel-card:hover{transform:translateY(-8px) rotate(.5deg)}
+.vessel-card img{width:100%;height:260px;object-fit:cover;filter:brightness(.85);
+  transition:filter .4s;display:block}
+.vessel-card:hover img{filter:brightness(1)}
+.vessel-card-body{padding:1.6rem 1.8rem}
+.vc-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.8rem}
+.vc-stat{text-align:center;padding:.7rem .5rem;background:rgba(160,212,232,.04);border-radius:3px}
+.vc-stat strong{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;color:var(--gold2);display:block;line-height:1}
+.vc-stat span{font-family:'Fira Code',monospace;font-size:.52rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.vessel-card-title{font-family:'Cabinet Grotesk',sans-serif;font-size:.88rem;font-weight:700;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--foam);margin-bottom:.3rem}
+.vessel-card-sub{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--muted)}
+
+/* IMTA Diagram */
+.imta-diagram{width:480px;max-width:90%;position:relative}
+.imta-diagram svg{width:100%;height:auto;filter:drop-shadow(0 0 30px rgba(8,196,168,.15))}
+.imta-legend{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1.2rem}
+.il{display:flex;align-items:center;gap:.5rem;font-family:'Fira Code',monospace;font-size:.58rem;
+  color:var(--muted);letter-spacing:.06em}
+.il-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* Submersible glow visual */
+.sub-visual{position:relative;width:500px;max-width:90%}
+.sub-visual img{width:100%;border-radius:6px;filter:brightness(.6) saturate(.8) hue-rotate(10deg)}
+.sub-glow{
+  position:absolute;inset:0;border-radius:6px;
+  background:radial-gradient(ellipse 60% 40% at 50% 60%,rgba(0,255,159,.08) 0%,transparent 70%)
+}
+.biolum-particles{position:absolute;inset:0;border-radius:6px;overflow:hidden}
+.bp{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--bio);
+  animation:float-bio linear infinite;opacity:0}
+@keyframes float-bio{
+  0%{opacity:0;transform:translateY(0) scale(1)}
+  20%{opacity:.8}
+  80%{opacity:.4}
+  100%{opacity:0;transform:translateY(-80px) scale(.3)}
+}
+.depth-badge{
+  position:absolute;bottom:1.5rem;left:1.5rem;
+  background:rgba(0,8,16,.85);border:1px solid rgba(0,255,159,.3);border-radius:3px;
+  padding:.8rem 1.1rem;font-family:'Fira Code',monospace;font-size:.6rem;
+  color:var(--bio);letter-spacing:.1em;line-height:1.9
+}
+.depth-badge strong{color:var(--teal2);font-size:.9rem;display:block}
+
+/* Design visual */
+.design-card-stack{position:relative;width:460px;max-width:90%}
+.design-card{
+  background:rgba(4,24,40,.7);border:1px solid var(--line);border-radius:6px;
+  padding:1.5rem;backdrop-filter:blur(8px);
+  box-shadow:0 20px 60px rgba(0,0,0,.4)
+}
+.design-card:nth-child(1){position:relative;z-index:3}
+.design-card:nth-child(2){position:absolute;top:1.2rem;left:1.2rem;z-index:2;width:100%;
+  opacity:.7;transform:scale(.97)}
+.design-card:nth-child(3){position:absolute;top:2.4rem;left:2.4rem;z-index:1;width:100%;
+  opacity:.4;transform:scale(.94)}
+.dc-label{font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+.dc-visual{height:160px;background:linear-gradient(135deg,var(--ocean),var(--mid));border-radius:4px;
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.dc-visual img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.dc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,40,.8),transparent)}
+
+/* ═══════════════════════════════════════
+   EXPERTISE
+═══════════════════════════════════════ */
+#expertise{background:var(--deep);overflow:hidden}
+#expertise::after{
+  content:'';position:absolute;top:-200px;right:-250px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,150,12,.05) 0%,transparent 70%);
+  pointer-events:none
+}
+.exp-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;max-width:1200px;align-items:start}
+.creds{display:flex;flex-direction:column}
+.cred{
+  display:grid;grid-template-columns:10px 1fr;gap:1.4rem;
+  padding:1.6rem 0;border-bottom:1px solid var(--line);
+  transition:padding-left .25s
+}
+.cred:hover{padding-left:.6rem}
+.cred-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);margin-top:4px;flex-shrink:0}
+.cred:nth-child(5) .cred-dot{background:var(--teal2)}
+.cred strong{display:block;font-family:'Cabinet Grotesk',sans-serif;font-size:.88rem;font-weight:700;
+  color:var(--white);margin-bottom:.4rem}
+.cred p{font-family:'Fira Code',monospace;font-size:.67rem;font-weight:300;color:var(--muted);line-height:1.85}
+.exp-right{display:flex;flex-direction:column;gap:2rem}
+.q-card{
+  padding:2.4rem 2.2rem;background:rgba(1,11,20,.6);border:1px solid var(--line);
+  border-radius:6px;position:relative
+}
+.q-card::before{
+  content:'"';position:absolute;top:-1rem;left:1.8rem;
+  font-family:'Fraunces',serif;font-size:6rem;font-style:italic;
+  color:var(--gold);opacity:.2;line-height:1
+}
+.q-txt{font-family:'Fraunces',serif;font-size:1.2rem;font-style:italic;font-weight:300;
+  line-height:1.7;color:var(--foam);margin-bottom:1rem}
+.q-attr{font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.12em;color:var(--gold)}
+.partners-box{
+  padding:1.8rem 2rem;border:1px solid rgba(200,150,12,.2);
+  border-radius:6px;background:rgba(200,150,12,.04)
+}
+.pb-lbl{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+.pb-items{font-family:'Fira Code',monospace;font-size:.67rem;color:var(--foam);line-height:2.2}
+
+/* ═══════════════════════════════════════
+   DSM FEATURE
+═══════════════════════════════════════ */
+#dsm{background:var(--void);overflow:hidden}
+.dsm-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;max-width:1200px;align-items:center}
+.dsm-img-wrap{position:relative;border-radius:8px;overflow:hidden}
+.dsm-img-wrap img{width:100%;display:block;filter:brightness(.75) saturate(.7)}
+.dsm-img-wrap::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(1,11,20,.8) 0%,transparent 50%)}
+.dsm-badge-live{
+  position:absolute;bottom:1.8rem;left:1.8rem;z-index:2;
+  display:flex;align-items:center;gap:.8rem;
+  background:rgba(1,11,20,.88);border:1px solid rgba(200,150,12,.35);
+  border-radius:3px;padding:.65rem 1.1rem;
+  font-family:'Fira Code',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.1em
+}
+.dsm-badge-live::before{content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--teal2);animation:pulse 2s infinite}
+.dsm-facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:2rem}
+.dsm-fact{padding:1.1rem 1.3rem;background:var(--faint);border:1px solid var(--line);border-radius:4px;
+  transition:border-color .2s}
+.dsm-fact:hover{border-color:rgba(200,150,12,.25)}
+.dsm-fact strong{display:block;font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;
+  color:var(--gold2);line-height:1;margin-bottom:.3rem}
+.dsm-fact span{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted)}
+.dsm-para{font-family:'Fira Code',monospace;font-size:.72rem;font-weight:300;
+  color:var(--muted);line-height:2;margin-bottom:1.2rem}
+
+/* ═══════════════════════════════════════
+   FOUNDER
+═══════════════════════════════════════ */
+#founder{background:var(--abyss);overflow:hidden}
+.founder-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;max-width:1200px;align-items:center}
+.founder-img-block{position:relative}
+.founder-avatar{
+  width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,var(--ocean) 0%,var(--mid) 50%,var(--deep) 100%);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;position:relative;border:1px solid var(--lineg)
+}
+.founder-initials{
+  font-family:'Fraunces',serif;font-size:8rem;font-weight:300;font-style:italic;
+  color:rgba(160,212,232,.12);letter-spacing:-.05em;user-select:none
+}
+.founder-frame{
+  position:absolute;inset:1.2rem;border:1px solid rgba(160,212,232,.1);border-radius:6px;pointer-events:none
+}
+.founder-title-card{
+  position:absolute;bottom:-1.5rem;left:50%;transform:translateX(-50%);
+  background:rgba(1,11,20,.92);border:1px solid var(--lineg);border-radius:4px;
+  padding:1rem 1.8rem;text-align:center;width:calc(100% - 2rem);
+  backdrop-filter:blur(12px)
+}
+.founder-name{font-family:'Cabinet Grotesk',sans-serif;font-size:1.1rem;font-weight:800;
+  letter-spacing:.04em;color:var(--white);display:block}
+.founder-role{font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-top:.3rem}
+.founder-bio{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:300;
+  line-height:1.8;color:var(--foam)}
+.founder-bio p{margin-bottom:1.2rem}
+.founder-bio strong{font-weight:400;color:var(--gold3)}
+.founder-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.8rem}
+.ftag-item{
+  font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--foam);background:var(--faint);border:1px solid var(--line);
+  padding:.35rem .8rem;border-radius:2px
+}
+
+/* ═══════════════════════════════════════
+   ROADMAP
+═══════════════════════════════════════ */
+#roadmap{background:var(--deep)}
+.rm-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;max-width:1200px;align-items:start}
+.rm-left .rm-desc{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;
+  color:var(--foam);line-height:1.85}
+.timeline{position:relative}
+.tl-spine{position:absolute;left:28px;top:0;bottom:0;width:1px;
+  background:linear-gradient(var(--gold),var(--teal),var(--sky));opacity:.25}
+.phase{display:grid;grid-template-columns:56px 1fr;gap:2rem;margin-bottom:2.5rem;position:relative}
+.phase-marker{
+  width:56px;display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;
+  padding-top:.3rem;text-align:right
+}
+.pm-yr{font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.1em;
+  color:var(--gold);text-transform:uppercase;line-height:1}
+.pm-ph{font-family:'Fira Code',monospace;font-size:.52rem;font-weight:300;
+  color:var(--muted);line-height:1}
+.pm-dot{
+  position:absolute;left:22px;top:6px;width:14px;height:14px;border-radius:50%;
+  background:var(--deep);border:2px solid var(--gold)
+}
+.phase:nth-child(2) .pm-dot{border-color:var(--teal)}
+.phase:nth-child(3) .pm-dot{border-color:var(--sky)}
+.phase-box{
+  padding:1.8rem 2rem;background:var(--faint);border:1px solid var(--line);
+  border-radius:4px;transition:all .25s
+}
+.phase-box:hover{border-color:rgba(200,150,12,.25);background:rgba(200,150,12,.03)}
+.phase-title{font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:700;
+  color:var(--white);margin-bottom:.8rem}
+.phase-items{list-style:none;font-family:'Fira Code',monospace;font-size:.68rem;
+  font-weight:300;color:var(--muted);line-height:2.1}
+.phase-items li::before{content:'→ ';color:var(--gold);opacity:.6}
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+#contact{background:var(--ocean)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5.5rem;max-width:1100px}
+.frm-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.9rem}
+.fl{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.fi,.fta,.fsel{
+  background:rgba(160,212,232,.04);border:1px solid var(--line);border-radius:2px;
+  color:var(--white);font-family:'Fira Code',monospace;font-size:.75rem;
+  padding:.8rem 1rem;outline:none;width:100%;transition:all .2s
+}
+.fi:focus,.fta:focus,.fsel:focus{border-color:var(--gold);background:rgba(200,150,12,.04)}
+.fta{resize:vertical;min-height:120px}
+.fsel option{background:var(--ocean)}
+.c-submit{
+  font-family:'Fira Code',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--gold2);color:var(--void);padding:.95rem 2.4rem;border:none;
+  border-radius:2px;font-weight:500;margin-top:.5rem;transition:all .25s;position:relative;overflow:hidden
+}
+.c-submit::after{content:'→';margin-left:.6rem;transition:margin-left .2s}
+.c-submit:hover{background:var(--gold3)}
+.c-submit:hover::after{margin-left:1.2rem}
+.cinfo{display:flex;flex-direction:column;gap:2rem}
+.ci-lbl{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.ci-lbl::after{content:'';flex:1;height:1px;background:rgba(200,150,12,.18)}
+.ci-val{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--foam);line-height:1.6}
+.seeking-box{padding:1.7rem 1.9rem;border:1px solid rgba(200,150,12,.2);border-radius:4px;
+  background:rgba(200,150,12,.04)}
+.sk-lbl{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.9rem;display:block}
+.sk-list{list-style:none;font-family:'Fira Code',monospace;font-size:.68rem;color:var(--foam);line-height:2.2}
+.sk-list li::before{content:'→ ';color:var(--gold);opacity:.5}
+#form-msg{display:none;margin-top:.8rem;font-family:'Fira Code',monospace;font-size:.68rem;
+  color:var(--teal2);letter-spacing:.08em}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  background:var(--void);border-top:1px solid var(--line);
+  padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between
+}
+.f-left{display:flex;align-items:center;gap:1.4rem}
+.f-copy{font-family:'Fira Code',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.07em}
+.f-sep{width:1px;height:1rem;background:var(--line)}
+.f-tagline{font-family:'Fraunces',serif;font-style:italic;font-size:.9rem;color:var(--foam);opacity:.45}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  nav,section,.svc-block{padding-left:2rem;padding-right:2rem}
+  nav.scrolled{padding-left:2rem;padding-right:2rem}
+  .hero{padding-left:2rem;padding-right:2rem}
+  .n-links{display:none}
+  .about-grid,.exp-grid,.dsm-wrap,.founder-wrap,.contact-grid{grid-template-columns:1fr;gap:3.5rem}
+  .rm-grid{grid-template-columns:1fr}
+  .svc-block{flex-direction:column!important;padding-top:4rem;padding-bottom:4rem}
+  .svc-visual{margin-top:2rem;width:100%}
+  .vessel-card,.imta-diagram,.sub-visual,.design-card-stack{width:100%;max-width:100%}
+  .metrics-inner{grid-template-columns:repeat(2,1fr)}
+  .met:nth-child(2){border-right:none}
+  .depth-marks{display:none}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+  #about .bg-word{display:none}
+  .hero-coords{display:none}
+  .frm-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="c1"></div>
+<div id="c2"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+  <a href="#" class="n-logo">
+    <div class="n-emblem">
+      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1.5" y="1.5" width="39" height="39" rx="3" stroke="#c8960c" stroke-width="1.2"/>
+        <line x1="21" y1="7" x2="21" y2="24" stroke="#c8960c" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M21 7 L11 22 L21 22 Z" fill="rgba(200,150,12,.4)"/>
+        <path d="M5 30 C9 25 13 29 17 26 C21 23 25 28 29 25 C33 22 37 27 41 24" stroke="#4bbcd8" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M5 34 C9 30 13 33 17 31 C21 29 25 33 29 31 C33 29 37 32 41 30" stroke="rgba(75,188,216,.45)" stroke-width="1" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="n-wordmark">
+      <strong>Bahari BlueTech</strong>
+      <span>Marine Engineering · Mombasa, Kenya</span>
+    </div>
+  </a>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#dsm">Deep Sea</a></li>
+    <li><a href="#founder">Team</a></li>
+    <li><a href="#roadmap">Vision</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="n-cta">Work With Us</a>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Bahari BlueTech — Ocean Engineering Studio
+    </div>
+    <h1 class="hero-h1">
+      Engineering<br>
+      <span class="it">Africa's</span><br>
+      <span class="gd">Ocean Future.</span>
+    </h1>
+    <p class="hero-sub">
+      A Kenyan marine engineering and ocean technology firm —<br>
+      designing vessels, modelling aquaculture systems, and building<br>
+      the infrastructure for Africa's blue economy from coast to deep seabed.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-prim">Explore Services</a>
+      <a href="#about" class="btn-sec">Our Mission</a>
+    </div>
+  </div>
+
+  <div class="depth-marks">
+    <div class="dm active">Surface</div>
+    <div class="dm">Coastal Zone</div>
+    <div class="dm">Bathypelagic</div>
+    <div class="dm">Deep Seabed</div>
+  </div>
+
+  <div class="hero-coords">
+    <strong>04°03'S / 39°40'E</strong><br>
+    Mombasa, Kenya<br>
+    Indian Ocean Seaboard<br><br>
+    Est. 2025
+  </div>
+
+  <div class="hero-waves-svg">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path opacity=".12" fill="#0e4d70">
+        <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+          M0,120 C240,80 480,150 720,100 C960,50 1200,130 1440,90 L1440,180 L0,180 Z;
+          M0,100 C240,140 480,80 720,120 C960,155 1200,80 1440,115 L1440,180 L0,180 Z;
+          M0,120 C240,80 480,150 720,100 C960,50 1200,130 1440,90 L1440,180 L0,180 Z"/>
+      </path>
+      <path opacity=".22" fill="#062038">
+        <animate attributeName="d" dur="9s" repeatCount="indefinite" values="
+          M0,145 C360,110 720,160 1080,130 C1260,115 1380,150 1440,140 L1440,180 L0,180 Z;
+          M0,135 C360,158 720,125 1080,150 C1260,162 1380,128 1440,142 L1440,180 L0,180 Z;
+          M0,145 C360,110 720,160 1080,130 C1260,115 1380,150 1440,140 L1440,180 L0,180 Z"/>
+      </path>
+      <path fill="#020f1e">
+        <animate attributeName="d" dur="6s" repeatCount="indefinite" values="
+          M0,165 C360,152 720,170 1080,158 C1260,150 1380,168 1440,160 L1440,180 L0,180 Z;
+          M0,160 C360,170 720,155 1080,166 C1260,172 1380,158 1440,163 L1440,180 L0,180 Z;
+          M0,165 C360,152 720,170 1080,158 C1260,150 1380,168 1440,160 L1440,180 L0,180 Z"/>
+      </path>
+    </svg>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="sh-line"></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ══════════ TICKER ══════════ -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ti">Semi-Industrial Fishing Vessels</span><span class="ti tsep">✦</span>
+    <span class="ti">IMTA Aquaculture Systems</span><span class="ti tsep">✦</span>
+    <span class="ti">Manned Mini-Submersibles</span><span class="ti tsep">✦</span>
+    <span class="ti">Marine Engineering & Design</span><span class="ti tsep">✦</span>
+    <span class="ti">Ocean Governance Advisory</span><span class="ti tsep">✦</span>
+    <span class="ti">Deep Sea Mining Expertise</span><span class="ti tsep">✦</span>
+    <span class="ti">3D Marine Prototyping</span><span class="ti tsep">✦</span>
+    <span class="ti">Blue Economy Solutions</span><span class="ti tsep">✦</span>
+    <span class="ti">Semi-Industrial Fishing Vessels</span><span class="ti tsep">✦</span>
+    <span class="ti">IMTA Aquaculture Systems</span><span class="ti tsep">✦</span>
+    <span class="ti">Manned Mini-Submersibles</span><span class="ti tsep">✦</span>
+    <span class="ti">Marine Engineering & Design</span><span class="ti tsep">✦</span>
+    <span class="ti">Ocean Governance Advisory</span><span class="ti tsep">✦</span>
+    <span class="ti">Deep Sea Mining Expertise</span><span class="ti tsep">✦</span>
+    <span class="ti">3D Marine Prototyping</span><span class="ti tsep">✦</span>
+    <span class="ti">Blue Economy Solutions</span><span class="ti tsep">✦</span>
+  </div>
+</div>
+
+<!-- ══════════ METRICS ══════════ -->
+<div class="metrics-band">
+  <div class="metrics-inner">
+    <div class="met"><span class="met-n">38K+</span><span class="met-l">km of African coastline — our domain</span></div>
+    <div class="met"><span class="met-n">6</span><span class="met-l">Kenyan coastal counties actively served</span></div>
+    <div class="met"><span class="met-n">5</span><span class="met-l">Core technical service verticals</span></div>
+    <div class="met"><span class="met-n">ISA</span><span class="met-l">Deep sea mining engineering expertise</span></div>
+    <div class="met"><span class="met-n">$150B</span><span class="met-l">Kenya blue economy growth potential</span></div>
+  </div>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="bg-word">BAHARI</div>
+  <div class="eyebrow">Who we are</div>
+  <h2 class="sec-title">Built from the <em>ocean up.</em></h2>
+  <div class="about-grid reveal">
+    <div>
+      <div class="about-body">
+        <p>Bahari BlueTech is a marine engineering design and ocean technology firm headquartered in Mombasa, Kenya. The company operates at the intersection of <strong>precision engineering, ocean science, and blue economy development</strong> — designing and fabricating vessels, modelling aquaculture infrastructure, and positioning African technical capacity at the frontier of global ocean governance.</p>
+        <p>Bahari BlueTech brings institutional expertise spanning vessel operations and naval architecture, IMTA aquaculture system design, deep sea mining engineering aligned with ISA frameworks, and ocean governance consulting across maritime policy and coastal development programmes.</p>
+        <p>Africa's 38,000 km of coastline and vast Exclusive Economic Zones represent one of the planet's most underdeveloped frontiers — not for lack of resources, but for lack of locally owned technical institutions capable of leading the design, build, and governance chain. <strong>Bahari BlueTech exists to close that gap.</strong></p>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="p-name">Design & Model</div>
+        <div class="p-txt">CAD vessel design, 3D marine modelling, aquaculture system layouts. Technical drawings engineered from concept through to regulatory submission and construction.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-name">Build & Fabricate</div>
+        <div class="p-txt">Fiberglass semi-industrial fishing vessel fabrication. Locally engineered, regionally optimised GRP craft for East African coastal and lake fishery operations.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-name">Advise & Govern</div>
+        <div class="p-txt">Blue economy policy research, ISA deep sea mining advisory, and ocean governance consulting for government bodies, international organisations, and development partners.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-name">Innovate & Scale</div>
+        <div class="p-txt">BlueTech startup ecosystem participation: grant applications, accelerator programmes, and global innovation award competition to fuel R&D and regional expansion.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services" style="padding-left:0;padding-right:0;padding-bottom:0">
+  <div style="padding:0 4rem 3rem">
+    <div class="eyebrow">What we do</div>
+    <h2 class="sec-title">Five <em>service verticals</em><br>for the blue economy.</h2>
+    <p class="svc-intro-txt">From fishing vessel fabrication to deep sea governance advisory — Bahari BlueTech delivers the full engineering stack that Africa's ocean economy requires.</p>
+  </div>
+
+  <!-- SERVICE 1: FISHING VESSELS -->
+  <div class="svc-block svc-block--vessel reveal">
+    <canvas class="svc-bg-canvas" id="canvas-vessel"></canvas>
+    <div class="svc-content">
+      <div class="svc-num-big">01</div>
+      <div class="svc-eyebrow">Service 01</div>
+      <h3 class="svc-h">Semi-Industrial<br><em>Fishing Vessels</em></h3>
+      <p class="svc-p">Bahari BlueTech designs and fabricates semi-industrial fiberglass (GRP) fishing vessels engineered specifically for East African coastal and lacustrine fisheries. The company's vessel designs prioritise structural durability in tropical marine environments, fuel efficiency for small-scale commercial operators, and regulatory compliance with Kenya Maritime Authority standards. Custom builds range from 6 to 18 metres, serving artisanal upgrades, county fisheries programmes, and commercial landing site fleets.</p>
+      <div class="svc-tags">
+        <span class="stag">GRP/FRP Construction</span>
+        <span class="stag">Hull Optimisation</span>
+        <span class="stag">Naval Architecture</span>
+        <span class="stag">6–18m Vessels</span>
+        <span class="stag">KMA Compliance</span>
+        <span class="stag">Stability Analysis</span>
+      </div>
+      <a href="#contact" class="svc-learn">Enquire about vessel builds</a>
+    </div>
+    <div class="svc-visual">
+      <div class="vessel-card">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=700&q=80" alt="Semi-industrial fishing vessel" onerror="this.style.display='none'">
+        <div class="vessel-card-body">
+          <div class="vessel-card-title">Commercial Fishing Vessel — GRP Series</div>
+          <div class="vessel-card-sub">Designed for East African coastal operations</div>
+          <div class="vc-stat-row">
+            <div class="vc-stat"><strong>18m</strong><span>Max LOA</span></div>
+            <div class="vc-stat"><strong>GRP</strong><span>Hull Material</span></div>
+            <div class="vc-stat"><strong>25yr</strong><span>Design Life</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 2: IMTA -->
+  <div class="svc-block svc-block--imta alt reveal">
+    <canvas class="svc-bg-canvas" id="canvas-imta"></canvas>
+    <div class="svc-content">
+      <div class="svc-num-big">02</div>
+      <div class="svc-eyebrow">Service 02</div>
+      <h3 class="svc-h">Integrated Multi-Trophic<br><em>Aquaculture Systems</em></h3>
+      <p class="svc-p">Bahari BlueTech designs Integrated Multi-Trophic Aquaculture (IMTA) systems that co-locate finfish cages, seaweed farms, and invertebrate (sea cucumber, oyster) culture — creating closed-loop marine food production systems with minimal environmental impact. The company's IMTA design portfolio covers site selection, hydrographic assessment, cage and mooring configuration, and species co-culture layouts tailored to Kenya's six coastal counties and tidal regimes.</p>
+      <div class="svc-tags">
+        <span class="stag">IMTA Design</span>
+        <span class="stag">Cage Systems</span>
+        <span class="stag">Seaweed Farming</span>
+        <span class="stag">Sea Cucumber</span>
+        <span class="stag">Mooring Design</span>
+        <span class="stag">Site Assessment</span>
+      </div>
+      <a href="#contact" class="svc-learn">Request aquaculture consultancy</a>
+    </div>
+    <div class="svc-visual">
+      <div class="imta-diagram">
+        <svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- Water surface -->
+          <path d="M0,60 Q60,48 120,60 Q180,72 240,60 Q300,48 360,60 Q420,72 480,60" fill="none" stroke="rgba(75,188,216,0.35)" stroke-width="1.5">
+            <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
+              M0,60 Q60,48 120,60 Q180,72 240,60 Q300,48 360,60 Q420,72 480,60;
+              M0,60 Q60,72 120,60 Q180,48 240,60 Q300,72 360,60 Q420,48 480,60;
+              M0,60 Q60,48 120,60 Q180,72 240,60 Q300,48 360,60 Q420,72 480,60"/>
+          </path>
+          <!-- Sun/light rays -->
+          <line x1="240" y1="0" x2="80" y2="60" stroke="rgba(245,208,96,.15)" stroke-width="2"/>
+          <line x1="240" y1="0" x2="160" y2="60" stroke="rgba(245,208,96,.1)" stroke-width="1.5"/>
+          <line x1="240" y1="0" x2="240" y2="60" stroke="rgba(245,208,96,.12)" stroke-width="2"/>
+          <line x1="240" y1="0" x2="320" y2="60" stroke="rgba(245,208,96,.1)" stroke-width="1.5"/>
+          <line x1="240" y1="0" x2="400" y2="60" stroke="rgba(245,208,96,.15)" stroke-width="2"/>
+          <!-- Water fill -->
+          <rect x="0" y="60" width="480" height="320" fill="url(#waterGrad)" rx="0"/>
+          <defs>
+            <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(8,48,78,0.9)"/>
+              <stop offset="100%" stop-color="rgba(1,11,20,0.95)"/>
+            </linearGradient>
+          </defs>
+          <!-- FINFISH CAGE - top center -->
+          <rect x="170" y="80" width="140" height="100" rx="4" fill="rgba(75,188,216,.08)" stroke="rgba(75,188,216,.5)" stroke-width="1.5"/>
+          <text x="240" y="108" fill="#a0d4e8" font-family="monospace" font-size="10" text-anchor="middle">FINFISH CAGE</text>
+          <text x="240" y="124" fill="#4a7a94" font-family="monospace" font-size="8" text-anchor="middle">Tilapia / Seabass</text>
+          <!-- Fish symbols -->
+          <ellipse cx="210" cy="148" rx="12" ry="6" fill="rgba(75,188,216,.4)"/>
+          <ellipse cx="240" cy="158" rx="10" ry="5" fill="rgba(75,188,216,.35)"/>
+          <ellipse cx="270" cy="145" rx="11" ry="5.5" fill="rgba(75,188,216,.4)"/>
+          <!-- Waste arrows down -->
+          <path d="M200,180 L160,220" stroke="rgba(200,150,12,.4)" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+          <path d="M280,180 L320,220" stroke="rgba(200,150,12,.4)" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+          <text x="130" y="208" fill="#c8960c" font-family="monospace" font-size="7" opacity=".7">nutrients</text>
+          <text x="308" y="208" fill="#c8960c" font-family="monospace" font-size="7" opacity=".7">waste</text>
+          <defs>
+            <marker id="arrowGold" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M1 1L7 4L1 7" fill="none" stroke="#c8960c" stroke-width="1.2"/>
+            </marker>
+            <marker id="arrowTeal" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M1 1L7 4L1 7" fill="none" stroke="#08c4a8" stroke-width="1.2"/>
+            </marker>
+          </defs>
+          <!-- SEAWEED left -->
+          <rect x="50" y="210" width="110" height="90" rx="4" fill="rgba(8,196,168,.06)" stroke="rgba(8,196,168,.4)" stroke-width="1.5"/>
+          <text x="105" y="238" fill="#08c4a8" font-family="monospace" font-size="9.5" text-anchor="middle">SEAWEED</text>
+          <text x="105" y="254" fill="#4a7a94" font-family="monospace" font-size="8" text-anchor="middle">Nutrient Absorber</text>
+          <!-- Seaweed fronds -->
+          <path d="M85,280 Q80,265 90,255" stroke="rgba(8,196,168,.5)" stroke-width="1.5" fill="none"/>
+          <path d="M105,280 Q100,262 108,250" stroke="rgba(8,196,168,.5)" stroke-width="1.5" fill="none"/>
+          <path d="M125,280 Q130,265 118,255" stroke="rgba(8,196,168,.5)" stroke-width="1.5" fill="none"/>
+          <!-- SEA CUCUMBER right -->
+          <rect x="320" y="210" width="110" height="90" rx="4" fill="rgba(200,150,12,.05)" stroke="rgba(200,150,12,.35)" stroke-width="1.5"/>
+          <text x="375" y="238" fill="#e8b830" font-family="monospace" font-size="9.5" text-anchor="middle">SEA CUCUMBER</text>
+          <text x="375" y="254" fill="#4a7a94" font-family="monospace" font-size="8" text-anchor="middle">Deposit Feeder</text>
+          <!-- Sea cucumber shapes -->
+          <ellipse cx="350" cy="278" rx="18" ry="7" fill="rgba(200,150,12,.25)"/>
+          <ellipse cx="380" cy="272" rx="15" ry="6" fill="rgba(200,150,12,.2)"/>
+          <ellipse cx="405" cy="280" rx="16" ry="6.5" fill="rgba(200,150,12,.25)"/>
+          <!-- Uptake arrows -->
+          <path d="M160,255 L170,210" stroke="rgba(8,196,168,.4)" stroke-width="1.2" marker-end="url(#arrowTeal)"/>
+          <path d="M320,255 L310,210" stroke="rgba(200,150,12,.4)" stroke-width="1.2" marker-end="url(#arrowGold)"/>
+          <!-- Labels -->
+          <text x="240" y="42" fill="#f0eee8" font-family="monospace" font-size="11" text-anchor="middle" font-weight="bold">IMTA SYSTEM DIAGRAM</text>
+          <text x="240" y="58" fill="#4a7a94" font-family="monospace" font-size="8" text-anchor="middle">Integrated Multi-Trophic Aquaculture — Closed Loop</text>
+          <!-- Bottom seabed -->
+          <rect x="0" y="340" width="480" height="40" fill="rgba(2,15,30,.8)"/>
+          <text x="240" y="366" fill="rgba(75,188,216,.25)" font-family="monospace" font-size="8" text-anchor="middle">SEABED — Benthic Zone</text>
+        </svg>
+        <div class="imta-legend">
+          <div class="il"><div class="il-dot" style="background:#4bbcd8"></div>Finfish cage system</div>
+          <div class="il"><div class="il-dot" style="background:#08c4a8"></div>Seaweed absorber bed</div>
+          <div class="il"><div class="il-dot" style="background:#c8960c"></div>Sea cucumber layer</div>
+          <div class="il"><div class="il-dot" style="background:#e8b830"></div>Nutrient cycling flow</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 3: SUBMERSIBLES -->
+  <div class="svc-block svc-block--sub reveal">
+    <canvas class="svc-bg-canvas" id="canvas-sub"></canvas>
+    <div class="svc-content">
+      <div class="svc-num-big">03</div>
+      <div class="svc-eyebrow">Service 03</div>
+      <h3 class="svc-h">Modular Manned<br><em>Mini-Submersibles</em><br>& ROV Systems</h3>
+      <p class="svc-p">Bahari BlueTech is developing design capability for modular manned mini-submersibles and Remotely Operated Vehicles (ROVs) engineered for shallow-water inspection, aquaculture monitoring, reef survey, and research operations in East African coastal and offshore environments. These platforms address a structural gap: African research institutions, port authorities, and aquaculture operators currently have no access to locally designed or maintained underwater observation systems. Bahari BlueTech's submersible design programme targets operational depths from 0 to 600 metres, with vessels optimised for tropical coral reef environments, limited-infrastructure deployment, and multi-mission reconfiguration.</p>
+      <div class="svc-tags">
+        <span class="stag">Mini-Sub Design</span>
+        <span class="stag">ROV Systems</span>
+        <span class="stag">0–600m Depth</span>
+        <span class="stag">Aquaculture Survey</span>
+        <span class="stag">Reef Inspection</span>
+        <span class="stag">Modular Config.</span>
+      </div>
+      <a href="#contact" class="svc-learn">Discuss submersible R&D</a>
+    </div>
+    <div class="svc-visual">
+      <div class="sub-visual">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Shinkai_6500_p1.jpg/1280px-Shinkai_6500_p1.jpg" alt="Manned research submersible" onerror="this.src='';this.style.background='var(--mid)';this.style.height='300px'">
+        <div class="sub-glow"></div>
+        <div class="biolum-particles" id="biolum"></div>
+        <div class="depth-badge">
+          Target operational range<br>
+          <strong>0 – 600m</strong>
+          Coastal · Reef · Offshore shelf
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 4: MARINE ENGINEERING -->
+  <div class="svc-block svc-block--design alt reveal">
+    <canvas class="svc-bg-canvas" id="canvas-design"></canvas>
+    <div class="svc-content">
+      <div class="svc-num-big">04</div>
+      <div class="svc-eyebrow">Service 04</div>
+      <h3 class="svc-h">Marine Engineering<br><em>& Design Solutions</em></h3>
+      <p class="svc-p">Bahari BlueTech provides the full marine engineering design stack: naval architecture, propulsion system specification, marine electrical layout, stability calculations, and structural engineering. The company's 3D modelling and prototyping capability produces physical scale models for client presentations, grant applications, and regulatory submissions. Additionally, Bahari BlueTech offers technical consultancy on port infrastructure, fish landing site design, and coastal marine facility planning for county governments and development partners across the EAC region.</p>
+      <div class="svc-tags">
+        <span class="stag">Naval Architecture</span>
+        <span class="stag">3D Prototyping</span>
+        <span class="stag">CAD Modelling</span>
+        <span class="stag">Port Design</span>
+        <span class="stag">Landing Sites</span>
+        <span class="stag">Stability Analysis</span>
+      </div>
+      <a href="#contact" class="svc-learn">Request engineering consultancy</a>
+    </div>
+    <div class="svc-visual">
+      <div class="design-card-stack">
+        <div class="design-card">
+          <div class="dc-label">// Vessel Design — Active File</div>
+          <div class="dc-visual">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80" alt="Engineering design work" onerror="this.style.display='none'">
+            <div class="dc-overlay"></div>
+          </div>
+          <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
+            <div style="background:var(--faint);border:1px solid var(--line);border-radius:3px;padding:.6rem;text-align:center">
+              <div style="font-family:'Fraunces',serif;font-size:1.2rem;color:var(--gold2)">14m</div>
+              <div style="font-family:'Fira Code',monospace;font-size:.5rem;color:var(--muted);text-transform:uppercase">LOA</div>
+            </div>
+            <div style="background:var(--faint);border:1px solid var(--line);border-radius:3px;padding:.6rem;text-align:center">
+              <div style="font-family:'Fraunces',serif;font-size:1.2rem;color:var(--gold2)">GRP</div>
+              <div style="font-family:'Fira Code',monospace;font-size:.5rem;color:var(--muted);text-transform:uppercase">Material</div>
+            </div>
+            <div style="background:var(--faint);border:1px solid var(--line);border-radius:3px;padding:.6rem;text-align:center">
+              <div style="font-family:'Fraunces',serif;font-size:1.2rem;color:var(--gold2)">COA</div>
+              <div style="font-family:'Fira Code',monospace;font-size:.5rem;color:var(--muted);text-transform:uppercase">Status</div>
+            </div>
+          </div>
+        </div>
+        <div class="design-card" style="position:absolute;top:1rem;left:1rem;z-index:2;width:100%;opacity:.65;transform:scale(.97)">
+          <div class="dc-label">// IMTA Farm Layout — Draft v3</div>
+          <div class="dc-visual" style="height:100px;background:linear-gradient(135deg,#062038,#0e4d70)"></div>
+        </div>
+        <div class="design-card" style="position:absolute;top:2rem;left:2rem;z-index:1;width:100%;opacity:.35;transform:scale(.94)">
+          <div class="dc-label">// Port Infrastructure Plan</div>
+          <div class="dc-visual" style="height:100px;background:linear-gradient(135deg,#041828,#062038)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 5: GOVERNANCE -->
+  <div class="svc-block svc-block--governance reveal" style="padding-bottom:8rem">
+    <canvas class="svc-bg-canvas" id="canvas-gov"></canvas>
+    <div class="svc-content">
+      <div class="svc-num-big">05</div>
+      <div class="svc-eyebrow">Service 05</div>
+      <h3 class="svc-h">Ocean Governance<br><em>& Blue Economy</em><br>Advisory</h3>
+      <p class="svc-p">Bahari BlueTech provides technical advisory services on ocean governance, maritime policy, and blue economy strategy to government bodies, county administrations, NGOs, and international development organisations. The company holds deep experience within Kenya's blue economy regulatory ecosystem and brings expertise in UNCLOS frameworks, EEZ management, marine spatial planning, and coastal livelihood programme design. Advisory engagements span policy research, feasibility studies, EIA technical input, and grant co-application support targeting EU, World Bank, and UNDP blue economy windows.</p>
+      <div class="svc-tags">
+        <span class="stag">Ocean Governance</span>
+        <span class="stag">UNCLOS / EEZ</span>
+        <span class="stag">Marine Spatial Planning</span>
+        <span class="stag">Blue Economy Strategy</span>
+        <span class="stag">EIA Support</span>
+        <span class="stag">Grant Writing</span>
+      </div>
+      <a href="#contact" class="svc-learn">Request governance advisory</a>
+    </div>
+    <div class="svc-visual">
+      <!-- Policy globe SVG -->
+      <svg width="420" height="380" viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 40px rgba(8,196,168,.12))">
+        <!-- Globe circles -->
+        <circle cx="210" cy="190" r="160" stroke="rgba(160,212,232,.1)" stroke-width="1"/>
+        <circle cx="210" cy="190" r="130" stroke="rgba(160,212,232,.08)" stroke-width="1"/>
+        <circle cx="210" cy="190" r="100" stroke="rgba(160,212,232,.08)" stroke-width="1"/>
+        <circle cx="210" cy="190" r="70" stroke="rgba(160,212,232,.06)" stroke-width="1"/>
+        <circle cx="210" cy="190" r="40" stroke="rgba(160,212,232,.06)" stroke-width="1"/>
+        <!-- Latitude lines -->
+        <ellipse cx="210" cy="190" rx="160" ry="50" stroke="rgba(160,212,232,.07)" stroke-width="1"/>
+        <ellipse cx="210" cy="190" rx="160" ry="110" stroke="rgba(160,212,232,.05)" stroke-width="1"/>
+        <ellipse cx="210" cy="160" rx="155" ry="45" stroke="rgba(160,212,232,.05)" stroke-width="1"/>
+        <!-- Nodes -->
+        <circle cx="210" cy="190" r="8" fill="var(--gold2)" opacity=".9">
+          <animate attributeName="r" values="8;11;8" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210" cy="190" r="20" fill="rgba(232,184,48,.12)">
+          <animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Connection lines to policy nodes -->
+        <line x1="210" y1="190" x2="340" y2="100" stroke="rgba(8,196,168,.3)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="210" y1="190" x2="80" y2="100" stroke="rgba(8,196,168,.3)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="210" y1="190" x2="360" y2="280" stroke="rgba(232,184,48,.25)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="210" y1="190" x2="60" y2="280" stroke="rgba(232,184,48,.25)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="210" y1="190" x2="210" y2="30" stroke="rgba(160,212,232,.2)" stroke-width="1" stroke-dasharray="4 4"/>
+        <!-- Policy node labels -->
+        <circle cx="340" cy="100" r="5" fill="var(--teal2)" opacity=".8"/>
+        <text x="352" y="104" fill="rgba(160,212,232,.7)" font-family="monospace" font-size="9">ISA / UNCLOS</text>
+        <circle cx="80" cy="100" r="5" fill="var(--teal2)" opacity=".8"/>
+        <text x="18" y="97" fill="rgba(160,212,232,.7)" font-family="monospace" font-size="9">EU Blue</text>
+        <text x="22" y="109" fill="rgba(160,212,232,.7)" font-family="monospace" font-size="9">Economy</text>
+        <circle cx="360" cy="280" r="5" fill="var(--gold2)" opacity=".8"/>
+        <text x="368" y="277" fill="rgba(232,184,48,.7)" font-family="monospace" font-size="9">World Bank</text>
+        <circle cx="60" cy="280" r="5" fill="var(--gold2)" opacity=".8"/>
+        <text x="8" y="277" fill="rgba(232,184,48,.7)" font-family="monospace" font-size="9">UNDP</text>
+        <circle cx="210" cy="30" r="5" fill="rgba(160,212,232,.8)"/>
+        <text x="175" y="22" fill="rgba(160,212,232,.7)" font-family="monospace" font-size="9">OceanHub</text>
+        <!-- Center label -->
+        <text x="210" y="220" fill="rgba(160,212,232,.4)" font-family="monospace" font-size="8" text-anchor="middle">BAHARI BLUETECH</text>
+        <text x="210" y="234" fill="rgba(160,212,232,.25)" font-family="monospace" font-size="7" text-anchor="middle">Mombasa, Kenya</text>
+        <!-- Orbiting dot -->
+        <circle r="4" fill="var(--teal)" opacity=".7">
+          <animateMotion dur="8s" repeatCount="indefinite">
+            <mpath href="#orbit1"/>
+          </animateMotion>
+        </circle>
+        <circle r="3" fill="var(--gold2)" opacity=".6">
+          <animateMotion dur="12s" repeatCount="indefinite" begin="3s">
+            <mpath href="#orbit2"/>
+          </animateMotion>
+        </circle>
+        <ellipse id="orbit1" cx="210" cy="190" rx="130" ry="130" style="display:none"/>
+        <ellipse id="orbit2" cx="210" cy="190" rx="100" ry="100" style="display:none"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EXPERTISE ══════════ -->
+<section id="expertise">
+  <div class="eyebrow">Technical foundation</div>
+  <h2 class="sec-title">Expertise earned <em>at sea.</em></h2>
+  <div class="exp-grid reveal">
+    <div class="creds">
+      <div class="cred">
+        <div class="cred-dot"></div>
+        <div>
+          <strong>Marine Engineering — Vessel Operations & Systems</strong>
+          <p>Bahari BlueTech's technical team holds hands-on operational experience aboard commercial marine vessels, encompassing propulsion systems, vessel safety protocols, deck operations, and passage planning in Indian Ocean conditions. This operational grounding informs the company's vessel design and fabrication work at every stage.</p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="cred-dot"></div>
+        <div>
+          <strong>Kenya Blue Economy — Government Sector Experience</strong>
+          <p>The company has direct experience operating within Kenya's blue economy public sector, including engagement with state corporations, regulatory bodies, and coastal county development programmes across the six-county seaboard. This institutional knowledge underpins Bahari BlueTech's policy advisory services.</p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="cred-dot"></div>
+        <div>
+          <strong>IMTA Aquaculture System Design & Modelling</strong>
+          <p>Bahari BlueTech has been involved in the design of Integrated Multi-Trophic Aquaculture systems, including cage farm layout, seaweed and sea cucumber co-culture configurations, and coastal site planning adapted to Kenyan tidal and hydrographic conditions.</p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="cred-dot"></div>
+        <div>
+          <strong>Ocean Governance & Maritime Policy</strong>
+          <p>The company's advisory capability is grounded in formal training in international ocean governance: UNCLOS application, Exclusive Economic Zone management, marine spatial planning frameworks, and blue economy policy instruments at both national and regional levels.</p>
+        </div>
+      </div>
+      <div class="cred">
+        <div class="cred-dot" style="background:var(--teal2)"></div>
+        <div>
+          <strong>ISA Deep Sea Mining Engineering Expertise</strong>
+          <p>Bahari BlueTech holds deep sea mining engineering expertise informed by training under the International Seabed Authority (ISA) deep-sea mining engineering framework — encompassing polymetallic nodule extraction systems, seabed resource assessment methodologies, deep ocean floor engineering, and ISA regulatory governance. The company is actively building East Africa's technical capacity in this emerging sector.</p>
+        </div>
+      </div>
+    </div>
+    <div class="exp-right reveal-d">
+      <div class="q-card">
+        <p class="q-txt">"Africa has contributed enormously to the global ocean economy while capturing little of its engineering value. Bahari BlueTech exists to change that — by building local design capacity, owning the technical intellectual property, and placing African expertise at every governance table that matters."</p>
+        <div class="q-attr">— Bahari BlueTech, Founding Principle · Mombasa, 2025</div>
+      </div>
+      <div class="partners-box">
+        <span class="pb-lbl">Target partners & funders</span>
+        <div class="pb-items">
+          OceanHub Africa · BlueInvest Africa (EU)<br>
+          Go Blue Project / UNEP · UN-Habitat<br>
+          World Bank Blue Economy Programme<br>
+          UNDP timbuktoo MineTech Accelerator<br>
+          International Seabed Authority Networks<br>
+          Kenya Coastal County Governments<br>
+          EU Horizon Blue Economy Research
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DSM FEATURE ══════════ -->
+<section id="dsm">
+  <div class="eyebrow">The Frontier</div>
+  <div class="dsm-wrap reveal">
+    <div class="dsm-img-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Deep-sea-mining.jpg/1280px-Deep-sea-mining.jpg" alt="Polymetallic nodules on ocean floor" onerror="this.src='https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80'">
+      <div class="dsm-badge-live">ISA Mining Code — Active Development 2025</div>
+    </div>
+    <div>
+      <h2 class="sec-title" style="margin-bottom:1.2rem">Deep sea mining:<br><em>Africa's next</em><br><span class="gc">strategic frontier.</span></h2>
+      <p class="dsm-para">The world's ocean floors hold an estimated $3 trillion in polymetallic nodules, cobalt-rich crusts, and seafloor massive sulphides — minerals critical for the global clean energy transition. The International Seabed Authority (ISA) is finalising the Mining Code that will govern commercial extraction across the international seabed Area, and Africa must be represented at that table with genuine, credible technical expertise.</p>
+      <p class="dsm-para">Bahari BlueTech holds deep sea mining engineering expertise informed by ISA framework training, covering polymetallic nodule extraction engineering, seabed environmental assessment, collector vehicle systems, and the governance architecture underpinning commercial licensing. The company is actively developing its role as East and Southern Africa's foremost technical voice on seabed resource governance and African participation in the emerging deep sea economy.</p>
+      <div class="dsm-facts-grid">
+        <div class="dsm-fact"><strong>19</strong><span>ISA exploration licences — nodule zones in force</span></div>
+        <div class="dsm-fact"><strong>$3T+</strong><span>Estimated nodule mineral value, Pacific alone</span></div>
+        <div class="dsm-fact"><strong>2025</strong><span>ISA Mining Code finalisation — in active progress</span></div>
+        <div class="dsm-fact"><strong>0</strong><span>African-led DSM engineering firms — the gap we fill</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOUNDER ══════════ -->
+<section id="founder">
+  <div class="eyebrow">Leadership</div>
+  <h2 class="sec-title">The team behind <em>Bahari BlueTech.</em></h2>
+  <div class="founder-wrap reveal">
+    <div class="founder-img-block">
+      <div class="founder-avatar">
+        <div class="founder-initials">CK</div>
+        <div class="founder-frame"></div>
+      </div>
+      <div class="founder-title-card">
+        <span class="founder-name">Cyril Kariuki</span>
+        <span class="founder-role">Founder & Marine Engineer</span>
+      </div>
+    </div>
+    <div style="padding-top:1rem">
+      <div class="founder-bio">
+        <p>Cyril Kariuki is a Kenyan marine engineer and the founding force behind Bahari BlueTech. With a professional background spanning vessel operations, fisheries engineering, aquaculture system design, and ocean governance, Kariuki established the company to address a structural gap in Africa's maritime economy: the absence of a locally owned, technically credible marine engineering institution capable of competing on the global stage.</p>
+        <p>Kariuki's professional experience encompasses <strong>hands-on vessel operations in commercial maritime contexts</strong>, engagement with Kenya's blue economy state infrastructure at the institutional level, and practical design work on IMTA aquaculture systems and vessel modelling projects. His ocean governance training spans international UNCLOS frameworks and EEZ management, and he holds deep sea mining engineering expertise developed under the <strong>International Seabed Authority (ISA) engineering framework</strong> — positioning him as one of East Africa's rare professionals at the crossroads of marine engineering, ocean science, and deep sea governance.</p>
+        <p>Kariuki's founding vision is clear: that Africa does not merely participate in the global blue economy — it <strong>engineers, owns, and governs</strong> it from within.</p>
+      </div>
+      <div class="founder-tags">
+        <span class="ftag-item">Marine Engineering</span>
+        <span class="ftag-item">Naval Architecture</span>
+        <span class="ftag-item">IMTA Design</span>
+        <span class="ftag-item">Vessel Operations</span>
+        <span class="ftag-item">ISA Deep Sea Mining</span>
+        <span class="ftag-item">Ocean Governance</span>
+        <span class="ftag-item">Blue Economy Policy</span>
+        <span class="ftag-item">UNCLOS Frameworks</span>
+      </div>
+      <div style="margin-top:2rem;display:flex;gap:1rem">
+        <a href="https://www.linkedin.com/in/cyril-kariuki-marine109/" target="_blank" rel="noopener" class="btn-sec" style="font-family:'Fira Code',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(160,212,232,.2);color:var(--foam);padding:.7rem 1.5rem;border-radius:2px;text-decoration:none;transition:all .25s">
+          LinkedIn Profile →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ROADMAP ══════════ -->
+<section id="roadmap">
+  <div class="eyebrow">Strategic vision</div>
+  <h2 class="sec-title">Where Bahari BlueTech<br><em>is going.</em></h2>
+  <div class="rm-grid reveal">
+    <div class="rm-left">
+      <p class="rm-desc">Bahari BlueTech is not waiting for the maritime industry to arrive in Africa. The company is building the engineering infrastructure, technical credibility, and intellectual property to lead it — incrementally, rigorously, and with global competitiveness from the ground up.</p>
+      <div style="margin-top:2.5rem;padding:1.6rem 1.8rem;background:var(--faint);border:1px solid var(--line);border-radius:4px">
+        <div style="font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem">Core ambition</div>
+        <div style="font-family:'Fraunces',serif;font-size:1rem;font-style:italic;font-weight:300;color:var(--foam);line-height:1.7">To become the most technically credible marine engineering firm originating from East Africa — competing for global innovation awards, leading on deep sea mineral governance, and building the vessels that feed the continent.</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-spine"></div>
+      <div class="phase">
+        <div class="phase-marker"><span class="pm-yr">2025</span><span class="pm-ph">Phase 01</span></div>
+        <div class="pm-dot"></div>
+        <div class="phase-box">
+          <div class="phase-title">Foundation — Design Studio & Market Entry</div>
+          <ul class="phase-items">
+            <li>Launch marine design consultancy: vessel CAD, aquaculture layouts, technical reports</li>
+            <li>Acquire first 3D fabrication unit; produce physical models for pitches and clients</li>
+            <li>Establish institutional digital presence and sector authority online</li>
+            <li>Engage Go Blue (UNEP/EU), coastal county governments, and fishing cooperatives</li>
+            <li>Apply to OceanHub Africa Acceleration Programme</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="pm-yr">2026–27</span><span class="pm-ph">Phase 02</span></div>
+        <div class="pm-dot"></div>
+        <div class="phase-box">
+          <div class="phase-title">Growth — First Vessel Build & Grant Capital</div>
+          <ul class="phase-items">
+            <li>Complete first fiberglass fishing vessel prototype with a coastal cooperative partner</li>
+            <li>Apply to BlueInvest Africa (EU) and UNDP MineTech Accelerator</li>
+            <li>Publish ISA deep sea mining policy paper on African positioning</li>
+            <li>Develop proprietary boat design series with vessel tracking integration</li>
+            <li>Establish formal fabrication workshop; open commercial build contracts</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="pm-yr">2028–30</span><span class="pm-ph">Phase 03</span></div>
+        <div class="pm-dot"></div>
+        <div class="phase-box">
+          <div class="phase-title">Scale — IP Ownership, Awards & Regional Reach</div>
+          <ul class="phase-items">
+            <li>Register and license vessel design IP across the East African Community</li>
+            <li>Compete for Ocean Exchange, Africa Innovation Challenge, and global awards</li>
+            <li>Establish as foremost African technical voice on ISA deep sea mining governance</li>
+            <li>Expand advisory regionally: Tanzania, Mozambique, Madagascar, SADC</li>
+            <li>Seed funding round targeting EU blue economy and impact investment capital</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="eyebrow">Get in touch</div>
+  <h2 class="sec-title">Let's build the <em>ocean economy</em><br>together.</h2>
+  <div class="contact-grid reveal">
+    <div>
+      <div class="frm-row">
+        <div class="fg"><label class="fl">Full name</label><input class="fi" type="text" placeholder="Your name"></div>
+        <div class="fg"><label class="fl">Organisation</label><input class="fi" type="text" placeholder="Company / Institution"></div>
+      </div>
+      <div class="fg"><label class="fl">Email address</label><input class="fi" type="email" placeholder="you@example.com"></div>
+      <div class="fg">
+        <label class="fl">Service interest</label>
+        <select class="fsel">
+          <option value="">Select a service...</option>
+          <option>Semi-Industrial Fishing Vessel Design / Build</option>
+          <option>IMTA Aquaculture System Design</option>
+          <option>Manned Submersible / ROV Development</option>
+          <option>Marine Engineering & CAD Design</option>
+          <option>Ocean Governance & Policy Advisory</option>
+          <option>Deep Sea Mining Advisory (ISA)</option>
+          <option>3D Marine Prototype Fabrication</option>
+          <option>Grant Co-application Support</option>
+          <option>Partnership / Strategic Collaboration</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Describe your project, organisation, or enquiry..."></textarea></div>
+      <button class="c-submit" onclick="handleSend()">Send Enquiry</button>
+      <div id="form-msg">✓ Enquiry received — we will respond within 48 hours.</div>
+    </div>
+    <div class="cinfo">
+      <div>
+        <div class="ci-lbl">Headquarters</div>
+        <div class="ci-val">Mombasa, Kenya<br><span style="font-size:.85rem;color:var(--muted)">Indian Ocean Seaboard, East Africa</span></div>
+      </div>
+      <div>
+        <div class="ci-lbl">Email</div>
+        <div class="ci-val">info@bahariblutech.co.ke</div>
+      </div>
+      <div>
+        <div class="ci-lbl">Languages</div>
+        <div class="ci-val" style="font-size:.95rem">English · Kiswahili</div>
+      </div>
+      <div>
+        <div class="ci-lbl">We serve</div>
+        <div class="ci-val" style="font-size:.85rem;line-height:2">
+          Government agencies & state corporations<br>
+          Fishing cooperatives & coastal communities<br>
+          NGOs & international development partners<br>
+          Aquaculture investors & operators<br>
+          Universities & oceanographic institutions<br>
+          International funders & impact investors
+        </div>
+      </div>
+      <div class="seeking-box">
+        <span class="sk-lbl">Currently seeking</span>
+        <ul class="sk-list">
+          <li>Pilot vessel build partnerships</li>
+          <li>Aquaculture design & consultancy contracts</li>
+          <li>Grant co-applicants (EU, UNDP, World Bank)</li>
+          <li>Technical advisory engagements</li>
+          <li>Innovation award collaborators</li>
+          <li>Impact investor conversations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="f-left">
+    <span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya · All rights reserved</span>
+    <div class="f-sep"></div>
+    <span class="f-copy">info@bahariblutech.co.ke</span>
+  </div>
+  <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+</footer>
+
+<!-- ══════════════════════════════════════
+   JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+/* ── Cursor ── */
+const c1=document.getElementById('c1'),c2=document.getElementById('c2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){
+  c1.style.left=mx+'px';c1.style.top=my+'px';
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  c2.style.left=rx+'px';c2.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('c-big'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('c-big'));
+});
+
+/* ── Nav scroll ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+/* ── Scroll reveal ── */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target)}});
+},{threshold:.08});
+document.querySelectorAll('.reveal,.reveal-d').forEach(el=>ro.observe(el));
+
+/* ── Hero particle canvas ── */
+(function(){
+  const cv=document.getElementById('hero-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H,pts=[];
+  function resize(){cv.width=W=window.innerWidth;cv.height=H=window.innerHeight;init()}
+  function init(){
+    pts=[];
+    const n=Math.floor(W*H/10000);
+    for(let i=0;i<n;i++)pts.push({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*1.5+.2,
+      vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.1,
+      a:Math.random()*.45+.05,
+      c:Math.random()<.15?'rgba(8,196,168,':'rgba(160,212,232,'
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.c+p.a+')';ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+/* ── Service canvas backgrounds ── */
+function makeWaveCanvas(id,color1,color2){
+  const cv=document.getElementById(id);
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let W,H,t=0;
+  function resize(){cv.width=W=cv.parentElement.offsetWidth;cv.height=H=cv.parentElement.offsetHeight}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      ctx.moveTo(0,H/2);
+      for(let x=0;x<=W;x+=3){
+        const y=H/2+Math.sin((x/W)*Math.PI*4+t+i*1.2)*(15+i*8)*(.3);
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();
+      ctx.fillStyle=`rgba(${color1},${0.04-i*0.01})`;ctx.fill();
+    }
+    t+=.008;requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize);draw();
+}
+makeWaveCanvas('canvas-vessel','8,48,78','');
+makeWaveCanvas('canvas-imta','2,15,30','');
+makeWaveCanvas('canvas-sub','0,8,16','');
+makeWaveCanvas('canvas-design','4,24,40','');
+makeWaveCanvas('canvas-gov','2,15,30','');
+
+/* ── Bioluminescence particles ── */
+(function(){
+  const container=document.getElementById('biolum');
+  if(!container)return;
+  function createDrop(){
+    const d=document.createElement('div');
+    d.className='bp';
+    d.style.left=Math.random()*100+'%';
+    d.style.bottom=Math.random()*30+'%';
+    d.style.animationDuration=(3+Math.random()*4)+'s';
+    d.style.animationDelay=(Math.random()*3)+'s';
+    d.style.width=d.style.height=(2+Math.random()*4)+'px';
+    d.style.background=Math.random()<.5?'var(--bio)':'var(--bio2)';
+    container.appendChild(d);
+    setTimeout(()=>d.remove(),(7+Math.random()*4)*1000);
+  }
+  setInterval(createDrop,300);
+})();
+
+/* ── Active nav link ── */
+const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(scrollY>=s.offsetTop-140)cur=s.id});
+  document.querySelectorAll('.n-links a').forEach(a=>{
+    a.style.color=a.getAttribute('href')==='#'+cur?'var(--gold2)':'';
+  });
+});
+
+/* ── Form ── */
+function handleSend(){
+  const m=document.getElementById('form-msg');
+  m.style.display='block';
+  setTimeout(()=>m.style.display='none',6000);
+}
+
+/* ── Counter animation on metrics ── */
+const metNums=document.querySelectorAll('.met-n');
+const metObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const target=el.textContent;
+      if(/^\d/.test(target)){
+        const num=parseInt(target);
+        let start=0;const dur=1800;const step=dur/60;
+        const timer=setInterval(()=>{
+          start+=num/60;
+          el.textContent=Math.floor(start)+(target.includes('+')?' +':target.includes('B')?'B':target.slice(String(num).length));
+          if(start>=num){el.textContent=target;clearInterval(timer);}
+        },step);
+      }
+      metObs.unobserve(el);
+    }
+  });
+},{threshold:.5});
+metNums.forEach(n=>metObs.observe(n));
+</script>
+</body>
+</html>
