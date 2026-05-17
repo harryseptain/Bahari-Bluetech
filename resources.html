@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources | Bahari BlueTech</title>
+<meta name="description" content="Bahari BlueTech's resource library — SEO publications, technical briefs, ocean governance analysis, and blue economy insights from Kenya's leading marine engineering firm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ── RESOURCES PAGE SPECIFICS ── */
+.res-layout{display:grid;grid-template-columns:1fr 280px;gap:4rem;align-items:start}
+
+/* Featured article */
+.res-featured{
+  grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;
+  border:1px solid var(--lineg);border-radius:8px;overflow:hidden;
+  background:rgba(6,32,56,.4);margin-bottom:3rem;transition:border-color .3s
+}
+.res-featured:hover{border-color:rgba(75,188,216,.2)}
+.res-feat-img{min-height:380px;overflow:hidden;position:relative}
+.res-feat-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.7);transition:filter .4s}
+.res-featured:hover .res-feat-img img{filter:brightness(.85) saturate(.85)}
+.res-feat-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 40%,rgba(2,15,30,.9))}
+.res-feat-body{padding:3rem;display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(135deg,rgba(4,24,40,.5),rgba(6,32,56,.7))}
+.res-feat-cat{font-family:'Fira Code',monospace;font-size:.54rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold2);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.res-feat-cat::before{content:'✦';font-size:.5rem}
+.res-feat-title{font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2.1rem);font-weight:300;
+  line-height:1.2;color:var(--white);margin-bottom:1rem}
+.res-feat-title em{font-style:italic;color:var(--sky)}
+.res-feat-excerpt{font-family:'Fira Code',monospace;font-size:.67rem;font-weight:300;
+  color:var(--muted);line-height:2;margin-bottom:1.8rem}
+.res-feat-meta{font-family:'Fira Code',monospace;font-size:.56rem;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+
+/* Article grid */
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
+
+/* Article card */
+.res-card{
+  background:var(--faint);border:1px solid var(--line);border-radius:6px;
+  overflow:hidden;transition:all .3s;display:flex;flex-direction:column
+}
+.res-card:hover{border-color:var(--lineg);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.res-card-img{height:180px;background:linear-gradient(135deg,var(--deep),var(--ocean));
+  position:relative;overflow:hidden;flex-shrink:0}
+.res-card-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.65);transition:filter .4s}
+.res-card:hover .res-card-img img{filter:brightness(.88) saturate(.8)}
+.res-card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.8rem;opacity:.25}
+.res-cat-tag{position:absolute;top:.85rem;left:.85rem;font-family:'Fira Code',monospace;
+  font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);
+  background:rgba(1,11,20,.8);border:1px solid rgba(232,184,48,.22);border-radius:2px;
+  padding:.22rem .65rem;backdrop-filter:blur(4px)}
+.res-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.res-date{font-family:'Fira Code',monospace;font-size:.52rem;letter-spacing:.1em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:.55rem}
+.res-title{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:300;color:var(--white);
+  line-height:1.4;margin-bottom:.7rem}
+.res-excerpt{font-family:'Fira Code',monospace;font-size:.63rem;font-weight:300;
+  color:var(--muted);line-height:1.85;margin-bottom:1.2rem;flex:1}
+.res-read-link{font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold2);display:inline-flex;align-items:center;
+  gap:.5rem;border-bottom:1px solid rgba(232,184,48,.22);padding-bottom:.2rem;
+  transition:all .2s;margin-top:auto;align-self:flex-start}
+.res-read-link:hover{color:var(--gold3);gap:.8rem;border-bottom-color:var(--gold3)}
+
+/* Sidebar */
+.res-sidebar{position:sticky;top:7rem}
+.sidebar-section{margin-bottom:2rem}
+.sidebar-title{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;
+  align-items:center;gap:.6rem}
+.sidebar-title::after{content:'';flex:1;height:1px;background:rgba(200,150,12,.18)}
+.sidebar-links{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.sidebar-links a{font-family:'Fira Code',monospace;font-size:.63rem;color:var(--muted);
+  letter-spacing:.05em;transition:color .2s;padding:.3rem 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:.5rem}
+.sidebar-links a:hover{color:var(--gold2)}
+.sidebar-links a::before{content:'→';color:var(--gold);opacity:.4;font-size:.6rem}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.4rem}
+.newsletter-box{padding:1.5rem;border:1px solid rgba(8,196,168,.2);border-radius:4px;
+  background:rgba(8,196,168,.04)}
+.nl-label{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;display:block}
+.nl-desc{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--muted);
+  line-height:1.8;margin-bottom:1rem}
+.nl-input{width:100%;font-family:'Fira Code',monospace;font-size:.65rem;color:var(--white);
+  background:rgba(160,212,232,.04);border:1px solid var(--line);border-radius:2px;
+  padding:.65rem .8rem;outline:none;margin-bottom:.6rem;transition:border-color .2s}
+.nl-input:focus{border-color:rgba(8,196,168,.3)}
+.nl-btn{width:100%;font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;background:var(--teal);color:var(--void);border:none;
+  padding:.7rem;border-radius:2px;font-weight:500;transition:background .2s}
+.nl-btn:hover{background:var(--teal2)}
+
+@media(max-width:1100px){
+  .res-layout{grid-template-columns:1fr}
+  .res-sidebar{position:static}
+  .res-grid{grid-template-columns:1fr}
+  .res-featured{grid-template-columns:1fr}
+  .res-feat-img{min-height:220px}
+  .res-feat-img::after{background:linear-gradient(180deg,transparent 40%,rgba(2,15,30,.9))}
+}
+</style>
+</head>
+<body>
+<div id="c1"></div>
+<div id="c2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="n-logo">
+    <div class="n-emblem"><svg viewBox="0 0 58 58" fill="none"><rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/><line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/><path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/><path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="n-wordmark"><strong>Bahari BlueTech</strong><span>Marine Engineering · Mombasa, Kenya</span></div>
+  </a>
+  <ul class="n-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation</a></li>
+    <li><a href="sustainability.html">Sustainability</a></li>
+    <li><a href="roadmap.html">Roadmap</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="n-cta">Work With Us</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <canvas class="ph-canvas" id="ph-canvas"></canvas>
+  <div class="ph-waves"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path opacity=".15" fill="#0e4d70"><animate attributeName="d" dur="10s" repeatCount="indefinite" values="M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,65 L1440,120 L0,120 Z;M0,65 C360,95 720,55 1080,80 C1260,98 1380,62 1440,72 L1440,120 L0,120 Z;M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,65 L1440,120 L0,120 Z"/></path><path fill="#020f1e"><animate attributeName="d" dur="7s" repeatCount="indefinite" values="M0,105 C360,92 720,112 1080,98 C1260,90 1380,108 1440,102 L1440,120 L0,120 Z;M0,100 C360,110 720,96 1080,107 C1260,113 1380,99 1440,104 L1440,120 L0,120 Z;M0,105 C360,92 720,112 1080,98 C1260,90 1380,108 1440,102 L1440,120 L0,120 Z"/></path></svg></div>
+  <div class="ph-content">
+    <div class="ph-eyebrow">Knowledge hub</div>
+    <h1 class="ph-h1">Publications &amp;<br><em>Resources.</em></h1>
+    <p class="ph-sub">Technical briefs, policy analysis, industry insights, and SEO articles from Africa's marine engineering frontier — written from Mombasa, read across the Indian Ocean.</p>
+  </div>
+</div>
+
+<!-- ══════ RESOURCES MAIN ══════ -->
+<section style="background:var(--abyss);padding:7rem 4rem">
+
+  <!-- Category filter -->
+  <div class="cat-filters reveal" id="cat-filters">
+    <button class="cat-btn active" data-cat="all">All Topics</button>
+    <button class="cat-btn" data-cat="blue-economy">Blue Economy</button>
+    <button class="cat-btn" data-cat="vessel-design">Vessel Design</button>
+    <button class="cat-btn" data-cat="aquaculture">Aquaculture</button>
+    <button class="cat-btn" data-cat="governance">Ocean Governance</button>
+    <button class="cat-btn" data-cat="deep-sea">Deep Sea Mining</button>
+    <button class="cat-btn" data-cat="sustainability">Sustainability</button>
+    <button class="cat-btn" data-cat="innovation">Innovation</button>
+  </div>
+
+  <div class="res-layout">
+    <!-- MAIN CONTENT -->
+    <div>
+      <!-- FEATURED ARTICLE -->
+      <div class="res-featured reveal" data-cat="blue-economy">
+        <div class="res-feat-img">
+          <img src="https://i.ibb.co/tT2pKTDp/Chat-GPT-Image-May-7-2026-01-08-00-AM.png" alt="The Untapped Potential of East Africa's Blue Economy" onerror="this.style.background='linear-gradient(135deg,var(--deep),var(--ocean))'">
+        </div>
+        <div class="res-feat-body">
+          <div class="res-feat-cat">Featured · Blue Economy Policy Analysis</div>
+          <div class="res-feat-title">The Untapped Potential of <em>East Africa's Blue Economy</em></div>
+          <div class="res-feat-excerpt">East Africa's Indian Ocean coastline holds over $300 billion in annual ocean economy potential — yet the region lacks the marine engineering institutions, vessel fabrication capacity, and governance frameworks to capture it. This in-depth analysis covers fisheries, IMTA aquaculture, ports, offshore energy, deep seabed minerals, and the structural changes needed to shift Africa from ocean consumer to ocean sovereign.</div>
+          <div class="res-feat-meta">Cyril Kariuki · Bahari BlueTech Insights · May 2025 · 18 min read</div>
+          <a href="bahari_article_blue_economy.html" class="btn-prim" style="width:fit-content">Read Article <svg viewBox="0 0 16 16" fill="none" style="width:14px"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+
+      <!-- ARTICLE GRID -->
+      <div class="res-grid">
+
+        <!-- Article 1 -->
+        <div class="res-card reveal" data-cat="vessel-design">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">⚓</div>
+            <div class="res-cat-tag">Vessel Design</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">April 2025</div>
+            <div class="res-title">Why GRP is the Right Material for East African Fishing Vessels</div>
+            <div class="res-excerpt">Glass Reinforced Plastic has transformed fishing fleets across Asia and Europe. Here's why it is the superior choice for East Africa's tropical coastal environment — and why imported wooden vessels are holding the industry back.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="res-card reveal" data-cat="aquaculture">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">🐟</div>
+            <div class="res-cat-tag">Aquaculture</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">April 2025</div>
+            <div class="res-title">What is IMTA? A Practical Guide for Kenyan Coastal Farmers</div>
+            <div class="res-excerpt">Integrated Multi-Trophic Aquaculture is not just a buzzword — it is the most sustainable and productive model for ocean farming in East Africa. This plain-language guide explains how it works, what it costs, and what it produces.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 3 -->
+        <div class="res-card reveal" data-cat="governance">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">🌐</div>
+            <div class="res-cat-tag">Ocean Governance</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">March 2025</div>
+            <div class="res-title">UNCLOS and Kenya: Understanding Your Exclusive Economic Zone</div>
+            <div class="res-excerpt">Kenya's EEZ covers 142,400 km² of Indian Ocean. Yet most Kenyans — and many policymakers — don't fully understand what UNCLOS entitles us to, or what governance obligations come with those rights. This explainer changes that.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 4 -->
+        <div class="res-card reveal" data-cat="deep-sea">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">🌊</div>
+            <div class="res-cat-tag">Deep Sea Mining</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">March 2025</div>
+            <div class="res-title">The ISA Mining Code Explained: What Africa Needs to Know Before It's Too Late</div>
+            <div class="res-excerpt">The International Seabed Authority is writing the rules for deep sea mining right now. African nations that are not in the room will be governed by rules written without them. Here is what is at stake and what needs to happen.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 5 -->
+        <div class="res-card reveal" data-cat="sustainability">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">♻️</div>
+            <div class="res-cat-tag">Sustainability</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">February 2025</div>
+            <div class="res-title">Zero Toxic Coatings: How We Design Vessels That Respect Coral Reefs</div>
+            <div class="res-excerpt">Conventional antifouling paints are destroying coral ecosystems across East Africa's coastline. Bahari BlueTech's vessel specifications reject all biocide-based coatings. Here is how we achieve the same performance without the ecological damage.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 6 -->
+        <div class="res-card reveal" data-cat="innovation">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">🤖</div>
+            <div class="res-cat-tag">Innovation</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">February 2025</div>
+            <div class="res-title">Building Africa's First Locally Designed ROV: The Engineering Brief</div>
+            <div class="res-excerpt">Africa has no locally designed or manufactured underwater remotely operated vehicle. Every reef survey, pipeline inspection, and aquaculture monitoring mission is conducted by imported equipment. Bahari BlueTech is changing that. Here is the design brief.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 7 -->
+        <div class="res-card reveal" data-cat="blue-economy">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">🌍</div>
+            <div class="res-cat-tag">Blue Economy</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">January 2025</div>
+            <div class="res-title">Kenya's 6 Coastal Counties: A Blue Economy Development Scorecard</div>
+            <div class="res-excerpt">From Kwale to Lamu, Kenya's six coastal counties have radically different marine resource endowments, infrastructure realities, and blue economy readiness levels. This county-by-county analysis scores each on their ocean development potential.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+        <!-- Article 8 -->
+        <div class="res-card reveal" data-cat="vessel-design">
+          <div class="res-card-img">
+            <div class="res-card-img-placeholder">⚙️</div>
+            <div class="res-cat-tag">Vessel Design</div>
+          </div>
+          <div class="res-card-body">
+            <div class="res-date">January 2025</div>
+            <div class="res-title">Naval Architecture 101: What Every Kenyan Fisherman Should Know About Hull Design</div>
+            <div class="res-excerpt">The difference between a well-designed hull and a poorly designed one is the difference between profit and loss across a vessel's 25-year lifespan. This primer explains the key design parameters every boat buyer and fishing cooperative leader should understand.</div>
+            <a href="#" class="res-read-link">Read article →</a>
+          </div>
+        </div>
+
+      </div><!-- end res-grid -->
+    </div><!-- end main content -->
+
+    <!-- SIDEBAR -->
+    <aside class="res-sidebar reveal-d">
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Recent publications</div>
+        <ul class="sidebar-links">
+          <li><a href="#">Kenya Blue Economy 2025: The $150B Opportunity</a></li>
+          <li><a href="#">Why GRP is Right for East Africa</a></li>
+          <li><a href="#">IMTA: A Guide for Coastal Farmers</a></li>
+          <li><a href="#">UNCLOS and Kenya's EEZ</a></li>
+          <li><a href="#">The ISA Mining Code Explained</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Topic tags</div>
+        <div class="tag-cloud">
+          <span class="tag tag-gold">Blue Economy</span>
+          <span class="tag">Vessel Design</span>
+          <span class="tag">IMTA</span>
+          <span class="tag tag-gold">Deep Sea Mining</span>
+          <span class="tag">GRP Fabrication</span>
+          <span class="tag">UNCLOS</span>
+          <span class="tag tag-gold">Kenya EEZ</span>
+          <span class="tag">Naval Architecture</span>
+          <span class="tag">Sustainability</span>
+          <span class="tag">ROV</span>
+          <span class="tag tag-gold">ISA</span>
+          <span class="tag">Ocean Governance</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="newsletter-box">
+          <span class="nl-label">Stay informed</span>
+          <div class="nl-desc">New publications, technical briefs, and blue economy insights — straight to your inbox. No spam. Unsubscribe anytime.</div>
+          <input class="nl-input" type="email" placeholder="your@email.com">
+          <button class="nl-btn">Subscribe</button>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Services mentioned</div>
+        <ul class="sidebar-links">
+          <li><a href="services.html#vessels">Fishing Vessel Design</a></li>
+          <li><a href="services.html#imta">IMTA Aquaculture</a></li>
+          <li><a href="services.html#submersibles">ROV & Submersibles</a></li>
+          <li><a href="services.html#governance">Ocean Governance</a></li>
+          <li><a href="services.html#engineering">Marine Engineering</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</section>
+
+<!-- ══════ CONTRIBUTE / SEO NOTE ══════ -->
+<section style="background:var(--void);padding:5rem 4rem;border-top:1px solid var(--line)">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1000px">
+    <div class="reveal">
+      <div class="eyebrow">Write for us</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1rem">Have expertise to share?</h2>
+      <p style="font-family:'Fira Code',monospace;font-size:.68rem;font-weight:300;color:var(--muted);line-height:2;margin-bottom:1.5rem">We welcome technical contributions from marine engineers, ocean scientists, aquaculture practitioners, maritime lawyers, and blue economy specialists. If you have expertise relevant to East Africa's ocean development — we'd like to publish it.</p>
+      <a href="contact.html" class="btn-sec">Submit a Contribution</a>
+    </div>
+    <div class="reveal-d">
+      <div style="padding:2rem;background:var(--faint);border:1px solid var(--line);border-radius:6px">
+        <div style="font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">What we publish</div>
+        <ul style="list-style:none;font-family:'Fira Code',monospace;font-size:.66rem;color:var(--foam);line-height:2.4">
+          <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--teal)">→</span> Technical engineering briefs & methodology papers</li>
+          <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--teal)">→</span> Ocean governance policy analysis</li>
+          <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--teal)">→</span> Blue economy sector research & market intelligence</li>
+          <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--teal)">→</span> Aquaculture case studies from East Africa</li>
+          <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--teal)">→</span> Sustainability & responsible ocean use commentary</li>
+          <li style="padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--teal)">→</span> Innovation & emerging ocean technology coverage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div class="f-left"><span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya</span><div class="f-sep"></div><span class="f-copy">info@baharibluetech.co.ke</span><div class="f-sep"></div><span class="f-copy">+254 140 211 588</span></div>
+      <ul class="f-links"><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="innovation.html">Innovation</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="resources.html">Resources</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </div>
+    <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254140211588" target="_blank" rel="noopener" class="wa-float"><div class="wa-tooltip">Chat on WhatsApp</div><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script src="site.js"></script>
+<script>initParticleCanvas('ph-canvas');</script>
+</body>
+</html>
