@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap | Bahari BlueTech</title>
+<meta name="description" content="Bahari BlueTech's strategic roadmap — from 2025 design studio launch through to regional African ocean engineering leadership by 2030.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ── ROADMAP PAGE SPECIFICS ── */
+.timeline-wrap{position:relative;padding-left:3rem;max-width:860px;margin:4rem 0}
+.timeline-wrap::before{
+  content:'';position:absolute;left:.9rem;top:0;bottom:0;
+  width:2px;background:linear-gradient(var(--brine),rgba(14,77,112,.2))
+}
+.phase-block{position:relative;margin-bottom:4rem}
+.phase-block:last-child{margin-bottom:0}
+
+/* Phase dot */
+.phase-dot{
+  position:absolute;left:-2.55rem;top:.35rem;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--gold2);border:3px solid var(--void);
+  box-shadow:0 0 0 1px var(--gold2),0 0 18px rgba(232,184,48,.4)
+}
+.phase-block.future .phase-dot{background:var(--brine);box-shadow:0 0 0 1px var(--brine)}
+
+/* Phase label */
+.phase-label{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Fira Code',monospace;font-size:.58rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.6rem
+}
+.phase-block.future .phase-label{color:var(--muted)}
+.pl-year{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:var(--gold3);
+  font-style:normal;letter-spacing:-.01em}
+.phase-block.future .pl-year{color:var(--muted)}
+
+/* Phase content card */
+.phase-card{
+  border:1px solid var(--lineg);border-radius:6px;
+  background:var(--faint);overflow:hidden;transition:border-color .3s
+}
+.phase-card:hover{border-color:rgba(232,184,48,.2)}
+.phase-block.future .phase-card{border-color:var(--line)}
+.phase-block.future .phase-card:hover{border-color:rgba(14,77,112,.4)}
+
+.phase-card-head{
+  padding:1.4rem 1.8rem;
+  border-bottom:1px solid var(--line);
+  background:rgba(6,32,56,.3)
+}
+.phase-card-title{
+  font-family:'Cabinet Grotesk',sans-serif;font-size:1.05rem;
+  font-weight:800;color:var(--white);letter-spacing:.02em
+}
+.phase-block.future .phase-card-title{color:var(--foam);opacity:.7}
+.phase-card-body{padding:1.6rem 1.8rem}
+
+/* Milestone items */
+.milestone-list{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.milestone-list li{
+  display:flex;align-items:flex-start;gap:.9rem;
+  font-family:'Fira Code',monospace;font-size:.67rem;
+  font-weight:300;color:var(--foam);line-height:1.7
+}
+.milestone-list li::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--gold2);flex-shrink:0;margin-top:.45rem
+}
+.phase-block.future .milestone-list li{color:var(--muted)}
+.phase-block.future .milestone-list li::before{background:var(--brine)}
+
+/* Status badge */
+.status-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Fira Code',monospace;font-size:.52rem;letter-spacing:.14em;
+  text-transform:uppercase;padding:.25rem .75rem;border-radius:2px;margin-left:.8rem
+}
+.status-active{background:rgba(8,196,168,.12);color:var(--teal2);border:1px solid rgba(8,196,168,.25)}
+.status-active::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal2);animation:pulse 2s infinite}
+.status-upcoming{background:rgba(14,77,112,.15);color:var(--muted);border:1px solid rgba(14,77,112,.2)}
+
+/* Ambition box */
+.ambition-box{
+  padding:2rem 2.2rem;border:1px solid rgba(200,150,12,.2);
+  border-radius:6px;background:rgba(200,150,12,.04);
+  margin-bottom:3rem
+}
+.ab-label{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:block}
+.ab-text{font-family:'Fraunces',serif;font-size:1.1rem;font-style:italic;font-weight:300;
+  color:var(--foam);line-height:1.75}
+
+/* Seekers column */
+.seekers-col{position:sticky;top:7rem;align-self:start}
+.seekers-box{padding:1.8rem;border:1px solid rgba(200,150,12,.2);border-radius:6px;
+  background:rgba(200,150,12,.04);margin-bottom:1.5rem}
+.sk-lbl{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:block}
+.sk-list{list-style:none;font-family:'Fira Code',monospace;font-size:.67rem;
+  color:var(--foam);line-height:2.3}
+.sk-list li{padding-left:1.2rem;position:relative}
+.sk-list li::before{content:'→';position:absolute;left:0;color:var(--gold);opacity:.55}
+
+.metrics-col{display:flex;flex-direction:column;gap:.8rem}
+.mc-item{padding:1.2rem 1.4rem;background:var(--faint);border:1px solid var(--line);border-radius:4px}
+.mc-n{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;color:var(--gold2);line-height:1}
+.mc-l{font-family:'Fira Code',monospace;font-size:.57rem;letter-spacing:.09em;color:var(--muted);
+  text-transform:uppercase;margin-top:.3rem;line-height:1.6}
+
+@media(max-width:1100px){
+  .rm-outer{grid-template-columns:1fr!important}
+  .seekers-col{position:static}
+  .timeline-wrap{padding-left:2rem}
+}
+</style>
+</head>
+<body>
+<div id="c1"></div>
+<div id="c2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="n-logo">
+    <div class="n-emblem"><svg viewBox="0 0 58 58" fill="none"><rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/><line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/><path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/><path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="n-wordmark"><strong>Bahari BlueTech</strong><span>Marine Engineering · Mombasa, Kenya</span></div>
+  </a>
+  <ul class="n-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation</a></li>
+    <li><a href="sustainability.html">Sustainability</a></li>
+    <li><a href="roadmap.html">Roadmap</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="n-cta">Work With Us</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="background:linear-gradient(160deg,var(--deep) 0%,var(--abyss) 100%)">
+  <canvas class="ph-canvas" id="ph-canvas"></canvas>
+  <div class="ph-waves"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path opacity=".15" fill="#0e4d70"><animate attributeName="d" dur="11s" repeatCount="indefinite" values="M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,65 L1440,120 L0,120 Z;M0,65 C360,95 720,55 1080,80 C1260,98 1380,62 1440,72 L1440,120 L0,120 Z;M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,65 L1440,120 L0,120 Z"/></path><path fill="#020f1e"><animate attributeName="d" dur="7s" repeatCount="indefinite" values="M0,105 C360,92 720,112 1080,98 C1260,90 1380,108 1440,102 L1440,120 L0,120 Z;M0,100 C360,110 720,96 1080,107 C1260,113 1380,99 1440,104 L1440,120 L0,120 Z;M0,105 C360,92 720,112 1080,98 C1260,90 1380,108 1440,102 L1440,120 L0,120 Z"/></path></svg></div>
+  <div class="ph-content">
+    <div class="ph-eyebrow">Strategic vision</div>
+    <h1 class="ph-h1">Where Bahari<br>BlueTech is <em>going.</em></h1>
+    <p class="ph-sub">We are not waiting for the maritime industry to arrive in Africa. We are building the engineering infrastructure, technical credibility, and intellectual property to lead it.</p>
+  </div>
+</div>
+
+<!-- ══════ MAIN ROADMAP SECTION ══════ -->
+<section style="background:var(--abyss);padding:7rem 4rem">
+  <div style="display:grid;grid-template-columns:1fr 320px;gap:5rem;align-items:start" class="rm-outer">
+
+    <!-- LEFT: TIMELINE -->
+    <div>
+      <div class="eyebrow reveal">Phase by phase</div>
+      <h2 class="sec-title reveal">The strategic<br><em>journey to 2030.</em></h2>
+
+      <div class="ambition-box reveal">
+        <span class="ab-label">Core ambition</span>
+        <div class="ab-text">To become the most technically credible marine engineering firm originating from East Africa — competing for global innovation awards, leading on deep sea mineral governance, and building the vessels that feed the continent.</div>
+      </div>
+
+      <div class="timeline-wrap reveal-d">
+
+        <!-- PHASE 01 -->
+        <div class="phase-block">
+          <div class="phase-dot"></div>
+          <div class="phase-label">
+            <span class="pl-year">2025</span>
+            Phase 01
+            <span class="status-badge status-active">Active now</span>
+          </div>
+          <div class="phase-card">
+            <div class="phase-card-head">
+              <div class="phase-card-title">Foundation — Design Studio & Market Entry</div>
+            </div>
+            <div class="phase-card-body">
+              <ul class="milestone-list">
+                <li>Launch marine design consultancy: vessel CAD, aquaculture layouts, technical reports</li>
+                <li>Acquire first 3D fabrication unit; produce physical models for client pitches and regulatory submissions</li>
+                <li>Establish institutional digital presence and sector authority online — positioning as East Africa's leading marine engineering voice</li>
+                <li>Engage Go Blue (UNEP/EU), coastal county governments, and fishing cooperatives in initial advisory and design partnerships</li>
+                <li>Apply to OceanHub Africa Acceleration Programme and Kenya Blue Economy trust fund instruments</li>
+                <li>Complete first ISA-aligned deep sea mining policy brief and distribute to Kenya Ministry of Mining, KRIOA, and international partners</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHASE 02 -->
+        <div class="phase-block future">
+          <div class="phase-dot"></div>
+          <div class="phase-label">
+            <span class="pl-year">2026–27</span>
+            Phase 02
+            <span class="status-badge status-upcoming">Upcoming</span>
+          </div>
+          <div class="phase-card">
+            <div class="phase-card-head">
+              <div class="phase-card-title">Growth — First Vessel Build & Grant Capital</div>
+            </div>
+            <div class="phase-card-body">
+              <ul class="milestone-list">
+                <li>Complete first fiberglass fishing vessel prototype in partnership with a coastal cooperative — documented end-to-end as a replicable build methodology</li>
+                <li>Apply to BlueInvest Africa (EU) and UNDP MineTech Accelerator programmes; secure first formal grant capital</li>
+                <li>Publish ISA deep sea mining policy paper on African EEZ state positioning in seabed governance negotiations</li>
+                <li>Develop proprietary vessel design series (12m, 16m, 22m) with integrated vessel tracking and AIS compliance</li>
+                <li>Establish formal fabrication workshop and open commercial build contracts to fishing cooperatives and county governments</li>
+                <li>Complete first IMTA aquaculture system design and installation for a partner aquaculture operator</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHASE 03 -->
+        <div class="phase-block future">
+          <div class="phase-dot"></div>
+          <div class="phase-label">
+            <span class="pl-year">2028–30</span>
+            Phase 03
+            <span class="status-badge status-upcoming">Upcoming</span>
+          </div>
+          <div class="phase-card">
+            <div class="phase-card-head">
+              <div class="phase-card-title">Scale — IP, Awards & Regional Reach</div>
+            </div>
+            <div class="phase-card-body">
+              <ul class="milestone-list">
+                <li>Register and license Bahari BlueTech vessel design IP across East African Community member states</li>
+                <li>Compete for Ocean Exchange, African Innovation Challenge, and global marine engineering awards — establishing international technical credibility</li>
+                <li>Establish Bahari BlueTech as the foremost African technical voice on ISA deep sea mining governance at UN-level negotiations</li>
+                <li>Expand advisory operations regionally: Tanzania, Mozambique, Madagascar, and SADC maritime zone states</li>
+                <li>Launch seed funding round targeting EU blue economy funds, impact investment capital, and AfDB blue economy programme instruments</li>
+                <li>Deliver first fully operational ROV prototype; conduct commercial inspection and survey contracts in Kenya EEZ</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHASE 04 -->
+        <div class="phase-block future">
+          <div class="phase-dot"></div>
+          <div class="phase-label">
+            <span class="pl-year">2030+</span>
+            Phase 04
+            <span class="status-badge status-upcoming">Horizon</span>
+          </div>
+          <div class="phase-card">
+            <div class="phase-card-head">
+              <div class="phase-card-title">Leadership — Continental Blue Economy Institution</div>
+            </div>
+            <div class="phase-card-body">
+              <ul class="milestone-list">
+                <li>Operate as a continent-wide marine engineering design and consultancy firm with offices in Mombasa, Dar es Salaam, and Maputo</li>
+                <li>Manage the first Africa-led, Africa-built, Africa-governed deep sea mineral extraction pilot in partnership with EAC member states</li>
+                <li>Run the Bahari BlueTech Academy: a formal marine engineering training programme producing the next generation of African ocean engineers</li>
+                <li>Operate a fleet of proprietary ROVs serving commercial inspection, research, and conservation contracts across the western Indian Ocean</li>
+                <li>Lead the African bloc negotiating position at ISA sessions on technology transfer, benefit sharing, and continental shelf extension rights</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end timeline-wrap -->
+    </div><!-- end left col -->
+
+    <!-- RIGHT: SIDEBAR -->
+    <div class="seekers-col">
+      <div class="seekers-box">
+        <span class="sk-lbl">Currently seeking</span>
+        <ul class="sk-list">
+          <li>Pilot vessel build partnerships</li>
+          <li>Aquaculture design & consultancy contracts</li>
+          <li>Grant co-applicants (EU, UNDP, World Bank)</li>
+          <li>Technical advisory engagements</li>
+          <li>Innovation award collaborators</li>
+          <li>Impact investor conversations</li>
+          <li>University research partnerships</li>
+          <li>County government blue economy programmes</li>
+        </ul>
+      </div>
+
+      <div class="metrics-col">
+        <div class="mc-item">
+          <div class="mc-n">2025</div>
+          <div class="mc-l">Year of founding — building from Mombasa</div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-n">2026</div>
+          <div class="mc-l">Target: first vessel prototype complete</div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-n">2028</div>
+          <div class="mc-l">Target: EAC-wide IP registration</div>
+        </div>
+        <div class="mc-item">
+          <div class="mc-n">2030</div>
+          <div class="mc-l">Target: regional marine engineering leader</div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem">
+        <a href="contact.html" class="btn-prim" style="width:100%;justify-content:center">Partner With Us <svg viewBox="0 0 16 16" fill="none" style="width:14px"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════ OPPORTUNITY LANDSCAPE ══════ -->
+<section style="background:var(--void);padding:7rem 4rem">
+  <div class="eyebrow reveal">Why now</div>
+  <h2 class="sec-title reveal">The window<br><em>is open.</em></h2>
+  <p class="sec-lead reveal-d">Several converging forces are creating a once-in-a-generation opportunity for an African marine engineering firm to seize continental leadership.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem" class="reveal-d">
+    <div class="card card-gold">
+      <div style="font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Driver 01</div>
+      <div style="font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:var(--white);margin-bottom:.5rem">Blue Economy Funding Surge</div>
+      <div style="font-family:'Fira Code',monospace;font-size:.63rem;color:var(--muted);line-height:1.85">The EU, World Bank, and UNDP have collectively committed over $4.5 billion to African blue economy programmes through 2030. The grant landscape has never been more favourable for technically credible African marine firms.</div>
+    </div>
+    <div class="card card-gold">
+      <div style="font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Driver 02</div>
+      <div style="font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:var(--white);margin-bottom:.5rem">ISA Regulatory Window</div>
+      <div style="font-family:'Fira Code',monospace;font-size:.63rem;color:var(--muted);line-height:1.85">The International Seabed Authority is finalising its Mining Code now. African nations that build technical expertise and governance credibility in this window will shape the rules — those that don't will be governed by rules set by others.</div>
+    </div>
+    <div class="card card-gold">
+      <div style="font-family:'Fira Code',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Driver 03</div>
+      <div style="font-family:'Cabinet Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:var(--white);margin-bottom:.5rem">Fishery Modernisation Demand</div>
+      <div style="font-family:'Fira Code',monospace;font-size:.63rem;color:var(--muted);line-height:1.85">Kenya's coastal fishing fleet is ageing rapidly. County governments and fishing cooperatives are actively seeking modern, locally designed and built vessels — a demand Bahari BlueTech is uniquely positioned to meet.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:5rem 4rem;text-align:center;background:var(--abyss)">
+  <h2 class="sec-title reveal" style="text-align:center">Be part of the<br><em>journey.</em></h2>
+  <p class="sec-lead reveal-d" style="text-align:center;margin:0 auto 2.5rem">Whether you're a funder, a partner, a government body, or an operator — there is a role for you in Africa's ocean engineering future.</p>
+  <div style="display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap" class="reveal-d">
+    <a href="contact.html" class="btn-prim">Get in Touch <svg viewBox="0 0 16 16" fill="none" style="width:14px"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    <a href="innovation.html" class="btn-sec">Explore Our Innovation</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div class="f-left"><span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya</span><div class="f-sep"></div><span class="f-copy">info@baharibluetech.co.ke</span><div class="f-sep"></div><span class="f-copy">+254 140 211 588</span></div>
+      <ul class="f-links"><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="innovation.html">Innovation</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="resources.html">Resources</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </div>
+    <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254140211588" target="_blank" rel="noopener" class="wa-float"><div class="wa-tooltip">Chat on WhatsApp</div><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script src="site.js"></script>
+<script>initParticleCanvas('ph-canvas');</script>
+</body>
+</html>
