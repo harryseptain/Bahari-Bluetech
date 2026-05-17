@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Bahari BlueTech</title>
+<meta name="description" content="Contact Bahari BlueTech — marine engineering consultancy, vessel design, IMTA aquaculture, ocean governance, and deep sea mining advisory based in Mombasa, Kenya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ── CONTACT PAGE SPECIFICS ── */
+.frm-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem}
+.frm-field{margin-bottom:.9rem}
+.frm-group-set{display:flex;flex-direction:column;gap:.9rem}
+
+/* Map / coordinates card */
+.loc-card{
+  border:1px solid var(--lineg);border-radius:6px;overflow:hidden;
+  background:linear-gradient(135deg,var(--deep),var(--ocean));margin-top:2rem
+}
+.loc-map{height:200px;position:relative;background:linear-gradient(160deg,#041828,#062038);
+  display:flex;align-items:center;justify-content:center}
+.loc-pin{text-align:center}
+.loc-pin-dot{width:16px;height:16px;border-radius:50%;background:var(--gold2);
+  margin:0 auto .6rem;box-shadow:0 0 20px rgba(232,184,48,.5),0 0 0 4px rgba(232,184,48,.15)}
+.loc-pin-label{font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold2)}
+.loc-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.loc-ring{position:absolute;border-radius:50%;border:1px solid rgba(232,184,48,.12);
+  top:50%;left:50%;transform:translate(-50%,-50%)}
+.loc-coords{padding:1.2rem 1.6rem;border-top:1px solid var(--line)}
+.lc-row{display:flex;justify-content:space-between;align-items:center;
+  padding:.5rem 0;border-bottom:1px solid var(--line)}
+.lc-row:last-child{border-bottom:none}
+.lc-label{font-family:'Fira Code',monospace;font-size:.54rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.lc-val{font-family:'Fira Code',monospace;font-size:.62rem;color:var(--foam)}
+.lc-val strong{color:var(--teal);font-weight:400}
+
+/* Engagement types */
+.engage-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:2rem}
+.engage-card{padding:1rem 1.2rem;border:1px solid var(--line);border-radius:4px;
+  background:var(--faint);transition:all .25s;cursor:default}
+.engage-card:hover{border-color:rgba(232,184,48,.2);background:rgba(232,184,48,.04)}
+.eng-title{font-family:'Cabinet Grotesk',sans-serif;font-size:.78rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.04em;color:var(--gold2);margin-bottom:.25rem}
+.eng-txt{font-family:'Fira Code',monospace;font-size:.58rem;color:var(--muted);line-height:1.75}
+
+/* Form success */
+#form-msg{display:none;margin-top:1rem;font-family:'Fira Code',monospace;font-size:.68rem;
+  color:var(--teal2);letter-spacing:.08em;padding:.8rem 1rem;border:1px solid rgba(8,196,168,.25);
+  border-radius:3px;background:rgba(8,196,168,.05)}
+
+/* Serve row */
+.serve-list{list-style:none;font-family:'Fira Code',monospace;font-size:.67rem;
+  color:var(--foam);line-height:2.4}
+.serve-list li{padding-left:1.2rem;position:relative}
+.serve-list li::before{content:'→';position:absolute;left:0;color:var(--gold);opacity:.5}
+
+@media(max-width:1100px){
+  .frm-row{grid-template-columns:1fr}
+  .engage-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="c1"></div>
+<div id="c2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="n-logo">
+    <div class="n-emblem"><svg viewBox="0 0 58 58" fill="none"><rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/><line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/><path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/><path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="n-wordmark"><strong>Bahari BlueTech</strong><span>Marine Engineering · Mombasa, Kenya</span></div>
+  </a>
+  <ul class="n-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation</a></li>
+    <li><a href="sustainability.html">Sustainability</a></li>
+    <li><a href="roadmap.html">Roadmap</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="n-cta">Work With Us</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <canvas class="ph-canvas" id="ph-canvas"></canvas>
+  <div class="ph-waves"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path opacity=".15" fill="#0e4d70"><animate attributeName="d" dur="10s" repeatCount="indefinite" values="M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,65 L1440,120 L0,120 Z;M0,65 C360,95 720,55 1080,80 C1260,98 1380,62 1440,72 L1440,120 L0,120 Z;M0,80 C360,40 720,100 1080,60 C1260,40 1380,80 1440,65 L1440,120 L0,120 Z"/></path><path fill="#020f1e"><animate attributeName="d" dur="7s" repeatCount="indefinite" values="M0,105 C360,92 720,112 1080,98 C1260,90 1380,108 1440,102 L1440,120 L0,120 Z;M0,100 C360,110 720,96 1080,107 C1260,113 1380,99 1440,104 L1440,120 L0,120 Z;M0,105 C360,92 720,112 1080,98 C1260,90 1380,108 1440,102 L1440,120 L0,120 Z"/></path></svg></div>
+  <div class="ph-content">
+    <div class="ph-eyebrow">Get in touch</div>
+    <h1 class="ph-h1">Let's build the<br><em>ocean economy</em><br>together.</h1>
+    <p class="ph-sub">Whether you have a vessel to design, a system to model, or a policy question to answer — we want to hear from you. We respond to all enquiries within 48 hours.</p>
+  </div>
+</div>
+
+<!-- ══════ MAIN CONTACT SECTION ══════ -->
+<section style="background:var(--abyss);padding:7rem 4rem">
+  <div class="contact-grid reveal">
+
+    <!-- LEFT: FORM -->
+    <div>
+      <div class="eyebrow">Send an enquiry</div>
+      <h2 class="sec-title" style="margin-bottom:2.5rem">Start the<br><em>conversation.</em></h2>
+
+      <form id="enquiry-form" novalidate>
+        <!-- Web3Forms hidden fields -->
+        <input type="hidden" name="access_key" value="808339ea-8fd4-4ffb-a55e-697b1d52e705">
+        <input type="hidden" name="subject" value="New Enquiry — Bahari BlueTech Website">
+        <input type="hidden" name="from_name" value="Bahari BlueTech Website">
+        <input type="hidden" name="replyto" id="hidden-replyto" value="">
+        <!-- Honeypot anti-spam -->
+        <input type="checkbox" name="botcheck" style="display:none">
+
+        <div class="frm-row">
+          <div class="frm-field">
+            <label class="frm-label" for="f-name">Full name <span style="color:var(--gold2)">*</span></label>
+            <input class="frm-input" id="f-name" name="full_name" type="text" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="frm-field">
+            <label class="frm-label" for="f-org">Organisation</label>
+            <input class="frm-input" id="f-org" name="organisation" type="text" placeholder="Company / Institution / Co-operative" autocomplete="organization">
+          </div>
+        </div>
+
+        <div class="frm-field">
+          <label class="frm-label" for="f-email">Email address <span style="color:var(--gold2)">*</span></label>
+          <input class="frm-input" id="f-email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+
+        <div class="frm-row">
+          <div class="frm-field">
+            <label class="frm-label" for="f-phone">Phone / WhatsApp (optional)</label>
+            <input class="frm-input" id="f-phone" name="phone_whatsapp" type="tel" placeholder="+254 ..." autocomplete="tel">
+          </div>
+          <div class="frm-field">
+            <label class="frm-label" for="f-country">Country</label>
+            <input class="frm-input" id="f-country" name="country" type="text" placeholder="Kenya" autocomplete="country-name">
+          </div>
+        </div>
+
+        <div class="frm-field">
+          <label class="frm-label" for="f-service">Service interest <span style="color:var(--gold2)">*</span></label>
+          <select class="frm-select frm-input" id="f-service" name="service_interest" required>
+            <option value="">Select a service area...</option>
+            <option>Semi-Industrial Fishing Vessel Design / Build</option>
+            <option>IMTA Aquaculture System Design</option>
+            <option>Manned Submersible / ROV Development</option>
+            <option>Marine Engineering &amp; CAD Design</option>
+            <option>Ocean Governance &amp; Policy Advisory</option>
+            <option>Deep Sea Mining Advisory (ISA)</option>
+            <option>3D Marine Prototype Fabrication</option>
+            <option>Grant Co-application Support</option>
+            <option>Partnership / Strategic Collaboration</option>
+            <option>Media / Press Enquiry</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="frm-field">
+          <label class="frm-label" for="f-desc">Project or enquiry description <span style="color:var(--gold2)">*</span></label>
+          <textarea class="frm-textarea" id="f-desc" name="enquiry_description" placeholder="Describe your project, organisation, or enquiry. The more detail you provide, the better we can prepare for our response." required></textarea>
+        </div>
+
+        <div class="frm-field">
+          <label class="frm-label" for="f-referral">How did you find us?</label>
+          <select class="frm-select frm-input" id="f-referral" name="referral_source">
+            <option value="">Select an option...</option>
+            <option>Google / Web search</option>
+            <option>LinkedIn</option>
+            <option>Referral from colleague</option>
+            <option>OceanHub Africa / Accelerator</option>
+            <option>Government referral</option>
+            <option>Conference or event</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <button class="c-submit" id="submit-btn" type="submit">Send Enquiry</button>
+
+        <div id="form-msg"></div>
+        <div id="form-error" style="display:none;margin-top:1rem;font-family:'Fira Code',monospace;font-size:.68rem;color:#e05c5c;letter-spacing:.08em;padding:.8rem 1rem;border:1px solid rgba(224,92,92,.25);border-radius:3px;background:rgba(224,92,92,.05)"></div>
+        <div id="form-validation" style="display:none;margin-top:1rem;font-family:'Fira Code',monospace;font-size:.68rem;color:#e0a84e;letter-spacing:.08em;padding:.8rem 1rem;border:1px solid rgba(224,168,78,.25);border-radius:3px;background:rgba(224,168,78,.05)"></div>
+      </form>
+
+      <p style="font-family:'Fira Code',monospace;font-size:.58rem;color:var(--muted);line-height:1.9;margin-top:1.5rem">Prefer a direct conversation? Reach us on WhatsApp at <a href="https://wa.me/254140211588" style="color:var(--teal2)">+254 140 211 588</a> or email <a href="mailto:info@baharibluetech.co.ke" style="color:var(--teal2)">info@baharibluetech.co.ke</a></p>
+    </div>
+
+    <!-- RIGHT: INFO -->
+    <div class="reveal-d">
+
+      <!-- Contact details -->
+      <div class="cinfo-block">
+        <div class="ci-lbl">Headquarters</div>
+        <div class="ci-val">Mombasa, Kenya<br><span style="font-size:.85rem;color:var(--muted)">Indian Ocean Seaboard, East Africa</span></div>
+      </div>
+      <div class="cinfo-block">
+        <div class="ci-lbl">Email</div>
+        <div class="ci-val"><a href="mailto:info@baharibluetech.co.ke" style="color:var(--teal2)">info@baharibluetech.co.ke</a></div>
+      </div>
+      <div class="cinfo-block">
+        <div class="ci-lbl">WhatsApp</div>
+        <div class="ci-val"><a href="https://wa.me/254140211588" style="color:var(--teal2)">+254 140 211 588</a></div>
+      </div>
+      <div class="cinfo-block">
+        <div class="ci-lbl">Languages</div>
+        <div class="ci-val" style="font-size:.95rem">English · Kiswahili</div>
+      </div>
+      <div class="cinfo-block">
+        <div class="ci-lbl">Response time</div>
+        <div class="ci-val" style="font-size:.95rem">Within 48 hours for all enquiries</div>
+      </div>
+
+      <!-- Who we serve -->
+      <div style="margin:2rem 0">
+        <div class="ci-lbl" style="display:block;margin-bottom:.8rem">We serve</div>
+        <ul class="serve-list">
+          <li>Government agencies & state corporations</li>
+          <li>Fishing cooperatives & coastal communities</li>
+          <li>NGOs & international development partners</li>
+          <li>Aquaculture investors & operators</li>
+          <li>Universities & oceanographic institutions</li>
+          <li>International funders & impact investors</li>
+          <li>County governments & coastal development bodies</li>
+        </ul>
+      </div>
+
+      <!-- Currently seeking -->
+      <div class="seeking-box">
+        <span class="sk-lbl">Currently seeking</span>
+        <ul class="sk-list">
+          <li>Pilot vessel build partnerships</li>
+          <li>Aquaculture design & consultancy contracts</li>
+          <li>Grant co-applicants (EU, UNDP, World Bank)</li>
+          <li>Technical advisory engagements</li>
+          <li>Innovation award collaborators</li>
+          <li>Impact investor conversations</li>
+          <li>University research partnerships</li>
+          <li>County government blue economy programmes</li>
+        </ul>
+      </div>
+
+      <!-- Location card -->
+      <div class="loc-card">
+        <div class="loc-map">
+          <div class="loc-rings">
+            <div class="loc-ring" style="width:200px;height:200px"></div>
+            <div class="loc-ring" style="width:130px;height:130px"></div>
+            <div class="loc-ring" style="width:70px;height:70px"></div>
+          </div>
+          <div class="loc-pin">
+            <div class="loc-pin-dot"></div>
+            <div class="loc-pin-label">Mombasa, Kenya</div>
+          </div>
+        </div>
+        <div class="loc-coords">
+          <div class="lc-row"><span class="lc-label">Coordinates</span><span class="lc-val"><strong>04°03'S / 39°40'E</strong></span></div>
+          <div class="lc-row"><span class="lc-label">Region</span><span class="lc-val">Indian Ocean Seaboard</span></div>
+          <div class="lc-row"><span class="lc-label">EAC coverage</span><span class="lc-val">All member states</span></div>
+          <div class="lc-row"><span class="lc-label">Est.</span><span class="lc-val">2025</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ENGAGEMENT TYPES ══════ -->
+<section style="background:var(--void);padding:7rem 4rem">
+  <div class="eyebrow reveal">How we engage</div>
+  <h2 class="sec-title reveal">What kind of<br><em>partnership are you looking for?</em></h2>
+  <div class="engage-grid reveal-d" style="max-width:900px;margin-top:3rem">
+    <div class="engage-card">
+      <div class="eng-title">Design Consultancy</div>
+      <div class="eng-txt">Short-to-medium term engagements for vessel design, aquaculture layout, CAD modelling, and technical report production. Fixed-fee or day-rate basis.</div>
+    </div>
+    <div class="engage-card">
+      <div class="eng-title">Build Contract</div>
+      <div class="eng-txt">End-to-end vessel fabrication from design through to launch — including regulatory submissions, stability testing, and operator handover training.</div>
+    </div>
+    <div class="engage-card">
+      <div class="eng-title">Advisory Retainer</div>
+      <div class="eng-txt">Ongoing technical advisory support for government bodies, county administrations, and development organisations working on blue economy programmes.</div>
+    </div>
+    <div class="engage-card">
+      <div class="eng-title">Grant Co-Application</div>
+      <div class="eng-txt">Joint applications to EU BlueInvest, UNDP, World Bank, and African development fund instruments — contributing technical capacity and documentation.</div>
+    </div>
+    <div class="engage-card">
+      <div class="eng-title">Research Partnership</div>
+      <div class="eng-txt">Collaborative R&D with universities and oceanographic institutions — covering ROV development, IMTA system research, and deep sea mineral governance.</div>
+    </div>
+    <div class="engage-card">
+      <div class="eng-title">Impact Investment</div>
+      <div class="eng-txt">We welcome conversations with impact investors interested in building Africa's marine engineering capacity. Our seed round opens 2026.</div>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem" class="reveal-d">
+    <a href="https://wa.me/254140211588" target="_blank" class="btn-prim">Chat on WhatsApp <svg viewBox="0 0 16 16" fill="none" style="width:14px"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div class="f-left"><span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya</span><div class="f-sep"></div><span class="f-copy">info@baharibluetech.co.ke</span><div class="f-sep"></div><span class="f-copy">+254 140 211 588</span></div>
+      <ul class="f-links"><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="innovation.html">Innovation</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="roadmap.html">Roadmap</a></li><li><a href="resources.html">Resources</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </div>
+    <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/254140211588" target="_blank" rel="noopener" class="wa-float"><div class="wa-tooltip">Chat on WhatsApp</div><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script src="site.js"></script>
+<script>initParticleCanvas('ph-canvas');</script>
+<script>
+(function () {
+  var form       = document.getElementById('enquiry-form');
+  var submitBtn  = document.getElementById('submit-btn');
+  var msgSuccess = document.getElementById('form-msg');
+  var msgError   = document.getElementById('form-error');
+  var msgValid   = document.getElementById('form-validation');
+  var originalBtnText = 'Send Enquiry';
+
+  function hideAllMessages() {
+    msgSuccess.style.display = 'none';
+    msgError.style.display   = 'none';
+    msgValid.style.display   = 'none';
+  }
+
+  function showSuccess() {
+    hideAllMessages();
+    msgSuccess.style.display = 'block';
+    msgSuccess.textContent   = '✓ Enquiry received — we will respond within 48 hours.';
+    msgSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function showError(text) {
+    hideAllMessages();
+    msgError.style.display = 'block';
+    msgError.textContent   = '✗ ' + text;
+    msgError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function showValidation(text) {
+    hideAllMessages();
+    msgValid.style.display = 'block';
+    msgValid.textContent   = '⚠ ' + text;
+    msgValid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function setLoading(loading) {
+    submitBtn.disabled = loading;
+    submitBtn.textContent = loading ? 'Sending…' : originalBtnText;
+    submitBtn.style.opacity = loading ? '0.65' : '';
+  }
+
+  function validateForm() {
+    var name    = form.querySelector('#f-name').value.trim();
+    var email   = form.querySelector('#f-email').value.trim();
+    var service = form.querySelector('#f-service').value;
+    var desc    = form.querySelector('#f-desc').value.trim();
+
+    if (!name)    { showValidation('Please enter your full name.');          return false; }
+    if (!email)   { showValidation('Please enter your email address.');      return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showValidation('Please enter a valid email address.');    return false; }
+    if (!service) { showValidation('Please select a service area of interest.'); return false; }
+    if (!desc)    { showValidation('Please describe your project or enquiry.'); return false; }
+    return true;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    hideAllMessages();
+
+    if (!validateForm()) return;
+
+    // Mirror email into replyto hidden field so Web3Forms threads correctly
+    document.getElementById('hidden-replyto').value =
+      form.querySelector('#f-email').value.trim();
+
+    setLoading(true);
+
+    var data = {};
+    new FormData(form).forEach(function (val, key) { data[key] = val; });
+
+    fetch('https://api.web3forms.com/submit', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body:    JSON.stringify(data)
+    })
+    .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, body: j }; }); })
+    .then(function (result) {
+      setLoading(false);
+      if (result.ok && result.body.success) {
+        showSuccess();
+        form.reset();
+      } else {
+        var msg = (result.body && result.body.message) ||
+                  'Submission failed. Please email us directly at info@baharibluetech.co.ke';
+        showError(msg);
+      }
+    })
+    .catch(function (err) {
+      setLoading(false);
+      showError('Network error — please check your connection and try again, or email us at info@baharibluetech.co.ke');
+    });
+  });
+})();
+</script>
+</body>
+</html>
