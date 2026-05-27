@@ -1,0 +1,38 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME   # e.g. cyrilkariuki/bahari-bluetech
+  branch: main
+  base_url: https://YOUR_VERCEL_DOMAIN        # e.g. https://bahari-bluetech.vercel.app
+
+media_folder: "content/articles/images"
+public_folder: "/content/articles/images"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "URL-safe identifier, e.g. my-article-title" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Blue Economy", value: "blue-economy" }
+          - { label: "Vessel Design", value: "vessel-design" }
+          - { label: "Aquaculture", value: "aquaculture" }
+          - { label: "Ocean Governance", value: "governance" }
+          - { label: "Deep Sea Mining", value: "deep-sea" }
+          - { label: "Sustainability", value: "sustainability" }
+          - { label: "Innovation", value: "innovation" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "MMMM YYYY", time_format: false }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Reading Time (minutes)", name: "reading_time", widget: "number", value_type: "int", min: 1 }
+      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown on the Resources listing page." }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Overrides the page <title> tag for SEO. Defaults to article title if blank." }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Meta description for search engines. Keep under 160 characters." }
