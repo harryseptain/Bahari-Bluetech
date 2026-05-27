@@ -1,11 +1,11 @@
 backend:
   name: github
   repo: harryseptain/Bahari-Bluetech   # e.g. cyrilkariuki/bahari-bluetech
-  branch: trial1
+  branch: main
   base_url: https://www.baharibluetech.co.ke       # e.g. https://bahari-bluetech.vercel.app
 
-media_folder: "content/articles/images"
-public_folder: "/content/articles/images"
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
   - name: "articles"
