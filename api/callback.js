@@ -44,36 +44,20 @@ export default async function handler(req, res) {
 <html>
 <head><title>Authenticating...</title></head>
 <body>
-<p>Waiting for parent...</p>
 <script>
 (function() {
   var successMessage = ${JSON.stringify(successMessage)};
 
-  var log = function(msg) {
-    document.body.innerHTML += '<p>' + msg + '</p>';
-    console.log(msg);
-  };
-
-  log("Popup loaded. opener exists: " + !!window.opener);
-
   window.opener.postMessage("authorizing:github", "*");
-  log("Sent: authorizing:github");
 
   window.addEventListener("message", function(e) {
-    log("Received: " + JSON.stringify(e.data) + " from " + e.origin);
-
     if (e.data === "authorizing:github" || e.data === "authorizing:github:") {
       window.opener.postMessage(successMessage, e.origin);
-      log("Token sent!");
-      setTimeout(function() { window.close(); }, 2000);
+      setTimeout(function() { window.close(); }, 500);
     }
   }, false);
-
-  setTimeout(function() {
-    log("TIMEOUT - parent never responded.");
-  }, 5000);
 })();
 </script>
 </body>
-</html>`);
+</html>\`);
 }
