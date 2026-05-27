@@ -36,6 +36,7 @@ export default async function handler(req, res) {
   }
 
   const token = data.access_token;
+  const content = JSON.stringify({ token, provider: "github" });
 
   res.setHeader("Content-Type", "text/html");
   res.status(200).send(`<!doctype html>
@@ -44,34 +45,25 @@ export default async function handler(req, res) {
 <body>
 <script>
 (function() {
-  // Decap 3.x expects this exact format
-  var receiveMessage = function() {
-    var data = "authorization:github:success:" + JSON.stringify({
-      token: "${token}",
-      provider: "github"
-    });
+  // Step 1: Tell Decap we are starting authorization
+  window.opener.postMessage("authorizing:github", "*");
 
-    // Try postMessage to opener
-    if (window.opener && !window.opener.closed) {
-      window.opener.postMessage(data, "https://www.baharibluetech.co.ke");
+  // Step 2: Listen for Decap's acknowledgment, then send the token
+  window.addEventListener("message", function receiveMessage(e) {
+    console.log("Message from parent:", e.data, "origin:", e.origin);
+
+    if (e.data === "authorizing:github") {
+      // Step 3: Send the token back to the exact origin Decap is on
+      window.opener.postMessage(
+        "authorization:github:success:${content}",
+        e.origin
+      );
+      window.removeEventListener("message", receiveMessage);
       setTimeout(function() { window.close(); }, 1000);
-    } else {
-      // Fallback: write token to localStorage and redirect
-      localStorage.setItem("decap-cms-auth", JSON.stringify({
-        token: "${token}",
-        provider: "github"  
-      }));
-      window.location = "https://www.baharibluetech.co.ke/admin/#";
     }
-  };
-
-  if (document.readyState === "complete") {
-    receiveMessage();
-  } else {
-    window.addEventListener("load", receiveMessage);
-  }
+  }, false);
 })();
-</scr` + `ipt>
+</script>
 </body>
 </html>`);
 }
