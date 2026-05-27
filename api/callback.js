@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const { code, state } = req.query;
+  const { code } = req.query;
 
   if (!code) {
     res.status(400).send("Missing code parameter");
@@ -29,45 +29,49 @@ export default async function handler(req, res) {
 
   if (!data.access_token) {
     res.status(500).send(`
-      <h2>OAuth failed — no access_token returned</h2>
+      <h2>OAuth failed</h2>
       <pre>${JSON.stringify(data, null, 2)}</pre>
     `);
     return;
   }
 
-  // ✅ EXACT format Decap CMS expects:
-  // "authorization:github:success:{"token":"...","provider":"github"}"
-  const tokenPayload = JSON.stringify({
-    token: data.access_token,
-    provider: "github",
-  });
-
-  const message = `authorization:github:success:${tokenPayload}`;
+  const token = data.access_token;
 
   res.setHeader("Content-Type", "text/html");
   res.status(200).send(`<!doctype html>
 <html>
 <head><title>Authenticating...</title></head>
 <body>
-<p>Completing login, please wait...</p>
 <script>
-  (function() {
-    var message = ${JSON.stringify(message)};
-    var origin = "https://www.baharibluetech.co.ke";
+(function() {
+  // Decap 3.x expects this exact format
+  var receiveMessage = function() {
+    var data = "authorization:github:success:" + JSON.stringify({
+      token: "${token}",
+      provider: "github"
+    });
 
-    function sendMessage() {
-      if (window.opener) {
-        window.opener.postMessage(message, origin);
-        setTimeout(function() { window.close(); }, 500);
-      } else {
-        document.body.innerHTML = "<p>Error: No opener window found. Please close this tab and try again.</p>";
-      }
+    // Try postMessage to opener
+    if (window.opener && !window.opener.closed) {
+      window.opener.postMessage(data, "https://www.baharibluetech.co.ke");
+      setTimeout(function() { window.close(); }, 1000);
+    } else {
+      // Fallback: write token to localStorage and redirect
+      localStorage.setItem("decap-cms-auth", JSON.stringify({
+        token: "${token}",
+        provider: "github"  
+      }));
+      window.location = "https://www.baharibluetech.co.ke/admin/#";
     }
+  };
 
-    // Small delay ensures the opener's listener is ready
-    setTimeout(sendMessage, 250);
-  })();
-</script>
+  if (document.readyState === "complete") {
+    receiveMessage();
+  } else {
+    window.addEventListener("load", receiveMessage);
+  }
+})();
+</scr` + `ipt>
 </body>
 </html>`);
 }
