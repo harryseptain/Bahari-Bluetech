@@ -4,69 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bahari BlueTech CMS</title>
+  <script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
-
-  <script>
-    // Check if we already have a stored token from a previous auth
-    var stored = localStorage.getItem("netlify-cms-user");
-    if (stored) {
-      try {
-        var userData = JSON.parse(stored);
-        if (userData.token) {
-          // Feed token directly into Decap's auth system
-          window.CMS_ENV = window.CMS_ENV || {};
-          // Decap checks window.netlifyIdentity — we simulate a completed auth
-          setTimeout(function() {
-            if (window.CMS && window.CMS.store) {
-              window.CMS.store.dispatch({
-                type: "AUTH_SUCCESS",
-                payload: { token: userData.token, provider: "github" }
-              });
-              console.log("Token injected into CMS store");
-            }
-          }, 1000);
-        }
-      } catch(e) {
-        console.error("Failed to parse stored user:", e);
-      }
-    }
-
-    // Listen for fresh OAuth message from popup
-    window.addEventListener("message", function(e) {
-      if (e.origin !== "https://www.baharibluetech.co.ke") return;
-      if (typeof e.data !== "string") return;
-      if (!e.data.startsWith("authorization:github:success:")) return;
-
-      console.log("OAuth message received:", e.data);
-
-      try {
-        var payload = JSON.parse(e.data.replace("authorization:github:success:", ""));
-        var token = payload.token;
-
-        // Store for future use
-        localStorage.setItem("netlify-cms-user", JSON.stringify({
-          token: token,
-          provider: "github",
-          backendName: "github"
-        }));
-
-        // Dispatch directly into Decap's Redux store
-        if (window.CMS && window.CMS.store) {
-          window.CMS.store.dispatch({
-            type: "AUTH_SUCCESS",
-            payload: { token: token, provider: "github" }
-          });
-          console.log("AUTH_SUCCESS dispatched to CMS store");
-        } else {
-          console.log("CMS store not ready, reloading...");
-          window.location.reload();
-        }
-      } catch(err) {
-        console.error("Auth handler error:", err);
-      }
-    });
-  </script>
 </body>
 </html>
