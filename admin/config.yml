@@ -1,7 +1,8 @@
 backend:
   name: github
-  repo: harryseptain/Bahari-Bluetech   # e.g. cyrilkariuki/bahari-bluetech
-  branch: main
+  repo: harryseptain/Bahari-Bluetech
+  branch: trial1
+  base_url: https://decap-oauth-provider.pages.dev
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
