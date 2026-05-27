@@ -23,41 +23,41 @@ export default async function handler(req, res) {
     });
     data = await response.json();
   } catch (err) {
-    res.status(500).send(`<pre>Fetch error: ${err.message}</pre>`);
+    res.status(500).send("<pre>Fetch error: " + err.message + "</pre>");
     return;
   }
 
   if (!data.access_token) {
-    res.status(500).send(`
-      <h2>OAuth failed</h2>
-      <pre>${JSON.stringify(data, null, 2)}</pre>
-    `);
+    res.status(500).send(
+      "<h2>OAuth failed</h2><pre>" + JSON.stringify(data, null, 2) + "</pre>"
+    );
     return;
   }
 
   const token = data.access_token;
   const content = JSON.stringify({ token: token, provider: "github" });
   const successMessage = "authorization:github:success:" + content;
+  const successMessageJSON = JSON.stringify(successMessage);
+
+  const html = "<!doctype html>\n" +
+    "<html>\n" +
+    "<head><title>Authenticating...</title></head>\n" +
+    "<body>\n" +
+    "<script>\n" +
+    "(function() {\n" +
+    "  var successMessage = " + successMessageJSON + ";\n" +
+    "  window.opener.postMessage('authorizing:github', '*');\n" +
+    "  window.addEventListener('message', function(e) {\n" +
+    "    if (e.data === 'authorizing:github' || e.data === 'authorizing:github:') {\n" +
+    "      window.opener.postMessage(successMessage, e.origin);\n" +
+    "      setTimeout(function() { window.close(); }, 500);\n" +
+    "    }\n" +
+    "  }, false);\n" +
+    "})();\n" +
+    "<\/script>\n" +
+    "</body>\n" +
+    "</html>";
 
   res.setHeader("Content-Type", "text/html");
-  res.status(200).send(`<!doctype html>
-<html>
-<head><title>Authenticating...</title></head>
-<body>
-<script>
-(function() {
-  var successMessage = ${JSON.stringify(successMessage)};
-
-  window.opener.postMessage("authorizing:github", "*");
-
-  window.addEventListener("message", function(e) {
-    if (e.data === "authorizing:github" || e.data === "authorizing:github:") {
-      window.opener.postMessage(successMessage, e.origin);
-      setTimeout(function() { window.close(); }, 500);
-    }
-  }, false);
-})();
-</script>
-</body>
-</html>\`);
+  res.status(200).send(html);
 }
