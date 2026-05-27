@@ -16,14 +16,29 @@ export default async function handler(req, res) {
 
   const data = await response.json();
 
+  const content = `
+<!doctype html>
+<html>
+<body>
+<script>
+(function() {
+  const message = 'authorization:github:success:' + JSON.stringify({
+    token: '${data.access_token}',
+    provider: 'github'
+  });
+
+  if (window.opener) {
+    window.opener.postMessage(message, '*');
+    window.close();
+  } else {
+    document.body.innerHTML = 'Login complete. You can close this window and return to Decap.';
+  }
+})();
+</script>
+</body>
+</html>
+`;
+
   res.setHeader("Content-Type", "text/html");
-  res.send(`
-    <script>
-      window.opener.postMessage(
-        "authorization:github:success:${JSON.stringify({ token: data.access_token })}",
-        "*"
-      );
-      window.close();
-    </script>
-  `);
+  res.status(200).send(content);
 }
