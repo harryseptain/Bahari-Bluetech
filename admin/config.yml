@@ -2,7 +2,8 @@ backend:
   name: github
   repo: harryseptain/Bahari-Bluetech
   branch: trial1
-  base_url: https://decap-oauth-provider.vercel.app
+  base_url: https://www.baharibluetech.co.ke
+  auth_endpoint: /api/auth
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
