@@ -1,6 +1,0 @@
-{
-  "buildCommand": "node build-articles.js",
-  "outputDirectory": ".",
-  "installCommand": "npm install gray-matter marked",
-  "framework": null
-}
