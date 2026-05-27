@@ -5,9 +5,9 @@
   "framework": null,
   "rewrites": [
     { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/", "destination": "/admin/index.html" }
-  ],
-  "routes": [
-    { "src": "^/$", "dest": "/index.html" }
+    { "source": "/admin/", "destination": "/admin/index.html" },
+    { "source": "/api/auth", "destination": "/api/auth.js" },
+    { "source": "/api/callback", "destination": "/api/callback.js" },
+    { "source": "/", "destination": "/index.html" }
   ]
 }
