@@ -3,7 +3,7 @@ backend:
   repo: harryseptain/Bahari-Bluetech
   branch: trial1
   base_url: https://www.baharibluetech.co.ke
-  auth_endpoint: /api/auth
+  auth_endpoint: api/auth
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
