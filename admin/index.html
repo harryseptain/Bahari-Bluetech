@@ -1,13 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Bahari BlueTech · CMS</title>
+  <title>Bahari BlueTech CMS</title>
 </head>
 <body>
-  <!-- Decap CMS loads here -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
+
+  <!-- Custom OAuth handler — must come AFTER Decap loads -->
+  <script>
+    window.addEventListener("message", function(e) {
+      if (e.origin !== "https://www.baharibluetech.co.ke") return;
+      if (typeof e.data !== "string") return;
+      if (!e.data.startsWith("authorization:github:success:")) return;
+
+      console.log("Auth message intercepted by custom handler:", e.data);
+
+      try {
+        var payload = JSON.parse(e.data.replace("authorization:github:success:", ""));
+        var token = payload.token;
+
+        // Store token where Decap looks for it
+        localStorage.setItem("netlify-cms-user", JSON.stringify({
+          token: token,
+          provider: "github",
+          backendName: "github"
+        }));
+
+        console.log("Token stored, reloading CMS...");
+        window.location.reload();
+      } catch(err) {
+        console.error("Failed to handle auth message:", err);
+      }
+    });
+  </script>
 </body>
 </html>
