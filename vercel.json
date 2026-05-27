@@ -1,0 +1,13 @@
+{
+  "buildCommand": "node build-articles.js",
+  "outputDirectory": ".",
+  "installCommand": "npm install gray-matter marked",
+  "framework": null,
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/", "destination": "/admin/index.html" }
+  ],
+  "routes": [
+    { "src": "^/$", "dest": "/index.html" }
+  ]
+}
