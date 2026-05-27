@@ -16,29 +16,27 @@ export default async function handler(req, res) {
 
   const data = await response.json();
 
-  const content = `
+  if (!data.access_token) {
+    res.status(500).send(`
+      <h2>OAuth failed</h2>
+      <pre>${JSON.stringify(data, null, 2)}</pre>
+    `);
+    return;
+  }
+
+  res.setHeader("Content-Type", "text/html");
+  res.status(200).send(`
 <!doctype html>
 <html>
 <body>
 <script>
-(function() {
-  const message = 'authorization:github:success:' + JSON.stringify({
-    token: '${data.access_token}',
-    provider: 'github'
-  });
+  const token = ${JSON.stringify(data.access_token)};
+  const message = "authorization:github:success:" + JSON.stringify({ token: token });
 
-  if (window.opener) {
-    window.opener.postMessage(message, '*');
-    window.close();
-  } else {
-    document.body.innerHTML = 'Login complete. You can close this window and return to Decap.';
-  }
-})();
+  window.opener.postMessage(message, window.location.origin);
+  window.close();
 </script>
 </body>
 </html>
-`;
-
-  res.setHeader("Content-Type", "text/html");
-  res.status(200).send(content);
+  `);
 }
