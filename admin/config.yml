@@ -4,7 +4,6 @@ backend:
   branch: trial1
   base_url: https://www.baharibluetech.co.ke
   auth_endpoint: api/auth
-  auth_type: pkce
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
