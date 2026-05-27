@@ -1,69 +1,41 @@
-export default async function handler(req, res) {
-  const { code } = req.query;
-
-  if (!code) {
-    res.status(400).send("Missing code parameter");
-    return;
-  }
-
-  let data;
-  try {
-    const response = await fetch("https://github.com/login/oauth/access_token", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        client_id: process.env.OAUTH_CLIENT_ID,
-        client_secret: process.env.OAUTH_CLIENT_SECRET,
-        code,
-        redirect_uri: "https://www.baharibluetech.co.ke/api/callback",
-      }),
-    });
-    data = await response.json();
-  } catch (err) {
-    res.status(500).send(`<pre>Fetch error: ${err.message}</pre>`);
-    return;
-  }
-
-  if (!data.access_token) {
-    res.status(500).send(`
-      <h2>OAuth failed</h2>
-      <pre>${JSON.stringify(data, null, 2)}</pre>
-    `);
-    return;
-  }
-
-  const token = data.access_token;
-  const content = JSON.stringify({ token, provider: "github" });
-
-  res.setHeader("Content-Type", "text/html");
-  res.status(200).send(`<!doctype html>
+res.status(200).send(`<!doctype html>
 <html>
 <head><title>Authenticating...</title></head>
 <body>
+<p>Waiting for parent...</p>
 <script>
 (function() {
-  // Step 1: Tell Decap we are starting authorization
+  var log = function(msg) {
+    document.body.innerHTML += '<p>' + msg + '</p>';
+    console.log(msg);
+  };
+
+  log("Popup loaded. opener exists: " + !!window.opener);
+
+  // Step 1: Send authorizing message
   window.opener.postMessage("authorizing:github", "*");
+  log("Sent: authorizing:github");
 
-  // Step 2: Listen for Decap's acknowledgment, then send the token
-  window.addEventListener("message", function receiveMessage(e) {
-    console.log("Message from parent:", e.data, "origin:", e.origin);
-
-    if (e.data === "authorizing:github") {
-      // Step 3: Send the token back to the exact origin Decap is on
+  // Step 2: Listen for ANY message back
+  window.addEventListener("message", function(e) {
+    log("Received from parent - origin: " + e.origin + " data: " + JSON.stringify(e.data));
+    
+    // Try both with and without colon
+    if (e.data === "authorizing:github" || e.data === "authorizing:github:") {
       window.opener.postMessage(
         "authorization:github:success:${content}",
         e.origin
       );
-      window.removeEventListener("message", receiveMessage);
-      setTimeout(function() { window.close(); }, 1000);
+      log("Token sent to parent!");
+      setTimeout(function() { window.close(); }, 2000);
     }
   }, false);
+
+  // Fallback: if no response in 5 seconds, log it
+  setTimeout(function() {
+    log("TIMEOUT - parent never responded. Check parent console.");
+  }, 5000);
 })();
 </script>
 </body>
 </html>`);
-}
