@@ -3,7 +3,7 @@
  * build-articles.js
  * -----------------
  * Reads every .md file in content/articles/, parses frontmatter,
- * converts Markdown body to HTML, renders _article-template.html,
+ * converts Markdown body to HTML, renders articles/_article-template.html,
  * and writes the output to articles/{{slug}}.html.
  *
  * Also writes articles-index.json for the resources.html listing page.
@@ -126,31 +126,45 @@ function build() {
     /* Derive slug */
     const slug = fm.slug || slugify(fm.title) || path.basename(file, '.md');
 
-    /* Markdown → HTML */
+    /* Markdown body → HTML */
     const contentHtml = marked(body || '');
+
+    /* Build FAQ HTML automatically from frontmatter list */
+    let faqHtml = '';
+    if (fm.faq && Array.isArray(fm.faq) && fm.faq.length > 0) {
+      faqHtml = '<div class="faq-block">' +
+        fm.faq.map(function(item) {
+          return '<div class="faq-item">' +
+            '<div class="faq-q">' + (item.question || '') + '</div>' +
+            '<div class="faq-a">' + (item.answer || '') + '</div>' +
+            '</div>';
+        }).join('') +
+        '</div>';
+    }
 
     /* Template data */
     const tplData = {
-      title:           fm.title          || '',
+      title:           fm.title           || '',
       slug,
-      category:        fm.category       || '',
+      category:        fm.category        || '',
       category_label:  CAT_LABELS[fm.category] || fm.category || '',
-      date:            fm.date           || '',
+      date:            fm.date            || '',
       date_formatted:  fmtDate(fm.date),
-      author:          fm.author         || 'Bahari BlueTech',
+      author:          fm.author          || 'Bahari BlueTech',
       author_initial:  initial(fm.author),
-      reading_time:    fm.reading_time   || '',
-      featured_image:  fm.featured_image || '',
-      excerpt:         fm.excerpt        || '',
+      reading_time:    fm.reading_time    || '',
+      featured_image:  fm.featured_image  || '',
+      excerpt:         fm.excerpt         || '',
       content:         contentHtml,
-      seo_title:       fm.seo_title      || fm.title || '',
+      faq:             faqHtml,
+      seo_title:       fm.seo_title       || fm.title || '',
       seo_description: fm.seo_description || fm.excerpt || '',
     };
 
     /* Render */
     const html = render(templateSrc, tplData);
 
-    /* Write */
+    /* Write article HTML */
     const outFile = path.join(OUT_DIR, slug + '.html');
     fs.writeFileSync(outFile, html);
     console.log('✓ articles/' + slug + '.html');
