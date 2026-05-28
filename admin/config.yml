@@ -35,5 +35,13 @@ collections:
       - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
       - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short summary shown on the Resources listing page." }
       - { label: "Body", name: "body", widget: "markdown" }
+      - label: "FAQ"
+        name: "faq"
+        widget: "list"
+        required: false
+        hint: "Optional FAQ section shown below the article body. Leave empty if not needed."
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Overrides the page <title> tag for SEO. Defaults to article title if blank." }
       - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Meta description for search engines. Keep under 160 characters." }
