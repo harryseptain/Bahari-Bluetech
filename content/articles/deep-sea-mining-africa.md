@@ -2,7 +2,7 @@
 title: "Deep Sea Mining and Africa: What Coastal Communities Need to Know"
 slug: deep-sea-mining-africa
 category: deep-sea
-date: 2026-05-01
+date: 2025-11-12
 author: Cyril Kariuki
 reading_time: 12
 featured_image: /assets/uploads/chatgpt-image-may-18-2026-03_12_59-am.png
