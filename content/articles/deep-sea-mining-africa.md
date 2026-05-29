@@ -4,7 +4,7 @@ slug: deep-sea-mining-africa
 category: deep-sea
 date: 2025-11-12
 author: Cyril Kariuki
-reading_time: 12
+reading_time: 20
 featured_image: /assets/uploads/chatgpt-image-may-18-2026-03_12_59-am.png
 excerpt: As the global race for seabed minerals accelerates, millions of
   Africans who depend on the ocean deserve clear, honest answers — before
