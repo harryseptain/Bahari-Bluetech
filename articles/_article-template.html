@@ -12,57 +12,72 @@
 <meta property="og:title" content="{{seo_title | default: title}}">
 <meta property="og:description" content="{{seo_description | default: excerpt}}">
 <meta property="og:type" content="article">
-{% if featured_image %}<meta property="og:image" content="{{featured_image}}">{% endif %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:17px}
+body{background:#f5f2ed;color:#1a1a1a;font-family:'Outfit',Georgia,sans-serif;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 
+/* ── SITE NAV (your main site nav, fully functional) ── */
+#nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:#041828;border-bottom:1px solid rgba(200,150,12,.18);gap:1.5rem}
+.n-logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.n-emblem{width:42px;height:42px;flex-shrink:0}
+.n-emblem svg{width:100%;height:100%}
+.n-wordmark strong{display:block;font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;letter-spacing:.04em;color:#f0ead8;line-height:1.1}
+.n-wordmark span{display:block;font-family:'DM Mono',monospace;font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;color:#4a7a94}
+.n-links{display:flex;gap:1.4rem;list-style:none;align-items:center}
+.n-links a{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#4a7a94;text-decoration:none;transition:color .2s;white-space:nowrap}
+.n-links a:hover,.n-links a.active{color:#c8960c}
+.n-cta{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1px solid #c8960c;color:#c8960c;padding:.45rem 1.1rem;border-radius:2px;text-decoration:none;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.n-cta:hover{background:#c8960c;color:#041828}
 
-/* ── ARTICLE OUTER ── */
-.article-outer{max-width:960px;margin:0 auto;padding:2.5rem 2rem 1.5rem}
+/* ── PUBLICATION RIBBON ── */
+.pub-ribbon{background:#c8960c;padding:.38rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.pub-ribbon span{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:#041828}
+
+/* ── ARTICLE WRAPPER ── */
+.article-outer{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem}
 
 /* ── BREADCRUMB ── */
-.breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:#8a9aaa;margin-bottom:1.8rem}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#8a9aaa;margin-bottom:2rem}
 .breadcrumb a{color:#8a9aaa;text-decoration:none}
 .breadcrumb a:hover{color:#c8960c}
 .breadcrumb span{opacity:.5}
 
 /* ── ARTICLE HEADER ── */
-.article-header{margin-bottom:2rem}
-.art-category-label{display:inline-flex;align-items:center;gap:.6rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#08b8d8;margin-bottom:.9rem}
-.art-category-label::before{content:'';width:16px;height:1px;background:#08b8d8}
-.art-h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3rem);font-weight:900;line-height:1.08;letter-spacing:-.02em;color:#041828;margin-bottom:.9rem}
+.article-header{margin-bottom:2.5rem}
+.art-category{display:inline-flex;align-items:center;gap:.6rem;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#08b8d8;margin-bottom:1rem}
+.art-category::before{content:'';width:18px;height:1px;background:#08b8d8}
+.art-h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.08;letter-spacing:-.02em;color:#041828;margin-bottom:1rem}
 .art-h1 em{font-style:italic;color:#c8960c}
-.art-deck{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:400;font-style:italic;line-height:1.65;color:#3a5a74;border-left:3px solid #c8960c;padding-left:1.2rem;margin-bottom:1.6rem}
-.art-meta{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;padding:.9rem 0;border-top:1px solid #e0dcd4;border-bottom:1px solid #e0dcd4;margin-bottom:1.8rem}
-.meta-item{display:flex;align-items:center;gap:.45rem;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#8a9aaa}
-.meta-dot{width:4px;height:4px;border-radius:50%;background:#c8960c;opacity:.6}
+.art-deck{font-family:'Playfair Display',serif;font-size:1.22rem;font-weight:400;font-style:italic;line-height:1.65;color:#3a5a74;border-left:3px solid #c8960c;padding-left:1.2rem;margin-bottom:1.8rem}
+.art-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;padding:1rem 0;border-top:1px solid #e0dcd4;border-bottom:1px solid #e0dcd4;margin-bottom:2rem}
+.meta-item{display:flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#8a9aaa}
+.meta-dot{width:5px;height:5px;border-radius:50%;background:#c8960c;opacity:.6}
 .meta-item strong{color:#4a7a94;font-weight:500}
-.read-time{margin-left:auto;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#08b8d8;background:rgba(8,184,216,.07);border:1px solid rgba(8,184,216,.2);padding:.22rem .7rem;border-radius:2px}
+.read-time{margin-left:auto;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#08b8d8;background:rgba(8,184,216,.07);border:1px solid rgba(8,184,216,.2);padding:.25rem .75rem;border-radius:2px}
 
 /* ── HERO IMAGE ── */
-.hero-img-wrap{width:100%;aspect-ratio:16/7;border-radius:4px;overflow:hidden;position:relative;margin-bottom:2rem;background:linear-gradient(135deg,#041828 0%,#062840 50%,#083a5a 100%)}
+.hero-img-wrap{width:100%;aspect-ratio:16/7;background:linear-gradient(135deg,#041828 0%,#062840 45%,#083a5a 100%);border-radius:4px;overflow:hidden;position:relative;margin-bottom:2.5rem}
 .hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.85}
-.hero-img-wrap.no-image{display:flex;align-items:center;justify-content:center}
+.hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,40,.7) 0%,transparent 50%)}
+.hero-img-wrap.no-image{display:flex;align-items:center;justify-content:center;min-height:260px}
 .hero-img-wrap.no-image::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(8,184,216,.03) 20px,rgba(8,184,216,.03) 21px)}
-.hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,40,.6) 0%,transparent 50%)}
-.hero-caption{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.08em;color:#8a9aaa;margin-top:.5rem;padding-left:.5rem;border-left:2px solid rgba(200,150,12,.3)}
+.hero-caption{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;color:#8a9aaa;margin-top:.6rem;padding-left:.5rem;border-left:2px solid rgba(200,150,12,.3)}
 
-/* ── ARTICLE BODY 2-COL ── */
-.article-body{display:grid;grid-template-columns:1fr 256px;gap:3.5rem;align-items:start}
+/* ── ARTICLE BODY ── */
+.article-body{display:grid;grid-template-columns:1fr 260px;gap:3.5rem;align-items:start}
 .body-main{}
-.body-sidebar{position:sticky;top:2rem}
+.body-sidebar{position:sticky;top:5rem}
 
-/* ── PROSE TYPOGRAPHY ── */
-.prose p{font-family:Georgia,serif;font-size:1rem;line-height:1.88;color:#2a2a2a;margin-bottom:1.3rem}
+/* ── TYPOGRAPHY ── */
+.prose p{font-family:Georgia,serif;font-size:1.02rem;line-height:1.88;color:#2a2a2a;margin-bottom:1.3rem}
 .prose p strong{color:#041828;font-weight:700}
 .prose p em{font-style:italic;color:#3a5a6a}
-.prose h2{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;line-height:1.18;letter-spacing:-.01em;color:#041828;margin:2.8rem 0 1rem;padding-top:2rem;border-top:1px solid #e0dcd4}
-.prose h2::before{content:attr(data-section);display:block;font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:#c8960c;margin-bottom:.4rem}
-.prose h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#041828;margin:2rem 0 .8rem;font-style:italic}
+.prose h2{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;line-height:1.18;letter-spacing:-.01em;color:#041828;margin:2.8rem 0 1rem;padding-top:2rem;border-top:1px solid #e0dcd4}
+.prose h2::before{content:attr(data-section);display:block;font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:#c8960c;margin-bottom:.5rem}
+.prose h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#041828;margin:2rem 0 .8rem;font-style:italic}
 .prose h3::before{content:'— ';color:#c8960c;font-style:normal}
 .prose ul,.prose ol{margin:0 0 1.3rem 1.4rem}
 .prose li{font-family:Georgia,serif;font-size:1rem;line-height:1.78;color:#2a2a2a;margin-bottom:.45rem}
@@ -75,114 +90,127 @@ img{max-width:100%;display:block}
 
 /* ── PULL QUOTE ── */
 .pull-quote{border-top:2px solid #c8960c;border-bottom:2px solid #c8960c;padding:1.4rem 0;margin:2rem 0;text-align:center}
-.pull-quote p{font-family:'Playfair Display',serif;font-size:1.25rem;font-style:italic;color:#041828;line-height:1.6;margin:0!important}
-.pull-quote cite{display:block;margin-top:.6rem;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#8a9aaa;font-style:normal}
+.pull-quote p{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:#041828;line-height:1.6;margin:0!important}
+.pull-quote cite{display:block;margin-top:.7rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#8a9aaa;font-style:normal}
 
 /* ── STAT CALLOUT ── */
 .stat-callout{border-radius:4px;padding:1.6rem 1.8rem;margin:2rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:linear-gradient(135deg,#041828,#062840);position:relative;overflow:hidden}
 .stat-callout::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(8,184,216,.04) 40px)}
 .sc-item{text-align:center;padding:1.2rem .8rem;position:relative;z-index:1}
 .sc-item+.sc-item{border-left:1px solid rgba(200,150,12,.18)}
-.sc-n{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:900;color:#e0b830;display:block;line-height:1}
-.sc-l{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:#4a7a94;display:block;margin-top:.4rem;line-height:1.6}
+.sc-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#e0b830;display:block;line-height:1}
+.sc-l{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:#4a7a94;display:block;margin-top:.4rem;line-height:1.6}
 
 /* ── HIGHLIGHT BOX ── */
-.highlight-box{background:#f0f7fa;border:1px solid rgba(8,184,216,.18);border-left:3px solid #08b8d8;border-radius:0 4px 4px 0;padding:1.2rem 1.4rem;margin:1.8rem 0}
-.hb-label{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:#08b8d8;margin-bottom:.6rem;display:block}
-.hb-list{list-style:none;font-family:'DM Mono',monospace;font-size:.67rem;font-weight:300;color:#2a4a5a;line-height:2.1}
+.highlight-box{background:#f0f7fa;border:1px solid rgba(8,184,216,.18);border-left:3px solid #08b8d8;border-radius:0 4px 4px 0;padding:1.3rem 1.5rem;margin:1.8rem 0}
+.hb-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#08b8d8;margin-bottom:.7rem;display:block}
+.hb-list{list-style:none;font-family:'DM Mono',monospace;font-size:.68rem;font-weight:300;color:#2a4a5a;line-height:2.1}
 .hb-list li::before{content:'→ ';color:#c8960c;opacity:.7}
 
 /* ── CHALLENGE BOX ── */
-.challenge-box{background:#fff8f0;border:1px solid rgba(200,150,12,.22);border-left:3px solid #c8960c;border-radius:0 4px 4px 0;padding:1.2rem 1.4rem;margin:1.8rem 0}
-.cb-label{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:#c8960c;margin-bottom:.6rem;display:block}
-.cb-list{list-style:none;font-family:'DM Mono',monospace;font-size:.67rem;font-weight:300;color:#5a3a1a;line-height:2.1}
+.challenge-box{background:#fff8f0;border:1px solid rgba(200,150,12,.22);border-left:3px solid #c8960c;border-radius:0 4px 4px 0;padding:1.3rem 1.5rem;margin:1.8rem 0}
+.cb-label{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#c8960c;margin-bottom:.7rem;display:block}
+.cb-list{list-style:none;font-family:'DM Mono',monospace;font-size:.68rem;font-weight:300;color:#5a3a1a;line-height:2.1}
 .cb-list li::before{content:'⚠ ';opacity:.6}
 
 /* ── INLINE IMAGE ── */
 .inline-img{margin:2rem 0;border-radius:4px;overflow:hidden}
 .inline-img img{width:100%;display:block}
-.img-caption{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.07em;color:#8a9aaa;margin-top:.5rem;padding-left:.5rem;border-left:2px solid rgba(200,150,12,.3);font-style:italic}
+.img-caption{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.07em;color:#8a9aaa;margin-top:.55rem;padding-left:.5rem;border-left:2px solid rgba(200,150,12,.3);font-style:italic}
 
 /* ── DIVIDER ── */
 .divider{height:1px;background:linear-gradient(90deg,transparent,#c8960c 30%,#c8960c 70%,transparent);opacity:.2;margin:2.5rem 0}
 
 /* ── SHARE ROW ── */
 .share-row{display:flex;align-items:center;gap:.8rem;padding:1.2rem 0;border-top:1px solid #e0dcd4;border-bottom:1px solid #e0dcd4;margin:2rem 0;flex-wrap:wrap}
-.share-lbl{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#8a9aaa;margin-right:.4rem}
-.share-btn{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid #e0dcd4;border-radius:2px;padding:.28rem .85rem;background:#fff;color:#4a7a94;cursor:pointer;transition:all .2s;text-decoration:none}
+.share-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#8a9aaa;margin-right:.4rem}
+.share-btn{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid #e0dcd4;border-radius:2px;padding:.3rem .9rem;background:#fff;color:#4a7a94;cursor:pointer;transition:all .2s;text-decoration:none}
 .share-btn:hover{background:#c8960c;color:#fff;border-color:#c8960c}
 .tag-row{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap}
-.tag{font-family:'DM Mono',monospace;font-size:.53rem;letter-spacing:.07em;text-transform:uppercase;color:#08b8d8;border:1px solid rgba(8,184,216,.22);padding:.16rem .5rem;border-radius:2px}
+.tag{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.07em;text-transform:uppercase;color:#08b8d8;border:1px solid rgba(8,184,216,.22);padding:.18rem .55rem;border-radius:2px}
 
 /* ── FAQ ── */
-.faq-block{margin:1.5rem 0}
-.faq-item{border:1px solid #e0dcd4;border-radius:4px;margin-bottom:.6rem;overflow:hidden}
-.faq-q{padding:.9rem 1.1rem;background:#faf8f5;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;color:#041828;line-height:1.35}
+.faq-block{margin:2rem 0}
+.faq-item{border:1px solid #e0dcd4;border-radius:4px;margin-bottom:.7rem;overflow:hidden}
+.faq-q{padding:1rem 1.2rem;background:#faf8f5;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:600;color:#041828;line-height:1.35}
 .faq-q::after{content:'+';font-size:1.2rem;color:#c8960c;font-weight:300;flex-shrink:0;margin-left:1rem;transition:transform .2s}
 .faq-item.open .faq-q::after{transform:rotate(45deg)}
-.faq-a{display:none;padding:.9rem 1.1rem;font-family:Georgia,serif;font-size:.9rem;line-height:1.75;color:#3a3a3a;border-top:1px solid #e0dcd4;background:#fff}
+.faq-a{display:none;padding:1rem 1.2rem;font-family:Georgia,serif;font-size:.9rem;line-height:1.75;color:#3a3a3a;border-top:1px solid #e0dcd4;background:#fff}
 .faq-item.open .faq-a{display:block}
 
 /* ── SIDEBAR ── */
-.sidebar-card{background:#fff;border:1px solid #e0dcd4;border-radius:4px;padding:1.2rem 1.3rem;margin-bottom:1.1rem}
-.sc-title{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:#c8960c;margin-bottom:.9rem;display:block}
+.sidebar-card{background:#fff;border:1px solid #e0dcd4;border-radius:4px;padding:1.3rem 1.4rem;margin-bottom:1.2rem}
+.sc-title{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#c8960c;margin-bottom:1rem;display:block}
 .toc-list{list-style:none}
-.toc-list li{font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.07em;color:#4a7a94;padding:.38rem 0;border-bottom:1px solid #f0ece4;line-height:1.4}
+.toc-list li{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.07em;color:#4a7a94;padding:.4rem 0;border-bottom:1px solid #f0ece4;line-height:1.4}
 .toc-list li:last-child{border-bottom:none}
 .toc-list a{color:#4a7a94;text-decoration:none;transition:color .2s}
 .toc-list a:hover{color:#c8960c}
-.toc-num{color:#c8960c;opacity:.5;margin-right:.45rem;font-size:.53rem}
-.key-data{display:flex;flex-direction:column;gap:.5rem}
-.kd-item{display:flex;justify-content:space-between;align-items:baseline;padding:.45rem 0;border-bottom:1px solid #f0ece4;font-family:'DM Mono',monospace;font-size:.6rem}
+.toc-num{color:#c8960c;opacity:.5;margin-right:.5rem;font-size:.55rem}
+.key-data{display:flex;flex-direction:column;gap:.6rem}
+.kd-item{display:flex;justify-content:space-between;align-items:baseline;padding:.5rem 0;border-bottom:1px solid #f0ece4;font-family:'DM Mono',monospace;font-size:.62rem}
 .kd-item:last-child{border-bottom:none}
 .kd-label{color:#8a9aaa;letter-spacing:.07em;flex:1;line-height:1.5}
 .kd-val{color:#c8960c;font-weight:500;letter-spacing:.06em;white-space:nowrap;margin-left:.5rem}
-.author-card{background:#041828;border-radius:4px;padding:1.2rem 1.3rem}
-.author-img{width:48px;height:48px;border-radius:50%;background:rgba(200,150,12,.15);border:1.5px solid #c8960c;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:#c8960c;margin-bottom:.8rem}
-.author-name{font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:700;color:#f0ead8;display:block;margin-bottom:.2rem}
-.author-role{font-family:'DM Mono',monospace;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:#4a7a94;display:block;margin-bottom:.65rem}
-.author-bio{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:300;color:#6a9ab8;line-height:1.85}
-.sidebar-cta{background:rgba(8,184,216,.06);border:1px solid rgba(8,184,216,.2);border-radius:4px;padding:1.2rem 1.3rem;margin-bottom:1.1rem}
+.author-card{background:#041828;border-radius:4px;padding:1.3rem 1.4rem;margin-bottom:1.2rem}
+.author-img{width:52px;height:52px;border-radius:50%;background:rgba(200,150,12,.15);border:1.5px solid #c8960c;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:#c8960c;margin-bottom:.9rem}
+.author-name{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:700;color:#f0ead8;display:block;margin-bottom:.2rem}
+.author-role{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#4a7a94;display:block;margin-bottom:.7rem}
+.author-bio{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:300;color:#6a9ab8;line-height:1.85}
+.sidebar-cta{background:rgba(8,184,216,.06);border:1px solid rgba(8,184,216,.2);border-radius:4px;padding:1.3rem 1.4rem;margin-bottom:1.2rem}
 .sidebar-cta-label{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:#08b8d8;margin-bottom:.5rem;display:block}
-.sidebar-cta p{font-family:'DM Mono',monospace;font-size:.6rem;color:#4a7a94;line-height:1.8;margin-bottom:.9rem}
+.sidebar-cta p{font-family:'DM Mono',monospace;font-size:.62rem;color:#4a7a94;line-height:1.8;margin-bottom:.9rem}
 .sidebar-cta a{display:block;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;background:#c8960c;color:#fff;text-align:center;padding:.5rem;border-radius:2px;text-decoration:none;transition:background .2s}
 .sidebar-cta a:hover{background:#e0a820}
 
-/* ── ARTICLE FOOTER ── */
-.article-footer{background:#041828;margin-top:3rem;border-top:1px solid rgba(200,150,12,.2)}
-.footer-inner{max-width:960px;margin:0 auto;padding:2rem 2rem 1.4rem}
-.footer-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#f0ead8;letter-spacing:.08em;margin-bottom:.25rem}
+/* ── FOOTER ── */
+.article-footer{background:#041828;margin-top:4rem;border-top:1px solid rgba(200,150,12,.2)}
+.footer-inner{max-width:900px;margin:0 auto;padding:2rem 2rem 1.5rem}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#f0ead8;letter-spacing:.08em;margin-bottom:.3rem}
 .footer-brand span{color:#c8960c}
-.footer-tag{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:#4a7a94;display:block;margin-bottom:.9rem}
-.footer-links{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:.9rem}
-.footer-links a{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:#4a7a94;text-decoration:none}
+.footer-tag{font-family:'DM Mono',monospace;font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:#4a7a94;display:block;margin-bottom:1rem}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.footer-links a{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#4a7a94;text-decoration:none}
 .footer-links a:hover{color:#c8960c}
-.footer-divider{height:1px;background:rgba(200,150,12,.12);margin:.7rem 0}
-.footer-legal{font-family:'DM Mono',monospace;font-size:.52rem;color:#2a4a5a;line-height:1.9}
+.footer-divider{height:1px;background:rgba(200,150,12,.12);margin:.8rem 0}
+.footer-legal{font-family:'DM Mono',monospace;font-size:.54rem;color:#2a4a5a;line-height:1.9}
 .footer-legal a{color:#c8960c;text-decoration:none}
 
 /* ── RESPONSIVE ── */
-@media(max-width:820px){
+@media(max-width:800px){
   .article-body{grid-template-columns:1fr}
   .body-sidebar{display:none}
-  .pub-nav-links{display:none}
+  .n-links{display:none}
   .stat-callout{grid-template-columns:1fr}
   .sc-item+.sc-item{border-left:none;border-top:1px solid rgba(200,150,12,.18)}
-  .art-meta{gap:.7rem}
+  .art-meta{gap:.8rem}
   .read-time{margin-left:0}
   .share-row{gap:.5rem}
   .tag-row{margin-left:0}
+  #nav{padding:.9rem 1.2rem}
 }
 </style>
 </head>
 <body>
-<div id="c1"></div>
-<div id="c2"></div>
 
-<!-- NAV -->
+<!-- PUBLICATION RIBBON -->
+<div class="pub-ribbon">
+  <span>Bahari BlueTech Insights — Official Publication</span>
+  <span>Marine Engineering · Blue Economy · Mombasa</span>
+</div>
+
+<!-- MAIN SITE NAV -->
 <nav id="nav">
   <a href="/index.html" class="n-logo">
-    <div class="n-emblem"><svg viewBox="0 0 58 58" fill="none"><rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/><line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/><path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/><path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="n-emblem">
+      <svg viewBox="0 0 58 58" fill="none">
+        <rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/>
+        <line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/>
+        <path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
     <div class="n-wordmark"><strong>Bahari BlueTech</strong><span>Marine Engineering · Mombasa, Kenya</span></div>
   </a>
   <ul class="n-links">
@@ -198,9 +226,8 @@ img{max-width:100%;display:block}
   <a href="/contact.html" class="n-cta">Work With Us</a>
 </nav>
 
-<!-- ══════════ ARTICLE ══════════ -->
-<main>
-<div class="article-outer">
+<!-- ARTICLE -->
+<main class="article-outer">
 
   <!-- Breadcrumb -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -209,9 +236,9 @@ img{max-width:100%;display:block}
     <span>{{category_label}}</span>
   </nav>
 
-  <!-- Article header -->
+  <!-- Article Header -->
   <header class="article-header">
-    <div class="art-category-label">{{category_label}}</div>
+    <div class="art-category">{{category_label}}</div>
     <h1 class="art-h1">{{title}}</h1>
     <p class="art-deck">{{excerpt}}</p>
     <div class="art-meta">
@@ -222,33 +249,31 @@ img{max-width:100%;display:block}
     </div>
   </header>
 
-  <!-- Hero image -->
+  <!-- Hero Image -->
   {% if featured_image %}
   <div class="hero-img-wrap">
     <img src="{{featured_image}}" alt="{{title}}">
   </div>
   {% else %}
-  <div class="hero-img-wrap no-image" style="min-height:260px"></div>
+  <div class="hero-img-wrap no-image"></div>
   {% endif %}
 
-  <!-- ARTICLE BODY — 2-column -->
+  <!-- Article Body -->
   <div class="article-body">
 
     <!-- MAIN CONTENT -->
     <div class="body-main">
 
-      <!-- Rendered Markdown body -->
       <div class="prose">
         {{content}}
       </div>
 
-      <!-- FAQ — auto-generated from frontmatter if present -->
+      <!-- FAQ — auto-generated from frontmatter -->
       {{faq}}
 
-      <!-- Divider -->
       <div class="divider"></div>
 
-      <!-- Share row -->
+      <!-- Share Row -->
       <div class="share-row">
         <span class="share-lbl">Share</span>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.baharibluetech.co.ke/articles/{{slug}}.html" target="_blank" rel="noopener" class="share-btn">LinkedIn</a>
@@ -265,7 +290,7 @@ img{max-width:100%;display:block}
     <!-- SIDEBAR -->
     <aside class="body-sidebar">
 
-      <!-- Author card -->
+      <!-- Author -->
       <div class="author-card">
         <div class="author-img">{{author_initial}}</div>
         <span class="author-name">{{author}}</span>
@@ -276,13 +301,13 @@ img{max-width:100%;display:block}
       <!-- CTA -->
       <div class="sidebar-cta">
         <span class="sidebar-cta-label">Work with us</span>
-        <p>Need marine engineering, vessel design, or ocean governance advisory? We'd love to hear from you.</p>
+        <p>Need marine engineering, vessel design, or ocean governance advisory? We would love to hear from you.</p>
         <a href="/contact.html">Get in Touch</a>
       </div>
 
-      <!-- More resources -->
+      <!-- More Resources -->
       <div class="sidebar-card">
-        <span class="sc-title">More Resources</span>
+        <span class="sc-title">More resources</span>
         <ul class="toc-list">
           <li><a href="/resources.html">All Publications</a></li>
           <li><a href="/resources.html?cat=blue-economy">Blue Economy</a></li>
@@ -294,9 +319,9 @@ img{max-width:100%;display:block}
         </ul>
       </div>
 
-      <!-- Our services -->
+      <!-- Our Services -->
       <div class="sidebar-card">
-        <span class="sc-title">Our Services</span>
+        <span class="sc-title">Our services</span>
         <ul class="toc-list">
           <li><a href="/services.html#vessels">Fishing Vessel Design</a></li>
           <li><a href="/services.html#imta">IMTA Aquaculture</a></li>
@@ -309,31 +334,25 @@ img{max-width:100%;display:block}
     </aside>
 
   </div><!-- /article-body -->
-</div><!-- /article-outer -->
+
 </main>
 
 <!-- FOOTER -->
-<footer>
-  <div class="f-inner">
-    <div>
-      <div class="f-left">
-        <span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya</span>
-        <div class="f-sep"></div>
-        <span class="f-copy">info@baharibluetech.co.ke</span>
-        <div class="f-sep"></div>
-        <span class="f-copy">+254 140 211 588</span>
-      </div>
-      <ul class="f-links">
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/innovation.html">Innovation</a></li>
-        <li><a href="/sustainability.html">Sustainability</a></li>
-        <li><a href="/roadmap.html">Roadmap</a></li>
-        <li><a href="/resources.html">Resources</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
+<footer class="article-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">BAHARI <span>BLUETECH</span> INSIGHTS</div>
+    <span class="footer-tag">Marine Engineering · Blue Economy · Ocean Innovation · Mombasa, Kenya</span>
+    <div class="footer-links">
+      <a href="/index.html">Website</a>
+      <a href="https://www.linkedin.com/company/bahari-bluetech/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/resources.html">All Articles</a>
+      <a href="/contact.html">Contact</a>
     </div>
-    <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+    <div class="footer-divider"></div>
+    <div class="footer-legal">
+      © 2025 Bahari BlueTech Limited · Mombasa, Kenya · All rights reserved<br>
+      <a href="mailto:info@baharibluetech.co.ke">info@baharibluetech.co.ke</a> · +254 140 211 588 · baharibluetech.co.ke
+    </div>
   </div>
 </footer>
 
