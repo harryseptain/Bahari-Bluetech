@@ -189,6 +189,49 @@ img{max-width:100%;display:block}
   .tag-row{margin-left:0}
   #nav{padding:.9rem 1.2rem}
 }
+/* ── WHATSAPP FLOAT FIX ── */
+.wa-float{
+  position:fixed !important;
+  bottom:1.5rem !important;
+  right:1.5rem !important;
+  width:52px !important;
+  height:52px !important;
+  border-radius:50% !important;
+  background:#25d366 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  z-index:999 !important;
+  text-decoration:none !important;
+  box-shadow:0 4px 20px rgba(37,211,102,.35) !important;
+}
+.wa-float svg{
+  width:26px !important;
+  height:26px !important;
+  fill:#fff !important;
+  flex-shrink:0 !important;
+}
+.wa-float .wa-tooltip{
+  position:absolute !important;
+  right:calc(100% + .7rem) !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  background:#041828 !important;
+  color:#f0ead8 !important;
+  font-family:'DM Mono',monospace !important;
+  font-size:.55rem !important;
+  letter-spacing:.1em !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+  padding:.35rem .7rem !important;
+  border-radius:2px !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  transition:opacity .2s !important;
+  width:auto !important;
+  height:auto !important;
+}
+.wa-float:hover .wa-tooltip{opacity:1 !important}  
 </style>
 </head>
 <body>
