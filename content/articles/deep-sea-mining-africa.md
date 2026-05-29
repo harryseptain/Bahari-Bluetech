@@ -93,7 +93,7 @@ As discussions about the future of ocean resources intensify, it is essential th
 
 ![](/assets/uploads/screenshot-2026-05-29-061858.png)
 
-What Is Deep Sea Mining?
+# What Is Deep Sea Mining?
 
 
 
@@ -109,7 +109,7 @@ It is important to understand that deep sea mining remains a developing industry
 
 
 
-Why Is the World Interested in Deep Ocean Minerals?
+# Why Is the World Interested in Deep Ocean Minerals?
 
 ![](/assets/uploads/chatgpt-image-may-18-2026-03_36_03-am.png "Electric vehicles, renewable energy systems, and battery storage all depend on the same metals found in deep seabed nodules — driving surging global demand.")
 
@@ -125,7 +125,7 @@ Because of these concerns, some researchers and industries believe that deep sea
 
 
 
-What Is the International Seabed Authority (ISA)?
+# What Is the International Seabed Authority (ISA)?
 
 ![The International Seabed Authority holds regular sessions attended by member states, including many African nations actively shaping seabed governance.](https://dsmobserver.com/wp-content/uploads/2018/08/DSC_6634.jpg)
 
@@ -141,7 +141,7 @@ Currently, the ISA has mainly issued exploration licences — authorising scient
 
 
 
-Why Should African Coastal Communities Care?
+# Why Should African Coastal Communities Care?
 
 ![Africa's coastal economies support tens of millions through fishing, ports, tourism, and maritime trade — all shaped by future ocean governance decisions.](https://biz-file.com/c/1705/390660-700x364.jpg?2)
 
@@ -157,7 +157,7 @@ As global interest in ocean resources expands, African countries will increasing
 
 
 
-Possible Benefits for Africa and Coastal Communities
+# Possible Benefits for Africa and Coastal Communities
 
 ![African professionals participating in international ocean science programmes are building the expertise Africa needs in seabed governance and blue economy leadership.](/assets/uploads/chatgpt-image-may-18-2026-04_01_53-am.png)
 
@@ -173,7 +173,7 @@ There may also be future commercial opportunities in port infrastructure, marine
 
 
 
-Environmental Concerns and Community Questions
+# Environmental Concerns and Community Questions
 
 Despite the potential opportunities, deep sea mining raises serious environmental questions that scientists are still struggling to answer. The deep ocean is one of the least explored environments on Earth. Researchers continue discovering new species in these areas — organisms that evolved over millions of years in near-total darkness and crushing pressure, with no exposure to industrial disturbance.
 
@@ -187,7 +187,7 @@ Many scientists and environmental organisations are calling for rigorous researc
 
 
 
-Why Public Awareness Matters
+# Why Public Awareness Matters
 
 
 
@@ -201,7 +201,7 @@ Education and awareness are not optional extras in the push for a sustainable bl
 
 
 
-Africa Must Build Ocean Knowledge and Expertise
+# Africa Must Build Ocean Knowledge and Expertise
 
 
 
@@ -215,7 +215,7 @@ Africa's future in ocean industries should not be framed solely around resource 
 
 
 
-Conclusion
+# Conclusion
 
 
 
