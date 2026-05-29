@@ -103,7 +103,7 @@ The most widely discussed resource is **polymetallic nodules** — dark, rock-
 
 ![](/assets/uploads/screenshot-2026-05-29-062103.png)
 
-![Polymetallic nodules form over millions of years on the seabed — and contain the exact metals the world's energy transition depends on.](/assets/uploads/chatgpt-image-may-18-2026-03_12_59-am.png)
+![](/assets/uploads/chatgpt-image-may-18-2026-03_12_59-am.png "Polymetallic nodules form over millions of years on the seabed — and contain the exact metals the world's energy transition depends on.")
 
 It is important to understand that deep sea mining remains a developing industry. No large-scale commercial extraction has yet begun in international waters. Scientists continue to study the environmental consequences that such activities could trigger across ecosystems that took millions of years to form.
 
