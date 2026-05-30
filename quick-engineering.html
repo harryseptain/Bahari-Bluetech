@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Engineering Desk | CAD, 3D Printing & Prototyping in Kenya | Bahari BlueTech</title>
+<meta name="description" content="Fast CAD drawings, 3D printing, prototype support, workshop fabrication drawings, marine gear concepts, and student project prototyping by Bahari BlueTech. Send a sketch, photo, or idea to get started.">
+<meta name="keywords" content="quick engineering services Kenya, CAD design Kenya, 3D printing services Kenya, prototype design Kenya, marine gear design, fabrication drawings, student prototype support, Mombasa engineering">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Cabinet+Grotesk:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+/* ═══════════════════════════════════════════════════════
+   QUICK ENGINEERING DESK — PAGE STYLES
+   Accent: #00c8a0 (teal-green) / #f5a623 (warm orange)
+   These extend site.css without overriding it.
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --qd-accent:   #00c8a0;
+  --qd-accent2:  #00a882;
+  --qd-warm:     #f5a623;
+  --qd-warm2:    #e08800;
+  --qd-wa:       #25d366;
+  --qd-bg:       #020f1e;
+  --qd-card:     #041828;
+  --qd-border:   rgba(0,200,160,.18);
+  --qd-border2:  rgba(0,200,160,.08);
+}
+
+/* ── Quick Desk Hero ── */
+.qd-hero {
+  min-height: 92vh;
+  background: linear-gradient(160deg, #010b14 0%, #021624 55%, #010b14 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.qd-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 40%, rgba(0,200,160,.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 15% 70%, rgba(245,166,35,.04) 0%, transparent 60%);
+}
+/* Animated grid pattern */
+.qd-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,200,160,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,160,.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+}
+
+.qd-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
+.qd-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: 'Fira Code', monospace;
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--qd-accent);
+  background: rgba(0,200,160,.1);
+  border: 1px solid rgba(0,200,160,.25);
+  border-radius: 40px;
+  padding: .35rem 1rem;
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  animation: qdFadeUp .8s cubic-bezier(.16,1,.3,1) both .1s;
+}
+.qd-hero-badge::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--qd-accent);
+  animation: qd-pulse 2s infinite;
+}
+@keyframes qd-pulse {
+  0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(1.7)}
+}
+@keyframes qdFadeUp {
+  from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none}
+}
+
+.qd-hero-h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-weight: 300;
+  line-height: .95;
+  letter-spacing: -.02em;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: qdFadeUp .9s cubic-bezier(.16,1,.3,1) both .25s;
+}
+.qd-hero-h1 em {
+  font-style: italic;
+  color: var(--qd-accent);
+}
+.qd-hero-h1 .qd-warm-text {
+  background: linear-gradient(90deg, var(--qd-warm), #ffce70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.qd-hero-sub {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: rgba(195,225,240,.75);
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: qdFadeUp .9s cubic-bezier(.16,1,.3,1) both .4s;
+}
+.qd-hero-copy {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(160,212,232,.7);
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: qdFadeUp .9s cubic-bezier(.16,1,.3,1) both .52s;
+}
+
+.qd-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: qdFadeUp .9s cubic-bezier(.16,1,.3,1) both .65s;
+}
+
+/* Buttons — Quick Desk specific */
+.btn-qd-hero-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .9rem 1.8rem;
+  background: var(--qd-wa);
+  color: #010a10;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .88rem;
+  font-weight: 800;
+  letter-spacing: .03em;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity .2s, transform .2s;
+}
+.btn-qd-hero-primary svg { width:18px;height:18px;fill:#010a10;flex-shrink:0; }
+.btn-qd-hero-primary:hover { opacity:.9; transform:translateY(-2px); }
+
+.btn-qd-hero-sec {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .9rem 1.6rem;
+  background: transparent;
+  color: var(--qd-accent);
+  border: 1px solid rgba(0,200,160,.4);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.btn-qd-hero-sec:hover { background: rgba(0,200,160,.08); transform:translateY(-2px); }
+
+/* Hero decorative stats */
+.qd-hero-stats {
+  position: absolute;
+  right: 4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  opacity: 0;
+  animation: qdFadeUp .8s ease both .9s;
+}
+.qd-stat {
+  text-align: right;
+  border-right: 2px solid rgba(0,200,160,.2);
+  padding-right: 1rem;
+}
+.qd-stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--qd-accent);
+  line-height: 1;
+}
+.qd-stat-label {
+  font-family: 'Fira Code', monospace;
+  font-size: .5rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(160,212,232,.4);
+  margin-top: .2rem;
+}
+
+/* ── Section spacing & shared ── */
+.qd-section {
+  padding: 6rem 4rem;
+}
+.qd-section-alt {
+  background: #020c18;
+}
+.qd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: 'Fira Code', monospace;
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--qd-accent);
+  margin-bottom: 1rem;
+}
+.qd-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--qd-accent);
+  opacity: .6;
+}
+.qd-section-h {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 1rem;
+  letter-spacing: -.015em;
+}
+.qd-section-h em {
+  font-style: italic;
+  color: var(--qd-accent);
+}
+.qd-section-lead {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(195,225,240,.75);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+/* ── Who It's For section ── */
+.qd-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.qd-audience-card {
+  padding: 1.4rem 1.2rem;
+  background: var(--qd-card);
+  border: 1px solid var(--qd-border);
+  border-radius: 6px;
+  transition: border-color .3s, transform .3s;
+}
+.qd-audience-card:hover {
+  border-color: rgba(0,200,160,.4);
+  transform: translateY(-3px);
+}
+.qd-audience-icon {
+  font-size: 1.6rem;
+  margin-bottom: .7rem;
+  display: block;
+}
+.qd-audience-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .82rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: .3rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.qd-audience-txt {
+  font-family: 'Fira Code', monospace;
+  font-size: .58rem;
+  font-weight: 300;
+  color: rgba(160,212,232,.6);
+  line-height: 1.8;
+}
+
+/* ── Services grid ── */
+.quick-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+.qs-card {
+  padding: 2rem 1.8rem;
+  background: var(--qd-card);
+  border: 1px solid var(--qd-border);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+}
+.qs-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--qd-accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s;
+}
+.qs-card:hover {
+  border-color: rgba(0,200,160,.35);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.4);
+}
+.qs-card:hover::before { transform: scaleX(1); }
+
+.qs-card-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(0,200,160,.12);
+  line-height: 1;
+  margin-bottom: .6rem;
+}
+.qs-card-icon {
+  font-size: 1.5rem;
+  margin-bottom: .8rem;
+  display: block;
+}
+.qs-card-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .95rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: .6rem;
+  letter-spacing: .02em;
+}
+.qs-card-desc {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .85rem;
+  font-weight: 400;
+  color: rgba(195,225,240,.75);
+  line-height: 1.65;
+  margin-bottom: .8rem;
+}
+.qs-card-examples {
+  font-family: 'Fira Code', monospace;
+  font-size: .57rem;
+  font-weight: 300;
+  color: rgba(0,200,160,.7);
+  line-height: 1.9;
+  margin-bottom: 1.2rem;
+  border-left: 2px solid rgba(0,200,160,.2);
+  padding-left: .8rem;
+}
+.btn-qs-request {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: 'Fira Code', monospace;
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--qd-accent);
+  text-decoration: none;
+  transition: gap .2s;
+}
+.btn-qs-request:hover { gap: .7rem; }
+
+/* ── How it works ── */
+.quick-process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  counter-reset: process;
+}
+.qp-step {
+  padding: 1.8rem 1.6rem;
+  background: var(--qd-card);
+  border: 1px solid var(--qd-border);
+  border-radius: 6px;
+  position: relative;
+}
+.qp-step-num {
+  font-family: 'Fraunces', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: rgba(0,200,160,.15);
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+.qp-step-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .9rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: .4rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.qp-step-txt {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .82rem;
+  font-weight: 400;
+  color: rgba(160,210,230,.7);
+  line-height: 1.65;
+}
+
+/* ── What to send ── */
+.qd-send-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+.qd-checklist {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.qd-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .88rem;
+  font-weight: 400;
+  color: rgba(195,225,240,.8);
+  line-height: 1.5;
+  padding: .7rem 1rem;
+  background: var(--qd-card);
+  border: 1px solid var(--qd-border2);
+  border-radius: 4px;
+}
+.qd-checklist li::before {
+  content: '✓';
+  color: var(--qd-accent);
+  font-weight: 700;
+  font-size: .8rem;
+  flex-shrink: 0;
+  margin-top: .05rem;
+}
+.qd-send-cta-box {
+  background: linear-gradient(135deg, #041c2a 0%, #031018 100%);
+  border: 1px solid rgba(0,200,160,.25);
+  border-radius: 8px;
+  padding: 2.2rem;
+  text-align: center;
+}
+.qd-send-cta-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: .6rem;
+  line-height: 1.25;
+}
+.qd-send-cta-txt {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .85rem;
+  font-weight: 400;
+  color: rgba(160,210,230,.7);
+  line-height: 1.7;
+  margin-bottom: 1.6rem;
+}
+
+/* ── Pricing ── */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+.pricing-card {
+  padding: 2rem 1.8rem;
+  background: var(--qd-card);
+  border: 1px solid var(--qd-border);
+  border-radius: 8px;
+  position: relative;
+  transition: transform .3s;
+}
+.pricing-card:hover { transform: translateY(-4px); }
+.pricing-card.featured {
+  border-color: rgba(0,200,160,.45);
+  background: linear-gradient(160deg, #062436, #031828);
+}
+.pricing-card.featured::after {
+  content: 'Most Popular';
+  position: absolute;
+  top: -1px; right: 1.5rem;
+  font-family: 'Fira Code', monospace;
+  font-size: .5rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #010a10;
+  background: var(--qd-accent);
+  padding: .25rem .7rem;
+  border-radius: 0 0 4px 4px;
+}
+.pricing-label {
+  font-family: 'Fira Code', monospace;
+  font-size: .54rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--qd-accent);
+  margin-bottom: .6rem;
+}
+.pricing-tier {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: .4rem;
+  letter-spacing: .01em;
+}
+.pricing-desc {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .82rem;
+  color: rgba(160,210,230,.65);
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+.pricing-items {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  border-top: 1px solid rgba(0,200,160,.1);
+  padding-top: 1rem;
+}
+.pricing-items li {
+  font-family: 'Fira Code', monospace;
+  font-size: .6rem;
+  color: rgba(195,225,240,.75);
+  line-height: 1.6;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+}
+.pricing-items li::before {
+  content: '→';
+  color: var(--qd-accent);
+  flex-shrink: 0;
+}
+.pricing-note {
+  margin-top: 2rem;
+  padding: 1rem 1.4rem;
+  background: rgba(0,200,160,.06);
+  border: 1px solid rgba(0,200,160,.15);
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: .6rem;
+  color: rgba(160,210,230,.6);
+  line-height: 1.8;
+}
+
+/* ── Disclaimer ── */
+.qd-disclaimer {
+  background: linear-gradient(135deg, #1a0e05, #0d0703);
+  border: 1px solid rgba(245,166,35,.2);
+  border-left: 4px solid var(--qd-warm);
+  border-radius: 6px;
+  padding: 1.8rem 2rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+.qd-disclaimer-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: .1rem;
+}
+.qd-disclaimer-title {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .85rem;
+  font-weight: 800;
+  color: var(--qd-warm);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: .5rem;
+}
+.qd-disclaimer-body {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .85rem;
+  color: rgba(220,200,160,.8);
+  line-height: 1.7;
+}
+
+/* ── FAQ ── */
+.qd-faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.qd-faq-item {
+  padding: 1.4rem 1.6rem;
+  background: var(--qd-card);
+  border: 1px solid var(--qd-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color .25s;
+}
+.qd-faq-item:hover { border-color: rgba(0,200,160,.35); }
+.qd-faq-q {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .88rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: .6rem;
+  line-height: 1.4;
+}
+.qd-faq-a {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .82rem;
+  color: rgba(160,210,230,.7);
+  line-height: 1.7;
+}
+
+/* ── Final CTA ── */
+.qd-final-cta {
+  padding: 7rem 4rem;
+  text-align: center;
+  background: linear-gradient(160deg, #021020 0%, #010810 100%);
+  position: relative;
+  overflow: hidden;
+}
+.qd-final-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,200,160,.06) 0%, transparent 65%);
+}
+.qd-final-cta-h {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.qd-final-cta-h em {
+  font-style: italic;
+  color: var(--qd-accent);
+}
+.qd-final-cta-p {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem;
+  color: rgba(160,210,230,.7);
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+.qd-final-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn-wa-large {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  padding: 1rem 2rem;
+  background: var(--qd-wa);
+  color: #010a10;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .95rem;
+  font-weight: 900;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: opacity .2s, transform .2s;
+  letter-spacing: .02em;
+}
+.btn-wa-large svg { width:20px;height:20px;fill:#010a10;flex-shrink:0; }
+.btn-wa-large:hover { opacity:.9; transform:translateY(-2px); }
+.btn-quote-large {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--qd-accent);
+  border: 1px solid rgba(0,200,160,.4);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.btn-quote-large:hover { background: rgba(0,200,160,.08); transform:translateY(-2px); }
+
+/* ── Breadcrumb / back link ── */
+.qd-breadcrumb {
+  font-family: 'Fira Code', monospace;
+  font-size: .6rem;
+  letter-spacing: .12em;
+  color: rgba(100,160,190,.5);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  opacity: 0;
+  animation: qdFadeUp .7s ease both .05s;
+}
+.qd-breadcrumb a {
+  color: rgba(0,200,160,.6);
+  text-decoration: none;
+  transition: color .2s;
+}
+.qd-breadcrumb a:hover { color: var(--qd-accent); }
+
+/* ── Responsive ── */
+@media(max-width:1100px){
+  .qd-hero { padding: 7rem 2rem 3rem; }
+  .qd-hero-stats { display: none; }
+  .qd-section { padding: 4.5rem 2rem; }
+  .qd-audience-grid { grid-template-columns: 1fr 1fr; }
+  .quick-service-grid { grid-template-columns: 1fr 1fr; }
+  .quick-process-steps { grid-template-columns: 1fr 1fr; }
+  .pricing-cards { grid-template-columns: 1fr; }
+  .qd-send-wrap { grid-template-columns: 1fr; }
+  .qd-faq-grid { grid-template-columns: 1fr; }
+  .qd-final-cta { padding: 5rem 2rem; }
+}
+@media(max-width:640px){
+  .quick-service-grid { grid-template-columns: 1fr; }
+  .quick-process-steps { grid-template-columns: 1fr; }
+  .qd-audience-grid { grid-template-columns: 1fr 1fr; }
+  .qd-hero-actions { flex-direction: column; }
+  .qd-final-cta-actions { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+<div id="c1"></div>
+<div id="c2"></div>
+
+<!-- ══════════ NAV (matches site nav, Quick Desk highlighted) ══════════ -->
+<nav id="nav">
+  <a href="index.html" class="n-logo">
+    <div class="n-emblem"><svg viewBox="0 0 58 58" fill="none"><rect x="2" y="2" width="54" height="54" rx="4" stroke="#c8960c" stroke-width="1.8"/><line x1="29" y1="9" x2="29" y2="33" stroke="#c8960c" stroke-width="1.8" stroke-linecap="round"/><path d="M29 9 L15 30 L29 30 Z" fill="rgba(200,150,12,.45)"/><path d="M6 41 C11 34 17 40 23 36 C29 32 35 39 41 35 C47 31 52 38 56 34" stroke="#4bbcd8" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M6 47 C11 41 17 46 23 43 C29 40 35 46 41 43 C47 40 52 45 56 42" stroke="rgba(75,188,216,.5)" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="n-wordmark"><strong>Bahari BlueTech</strong><span>Marine Engineering · Mombasa, Kenya</span></div>
+  </a>
+  <ul class="n-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="quick-engineering.html" style="color:#00c8a0" class="active">Quick Desk</a></li>
+    <li><a href="innovation.html">Innovation</a></li>
+    <li><a href="sustainability.html">Sustainability</a></li>
+    <li><a href="roadmap.html">Roadmap</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <!-- NOTE: Replace 254140211588 with your WhatsApp number -->
+  <a href="https://wa.me/254140211588?text=Hi%2C%20I%20have%20a%20small%20engineering%20job%20I%27d%20like%20help%20with." target="_blank" rel="noopener" class="n-cta" style="background:#25d366;color:#010a10">Send a Sketch</a>
+</nav>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section class="qd-hero" id="top">
+  <div class="qd-hero-grid"></div>
+  <div class="qd-hero-content">
+    <div class="qd-breadcrumb">
+      <a href="services.html">← Services</a>
+      <span>/</span>
+      <span>Quick Engineering Desk</span>
+    </div>
+    <div class="qd-hero-badge">⚡ Quick Engineering Desk · Bahari BlueTech</div>
+    <h1 class="qd-hero-h1">Fast CAD, 3D Printing<br>&amp; <em>Practical Design</em><br>for <span class="qd-warm-text">Real Ideas.</span></h1>
+    <p class="qd-hero-sub">Small CAD, 3D printing, prototyping, and practical marine/mechanical design support for small clients in Kenya and East Africa.</p>
+    <p class="qd-hero-copy">Send us a sketch, photo, broken part, or idea. We help turn it into a clean drawing, 3D model, prototype, or workshop-ready concept.</p>
+    <div class="qd-hero-actions">
+      <!-- NOTE: Replace 254140211588 with your WhatsApp number -->
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20have%20a%20small%20engineering%20job%20I%27d%20like%20help%20with." target="_blank" rel="noopener" class="btn-qd-hero-primary">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send Sketch on WhatsApp
+      </a>
+      <a href="#services" class="btn-qd-hero-sec">View Services ↓</a>
+    </div>
+  </div>
+
+  <!-- Decorative stats — desktop only -->
+  <div class="qd-hero-stats">
+    <div class="qd-stat">
+      <div class="qd-stat-num">6</div>
+      <div class="qd-stat-label">Service Types</div>
+    </div>
+    <div class="qd-stat">
+      <div class="qd-stat-num">Fast</div>
+      <div class="qd-stat-label">Turnaround</div>
+    </div>
+    <div class="qd-stat">
+      <div class="qd-stat-num">Kenya</div>
+      <div class="qd-stat-label">Based</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ WHO IT'S FOR ══════════ -->
+<section class="qd-section qd-section-alt" id="who">
+  <div class="qd-eyebrow reveal">Who it's for</div>
+  <h2 class="qd-section-h reveal">Built for practical people<br><em>with real ideas.</em></h2>
+  <p class="qd-section-lead reveal-d">You don't need a full engineering contract to work with us. Quick Engineering Desk is for small jobs, simple prototypes, technical sketches, custom parts, workshop drawings, and early-stage product ideas.</p>
+  <div class="qd-audience-grid reveal-d">
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">🎓</span>
+      <div class="qd-audience-title">Students & TVET Learners</div>
+      <div class="qd-audience-txt">University projects, TVET prototypes, innovation lab models, and technical diagrams for submissions.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">💡</span>
+      <div class="qd-audience-title">Startups & Innovators</div>
+      <div class="qd-audience-txt">Early-stage product ideas, MVP prototypes, 3D-printed proof-of-concept models, and investor pitch visuals.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">⚓</span>
+      <div class="qd-audience-title">Fishermen & Boat Owners</div>
+      <div class="qd-audience-txt">Deck layouts, fish box designs, onboard storage, bait tables, safety fittings, and small boat accessories.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">🔧</span>
+      <div class="qd-audience-title">Workshops & Fundis</div>
+      <div class="qd-audience-txt">Fabrication drawings for welders, metal workers, and small workshops. Equipment stands, guards, racks, trolleys.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">🏭</span>
+      <div class="qd-audience-title">Repair Shops</div>
+      <div class="qd-audience-txt">Custom replacement parts, brackets, casings, and small components that are hard to source locally.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">🏢</span>
+      <div class="qd-audience-title">Small Businesses</div>
+      <div class="qd-audience-txt">Custom product concepts, branded enclosures, storage solutions, display stands, and functional prototypes.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">🏫</span>
+      <div class="qd-audience-title">Schools & Training Centers</div>
+      <div class="qd-audience-txt">Visual models, teaching aids, project kits, and scale models for demonstrations and competitions.</div>
+    </div>
+    <div class="qd-audience-card">
+      <span class="qd-audience-icon">🛠️</span>
+      <div class="qd-audience-title">Makers & Developers</div>
+      <div class="qd-audience-txt">Hardware product development, 3D-printed enclosures, custom fittings, and mechanical assemblies.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SERVICES ══════════ -->
+<section class="qd-section" id="services">
+  <div class="qd-eyebrow reveal">Six practical services</div>
+  <h2 class="qd-section-h reveal">What we can do<br><em>for you.</em></h2>
+  <p class="qd-section-lead reveal-d">All six services under Quick Engineering Desk are designed to help you move from idea to something you can actually use, build, or show — without overcomplicating it.</p>
+
+  <div class="quick-service-grid">
+
+    <div class="qs-card reveal">
+      <div class="qs-card-num">01</div>
+      <span class="qs-card-icon">🖨️</span>
+      <div class="qs-card-title">3D Printing & Prototype Parts</div>
+      <p class="qs-card-desc">Custom parts, replacement pieces, brackets, casings, models, product prototypes, and small functional components — printed and ready.</p>
+      <div class="qs-card-examples">
+        Custom brackets & mounts<br>
+        Replacement broken parts<br>
+        Product casings & enclosures<br>
+        Student models & display pieces<br>
+        Functional mechanical components
+      </div>
+      <!-- NOTE: Replace 254140211588 with your WhatsApp number -->
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20need%203D%20printing%20or%20prototype%20parts." target="_blank" rel="noopener" class="btn-qs-request">Request this service →</a>
+    </div>
+
+    <div class="qs-card reveal">
+      <div class="qs-card-num">02</div>
+      <span class="qs-card-icon">✏️</span>
+      <div class="qs-card-title">Sketch-to-CAD Design</div>
+      <p class="qs-card-desc">Send a sketch, photo, broken part, or WhatsApp image. We turn it into a clean 2D drawing or 3D CAD model ready for fabrication or printing.</p>
+      <div class="qs-card-examples">
+        Hand sketches & rough drawings<br>
+        Photos of parts or assemblies<br>
+        Broken parts needing replication<br>
+        WhatsApp images of ideas<br>
+        Verbal descriptions with dimensions
+      </div>
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20have%20a%20sketch%20I%27d%20like%20converted%20to%20CAD." target="_blank" rel="noopener" class="btn-qs-request">Request this service →</a>
+    </div>
+
+    <div class="qs-card reveal">
+      <div class="qs-card-num">03</div>
+      <span class="qs-card-icon">⚓</span>
+      <div class="qs-card-title">Marine & Fishing Gear Design</div>
+      <p class="qs-card-desc">Practical design support for boat owners, fishermen, and coastal businesses. Small boat accessories, onboard layouts, and fishing gear concepts.</p>
+      <div class="qs-card-examples">
+        Boat deck layout concepts<br>
+        Fish boxes & bait tables<br>
+        Onboard storage solutions<br>
+        Safety layout ideas<br>
+        Small marine accessories & fittings
+      </div>
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20need%20marine%20or%20fishing%20gear%20design%20support." target="_blank" rel="noopener" class="btn-qs-request">Request this service →</a>
+    </div>
+
+    <div class="qs-card reveal">
+      <div class="qs-card-num">04</div>
+      <span class="qs-card-icon">📐</span>
+      <div class="qs-card-title">Workshop Fabrication Drawings</div>
+      <p class="qs-card-desc">Clear, practical drawings for fundis, welders, and metal fabricators. Everything they need to build from your idea.</p>
+      <div class="qs-card-examples">
+        Equipment stands & racks<br>
+        Guards, frames & trolleys<br>
+        Fish handling tables<br>
+        Engine stands & generator cages<br>
+        Pump stands & storage racks
+      </div>
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20need%20workshop%20fabrication%20drawings." target="_blank" rel="noopener" class="btn-qs-request">Request this service →</a>
+    </div>
+
+    <div class="qs-card reveal">
+      <div class="qs-card-num">05</div>
+      <span class="qs-card-icon">🌊</span>
+      <div class="qs-card-title">Fiberglass Product Concepts</div>
+      <p class="qs-card-desc">Design concepts for fiberglass items. We create the drawings and product concepts you can take to a fiberglass fabricator.</p>
+      <div class="qs-card-examples">
+        Boat consoles & hatch covers<br>
+        Storage compartments & cooler boxes<br>
+        Custom fish boxes & tanks<br>
+        Small marine accessories<br>
+        Custom molded product concepts
+      </div>
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20need%20a%20fiberglass%20product%20concept." target="_blank" rel="noopener" class="btn-qs-request">Request this service →</a>
+    </div>
+
+    <div class="qs-card reveal">
+      <div class="qs-card-num">06</div>
+      <span class="qs-card-icon">🚀</span>
+      <div class="qs-card-title">Student & Startup Prototyping</div>
+      <p class="qs-card-desc">Support for students, TVET learners, university projects, innovation hubs, and small startups turning ideas into something real.</p>
+      <div class="qs-card-examples">
+        CAD models & technical diagrams<br>
+        3D printed prototype models<br>
+        Product renders for presentations<br>
+        Bill of materials preparation<br>
+        Innovation challenge entries
+      </div>
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20need%20student%20or%20startup%20prototyping%20support." target="_blank" rel="noopener" class="btn-qs-request">Request this service →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════ HOW IT WORKS ══════════ -->
+<section class="qd-section qd-section-alt" id="process">
+  <div class="qd-eyebrow reveal">Simple process</div>
+  <h2 class="qd-section-h reveal">How it works —<br><em>six steps.</em></h2>
+  <p class="qd-section-lead reveal-d">We keep it simple. Send us what you have — even a rough photo or voice note — and we'll take it from there.</p>
+
+  <div class="quick-process-steps">
+    <div class="qp-step reveal">
+      <div class="qp-step-num">01</div>
+      <div class="qp-step-title">Send your sketch, photo, or idea</div>
+      <p class="qp-step-txt">WhatsApp is fine. A rough photo, hand sketch, broken part, or short description. Don't overthink it — just send what you have.</p>
+    </div>
+    <div class="qp-step reveal">
+      <div class="qp-step-num">02</div>
+      <div class="qp-step-title">We review and ask key questions</div>
+      <p class="qp-step-txt">We look at what you sent and follow up with a few simple questions — dimensions, material, intended use, quantity needed.</p>
+    </div>
+    <div class="qp-step reveal">
+      <div class="qp-step-num">03</div>
+      <div class="qp-step-title">You receive a clear quote and timeline</div>
+      <p class="qp-step-txt">We give you a clear price and realistic turnaround time. No hidden charges, no vague estimates. You decide whether to proceed.</p>
+    </div>
+    <div class="qp-step reveal">
+      <div class="qp-step-num">04</div>
+      <div class="qp-step-title">You pay a deposit</div>
+      <p class="qp-step-txt">A deposit is required before we start. Payment is via M-Pesa or bank transfer. We confirm receipt and begin work.</p>
+    </div>
+    <div class="qp-step reveal">
+      <div class="qp-step-num">05</div>
+      <div class="qp-step-title">We design, model, draw, or print</div>
+      <p class="qp-step-txt">Our team works on your job. For most small jobs, you'll receive a progress update before final delivery. We keep you informed.</p>
+    </div>
+    <div class="qp-step reveal" style="border-color:rgba(0,200,160,.35);background:linear-gradient(135deg,#041c2a,#031018)">
+      <div class="qp-step-num" style="color:rgba(0,200,160,.3)">06</div>
+      <div class="qp-step-title" style="color:var(--qd-accent)">You receive your file, drawing, or prototype</div>
+      <p class="qp-step-txt">Digital files (DXF, PDF, STL, STEP, DWG) are sent via WhatsApp or email. Physical 3D prints or models are available for pickup in Mombasa or can be arranged for delivery.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ WHAT TO SEND ══════════ -->
+<section class="qd-section" id="send">
+  <div class="qd-eyebrow reveal">Before you contact us</div>
+  <h2 class="qd-section-h reveal">What to <em>send us.</em></h2>
+  <p class="qd-section-lead reveal-d">The more you can share, the faster we can quote you. But don't worry — even a single photo is a good start. We'll ask for the rest.</p>
+
+  <div class="qd-send-wrap">
+    <ul class="qd-checklist reveal">
+      <li>A photo, sketch, or reference image of what you need</li>
+      <li>Approximate measurements or dimensions (rough is fine)</li>
+      <li>What the item should do — its function or purpose</li>
+      <li>Preferred material if you know it (plastic, metal, fiberglass, etc.)</li>
+      <li>Quantity needed (one piece or more?)</li>
+      <li>Your deadline — when do you need it?</li>
+      <li>Location — for physical delivery or pickup arrangements</li>
+      <li>Budget range if you have one (this helps us suggest the best option)</li>
+    </ul>
+
+    <div class="qd-send-cta-box reveal-d">
+      <div class="qd-send-cta-title">Ready? Just send us<br>what you have.</div>
+      <p class="qd-send-cta-txt">You don't need to prepare a formal brief. A photo on WhatsApp is enough to start. We'll guide you through the rest.</p>
+      <!-- NOTE: Replace 254140211588 with your WhatsApp number -->
+      <a href="https://wa.me/254140211588?text=Hi%2C%20I%20have%20a%20small%20engineering%20job%20I%27d%20like%20help%20with." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.6rem;background:#25d366;color:#010a10;font-family:'Cabinet Grotesk',sans-serif;font-size:.88rem;font-weight:800;border-radius:4px;text-decoration:none;width:100%;justify-content:center;box-sizing:border-box;margin-bottom:.8rem">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:17px;height:17px;fill:#010a10"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send Sketch on WhatsApp
+      </a>
+      <a href="contact.html" style="display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.75rem 1.4rem;border:1px solid rgba(0,200,160,.3);color:var(--qd-accent);font-family:'Cabinet Grotesk',sans-serif;font-size:.82rem;font-weight:700;border-radius:4px;text-decoration:none;box-sizing:border-box">Request a Formal Quote</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ PRICING ══════════ -->
+<section class="qd-section qd-section-alt" id="pricing">
+  <div class="qd-eyebrow reveal">Pricing</div>
+  <h2 class="qd-section-h reveal">Clear pricing,<br><em>no surprises.</em></h2>
+  <p class="qd-section-lead reveal-d">Most small jobs are quoted individually after a brief review. The prices below give you a starting point. Complex jobs and physical printing are always quoted after we understand exactly what you need.</p>
+
+  <div class="pricing-cards">
+
+    <div class="pricing-card reveal">
+      <div class="pricing-label">// Tier 01</div>
+      <div class="pricing-tier">Starter</div>
+      <div class="pricing-desc">For simple sketches, small CAD conversions, and basic technical drawings.</div>
+      <ul class="pricing-items">
+        <li>Simple sketch-to-CAD — <strong style="color:#00c8a0">From KES 1,500</strong></li>
+        <li>Simple 2D fabrication drawing — <strong style="color:#00c8a0">From KES 2,000</strong></li>
+        <li>Basic technical diagram — <strong style="color:#00c8a0">From KES 1,500</strong></li>
+        <li>Student project drawing — <strong style="color:#00c8a0">From KES 2,000</strong></li>
+        <li>File format of choice (PDF, DXF, DWG)</li>
+        <li>WhatsApp delivery</li>
+      </ul>
+    </div>
+
+    <div class="pricing-card featured reveal">
+      <div class="pricing-label">// Tier 02</div>
+      <div class="pricing-tier">Prototype</div>
+      <div class="pricing-desc">For 3D models, prototype preparation, and 3D printing support.</div>
+      <ul class="pricing-items">
+        <li>Simple 3D CAD model — <strong style="color:#00c8a0">From KES 2,500</strong></li>
+        <li>Student prototype support — <strong style="color:#00c8a0">From KES 2,000</strong></li>
+        <li>3D printed parts — <strong style="color:#00c8a0">Quoted by size & material</strong></li>
+        <li>Product render / visual — <strong style="color:#00c8a0">From KES 3,000</strong></li>
+        <li>STL / STEP file delivery</li>
+        <li>Physical print pickup (Mombasa) or delivery</li>
+      </ul>
+    </div>
+
+    <div class="pricing-card reveal">
+      <div class="pricing-label">// Tier 03</div>
+      <div class="pricing-tier">Workshop Ready</div>
+      <div class="pricing-desc">For fabrication drawings, marine gear concepts, and practical build-ready design support.</div>
+      <ul class="pricing-items">
+        <li>Workshop fabrication drawing — <strong style="color:#00c8a0">From KES 3,000</strong></li>
+        <li>Marine/fishing gear concept — <strong style="color:#00c8a0">Quoted after review</strong></li>
+        <li>Fiberglass product concept — <strong style="color:#00c8a0">Quoted after review</strong></li>
+        <li>Bill of materials (BOM) — <strong style="color:#00c8a0">Included where needed</strong></li>
+        <li>Production-ready file set (PDF + DXF)</li>
+        <li>Fundi/welder-ready drawings</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="pricing-note reveal-d">
+    ⚠️ &nbsp;<strong>Final pricing note:</strong> All prices depend on size, complexity, material, urgency, and whether physical printing or delivery is required. Prices above are starting points — complex or multi-part jobs are quoted individually. Contact us with your job and we'll give you a clear number before you commit to anything.
+  </div>
+</section>
+
+
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="qd-section qd-section-alt" id="faq">
+  <div class="qd-eyebrow reveal">FAQ</div>
+  <h2 class="qd-section-h reveal">Common <em>questions.</em></h2>
+
+  <div class="qd-faq-grid">
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Can I send just a photo or rough sketch?</div>
+      <div class="qd-faq-a">Yes. A photo on WhatsApp is enough to start. We'll look at what you send and ask any questions we need. You don't need a formal technical drawing — that's our job.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Do you offer 3D printing?</div>
+      <div class="qd-faq-a">Yes. We can 3D print parts, prototypes, models, and casings. We work with FDM (plastic) printing. Some specialist materials may require coordination with a printing partner. We'll let you know upfront.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">How do you price 3D printed parts?</div>
+      <div class="qd-faq-a">3D print pricing is based on print volume (size), material used, print time, and complexity. Send us the item you need and we'll give you a clear quote within 24 hours on working days.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Can you help students with project prototypes?</div>
+      <div class="qd-faq-a">Absolutely. We work with university students, TVET learners, and school innovation projects. We offer CAD models, 3D printed prototypes, technical diagrams, and presentation renders. Rates for students are flexible — just tell us your situation.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Can you design parts for boats or fishing equipment?</div>
+      <div class="qd-faq-a">Yes. This is one of our core areas. Boat deck layouts, fish boxes, bait tables, storage, fishing gear concepts, small marine accessories — all straightforward for us. Send a photo or description and we'll advise on what's possible.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Do you manufacture fiberglass products?</div>
+      <div class="qd-faq-a">We design fiberglass product concepts and create technical drawings. Physical fiberglass fabrication requires a specialist GRP shop. We can advise on local fabricators who can build from our drawings.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Do you provide county building approvals or land survey services?</div>
+      <div class="qd-faq-a">No. Quick Engineering Desk does not offer land surveying, civil engineering approvals, structural certification, or county permit services. If that's what you need, please consult a registered civil engineer or licensed land surveyor.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">How fast can a small job be done?</div>
+      <div class="qd-faq-a">Simple sketch-to-CAD jobs can often be turned around in 2–5 working days. 3D printed parts depend on print time and queue. Complex jobs take longer. We'll give you a realistic timeline when we quote.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">What file formats can I receive?</div>
+      <div class="qd-faq-a">We can deliver PDF, DXF, DWG (2D drawings), STL, STEP, IGES (3D models), and JPEG/PNG renders. Just tell us what you need and we'll confirm if it's available for your job.</div>
+    </div>
+
+    <div class="qd-faq-item reveal">
+      <div class="qd-faq-q">Can I request only a drawing without printing?</div>
+      <div class="qd-faq-a">Yes. Many clients just need the drawing or 3D model to take to their own fabricator or printer. That's absolutely fine — you pay for the design work only, and we deliver the file.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════ FINAL CTA ══════════ -->
+<section class="qd-final-cta">
+  <h2 class="qd-final-cta-h reveal">Have a small engineering idea?<br><em>Send it today.</em></h2>
+  <p class="qd-final-cta-p reveal-d">Send a sketch, photo, broken part, or short description and we'll tell you what is possible, what it may cost, and the best way to proceed. No commitment required.</p>
+  <div class="qd-final-cta-actions reveal-d">
+    <!-- NOTE: Replace 254140211588 with your WhatsApp number -->
+    <a href="https://wa.me/254140211588?text=Hi%2C%20I%20have%20a%20small%20engineering%20idea%20I%27d%20like%20help%20with." target="_blank" rel="noopener" class="btn-wa-large">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Send Sketch on WhatsApp
+    </a>
+    <a href="contact.html" class="btn-quote-large">Request a Quote →</a>
+  </div>
+  <div style="margin-top:2rem;font-family:'Fira Code',monospace;font-size:.56rem;color:rgba(100,150,170,.4);letter-spacing:.1em" class="reveal-d">
+    Also offering: <a href="services.html" style="color:rgba(0,200,160,.4);text-decoration:none">Strategic Services →</a> &nbsp;for larger projects & institutional clients
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div class="f-left">
+        <span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya</span>
+        <div class="f-sep"></div>
+        <span class="f-copy">info@baharibluetech.co.ke</span>
+        <div class="f-sep"></div>
+        <span class="f-copy">+254 140 211 588</span>
+      </div>
+      <ul class="f-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="quick-engineering.html">Quick Desk</a></li>
+        <li><a href="innovation.html">Innovation</a></li>
+        <li><a href="sustainability.html">Sustainability</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+  </div>
+</footer>
+
+<!-- NOTE: Replace 254140211588 with your WhatsApp number -->
+<a href="https://wa.me/254140211588" target="_blank" rel="noopener" class="wa-float" title="Chat on WhatsApp">
+  <div class="wa-tooltip">Chat on WhatsApp</div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="site.js"></script>
+</body>
+</html>
