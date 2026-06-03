@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<title>Bahari BlueTech | Maritime Engineering & Blue Economy — Mombasa, Kenya</title>
+<meta name="description" content="Bahari BlueTech is East Africa's maritime engineering and blue economy firm — vessel design, CAD drafting, fisheries infrastructure, and quick engineering support from Mombasa, Kenya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+
+<style>
+/* ═══════════════════════════════════════════════════
+   BAHARI BLUETECH — HOMEPAGE v4 · SHORT CINEMATIC
+   Glassmorphism · Logo · site.css untouched
+═══════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+}
+
+/* ─── GRID OVERLAY ─── */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(160,212,232,.013) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(160,212,232,.013) 1px,transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none; z-index:0;
+}
+
+/* ═══════════════════════════
+   NAV
+═══════════════════════════ */
+nav {
+  padding:1rem 4rem;
+  background:rgba(1,11,20,0);
+  transition:all .5s cubic-bezier(.16,1,.3,1);
+}
+nav.scrolled {
+  padding:.7rem 4rem;
+  background:rgba(1,11,20,.82);
+  backdrop-filter:blur(28px) saturate(1.5);
+  -webkit-backdrop-filter:blur(28px) saturate(1.5);
+  border-bottom:1px solid rgba(160,212,232,.07);
+  box-shadow:0 4px 40px rgba(0,0,0,.35);
+}
+
+/* Logo with real image */
+.n-logo { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
+.n-logo-img {
+  width:40px; height:40px;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 0 6px rgba(8,196,168,.18));
+  transition:filter .3s;
+}
+.n-logo:hover .n-logo-img { filter:drop-shadow(0 0 10px rgba(8,196,168,.35)); }
+.n-wordmark { display:flex; flex-direction:column; }
+.n-wordmark strong {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.88rem; font-weight:800;
+  letter-spacing:.02em; color:var(--white);
+  line-height:1.1;
+}
+.n-wordmark span {
+  font-family:'Fira Code',monospace;
+  font-size:.44rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--muted);
+}
+
+.n-links { display:flex; gap:2.2rem; list-style:none; }
+.n-links a {
+  font-family:'Fira Code',monospace;
+  font-size:.58rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted);
+  transition:color .2s; text-decoration:none;
+}
+.n-links a:hover,.n-links a.active { color:var(--foam); }
+
+.n-cta {
+  font-family:'Fira Code',monospace;
+  font-size:.56rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--teal);
+  border:1px solid rgba(8,196,168,.28);
+  padding:.5rem 1.2rem; border-radius:3px;
+  background:rgba(8,196,168,.05);
+  backdrop-filter:blur(8px);
+  transition:all .25s; text-decoration:none; white-space:nowrap;
+  position:relative; overflow:hidden;
+}
+.n-cta::before {
+  content:''; position:absolute; inset:0;
+  background:var(--teal); transform:translateX(-101%);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.n-cta:hover { color:var(--void); }
+.n-cta:hover::before { transform:translateX(0); }
+.n-cta span { position:relative; z-index:1; }
+
+/* Mobile toggle */
+.mob-toggle-btn {
+  display:none; background:none;
+  border:1px solid rgba(160,212,232,.12);
+  border-radius:3px; padding:.38rem .6rem;
+  cursor:pointer; transition:border-color .2s;
+}
+.mob-toggle-btn:hover { border-color:var(--teal); }
+.mob-toggle-btn svg { width:19px;height:19px;stroke:var(--foam);fill:none;stroke-width:1.5;stroke-linecap:round;display:block; }
+
+/* Mobile drawer */
+.mob-drawer {
+  display:none; position:fixed;
+  top:0; right:-100%;
+  width:min(300px,88vw); height:100vh;
+  background:rgba(2,14,28,.97);
+  backdrop-filter:blur(28px);
+  border-left:1px solid rgba(160,212,232,.08);
+  z-index:9000; padding:5rem 2rem 3rem;
+  flex-direction:column;
+  transition:right .4s cubic-bezier(.16,1,.3,1);
+}
+.mob-drawer.open { right:0; }
+.mob-drawer .mob-links { list-style:none; display:flex; flex-direction:column; gap:.4rem; }
+.mob-drawer .mob-links a {
+  font-family:'Fira Code',monospace;
+  font-size:.68rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted);
+  padding:.8rem 1rem; border-radius:3px; display:block;
+  transition:all .2s; border:1px solid transparent;
+  text-decoration:none;
+}
+.mob-drawer .mob-links a:hover { color:var(--teal2); border-color:rgba(8,196,168,.12); background:rgba(8,196,168,.04); }
+.mob-drawer .mob-links a.active { color:var(--foam); }
+.mob-cta-link {
+  margin-top:2rem; padding:.9rem 1rem;
+  background:rgba(8,196,168,.07);
+  border:1px solid rgba(8,196,168,.22);
+  border-radius:3px;
+  font-family:'Fira Code',monospace;
+  font-size:.6rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--teal2);
+  display:block; text-align:center;
+  transition:all .25s; text-decoration:none;
+}
+.mob-cta-link:hover { background:rgba(8,196,168,.14); }
+.mob-close {
+  position:absolute; top:1.4rem; right:1.4rem;
+  background:none; border:none; cursor:pointer; padding:.3rem;
+}
+.mob-close svg { width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:1.5;stroke-linecap:round; }
+.mob-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.55); z-index:8999;
+  backdrop-filter:blur(2px);
+}
+.mob-overlay.open { display:block; }
+@media(max-width:1100px){
+  nav { padding:.85rem 1.5rem; }
+  nav.scrolled { padding:.65rem 1.5rem; }
+  .mob-toggle-btn { display:flex; align-items:center; }
+  .mob-drawer { display:flex; }
+  .n-links,.n-cta { display:none; }
+}
+
+/* ═══════════════════════════
+   HERO — FULL-BLEED CINEMATIC
+═══════════════════════════ */
+.hero {
+  position:relative;
+  min-height:100svh;
+  display:flex; align-items:center;
+  overflow:hidden;
+  background:var(--void);
+}
+
+/* Full-bleed background image */
+.hero-bg {
+  position:absolute; inset:0; z-index:0;
+}
+.hero-bg img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 30%;
+  display:block;
+  animation:heroBgIn 2s cubic-bezier(.16,1,.3,1) both;
+  filter:brightness(.45) saturate(.65);
+}
+@keyframes heroBgIn {
+  from { transform:scale(1.08); opacity:0; filter:brightness(.3) saturate(.4); }
+  to   { transform:scale(1); opacity:1; filter:brightness(.45) saturate(.65); }
+}
+/* Gradient overlays */
+.hero-bg::after {
+  content:'';
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to right, rgba(1,11,20,.92) 0%, rgba(1,11,20,.7) 42%, rgba(1,11,20,.2) 80%),
+    linear-gradient(to top, rgba(1,11,20,.8) 0%, transparent 45%);
+}
+
+/* Scan line */
+.hero-scan {
+  position:absolute; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(8,196,168,.3),transparent);
+  animation:scanDown 7s ease-in-out infinite;
+  z-index:2; pointer-events:none;
+}
+@keyframes scanDown {
+  0%   { top:0%; opacity:0; }
+  4%   { opacity:1; }
+  96%  { opacity:.6; }
+  100% { top:100%; opacity:0; }
+}
+
+/* Glow blobs */
+.hero-glow {
+  position:absolute; z-index:1; pointer-events:none;
+  border-radius:50%;
+}
+.hero-glow.g1 {
+  left:-8%; top:20%; width:55vw; height:55vw;
+  background:radial-gradient(circle, rgba(8,196,168,.055) 0%, transparent 65%);
+  animation:blobPulse 9s ease-in-out infinite alternate;
+}
+.hero-glow.g2 {
+  right:5%; bottom:-10%; width:30vw; height:30vw;
+  background:radial-gradient(circle, rgba(8,78,112,.09) 0%, transparent 65%);
+}
+@keyframes blobPulse { from{opacity:.6;transform:scale(1)} to{opacity:1;transform:scale(1.07)} }
+
+/* Content */
+.hero-content {
+  position:relative; z-index:4;
+  padding:0 4rem;
+  max-width:720px;
+}
+
+.hero-tag {
+  display:inline-flex; align-items:center; gap:.65rem;
+  font-family:'Fira Code',monospace;
+  font-size:.55rem; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--teal);
+  margin-bottom:1.8rem;
+  opacity:0; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both .4s;
+}
+.hero-tag::before { content:''; width:22px; height:1px; background:var(--teal); opacity:.65; }
+.htag-dot {
+  width:5px; height:5px; border-radius:50%;
+  background:var(--teal2); flex-shrink:0;
+  animation:hpulse 2.2s infinite;
+}
+@keyframes hpulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.2;transform:scale(2)} }
+
+.hero-h1 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.8rem,5.5vw,5.2rem);
+  font-weight:200; line-height:.93;
+  letter-spacing:-.03em; margin-bottom:1.6rem;
+  opacity:0; animation:fadeUp 1s cubic-bezier(.16,1,.3,1) both .55s;
+}
+.hero-h1 em { font-style:italic; color:var(--sky); }
+.hero-h1 .gd {
+  background:linear-gradient(100deg, var(--gold2) 0%, #e5c84a 50%, var(--teal2) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.hero-sub {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:1.05rem; font-weight:300; line-height:1.85;
+  color:var(--foam); max-width:500px; margin-bottom:2.8rem;
+  opacity:0; animation:fadeUp .9s cubic-bezier(.16,1,.3,1) both .7s;
+}
+
+.hero-actions {
+  display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:3rem;
+  opacity:0; animation:fadeUp .8s ease both .9s;
+}
+
+/* Glass pill chips */
+.hero-chips {
+  display:flex; flex-wrap:wrap; gap:.5rem;
+  opacity:0; animation:fadeUp .7s ease both 1.1s;
+}
+.hchip {
+  font-family:'Fira Code',monospace;
+  font-size:.48rem; letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.3rem .8rem;
+  border:1px solid rgba(160,212,232,.12);
+  border-radius:2px; color:rgba(160,212,232,.4);
+  background:rgba(6,28,52,.3);
+  backdrop-filter:blur(6px);
+  transition:all .25s;
+}
+.hchip:hover { border-color:var(--teal); color:var(--teal2); background:rgba(8,196,168,.07); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── Right-side HUD panel ── */
+.hero-hud {
+  position:absolute; right:4rem; top:50%;
+  transform:translateY(-50%);
+  z-index:5;
+  display:flex; flex-direction:column; gap:1rem;
+  opacity:0; animation:fadeUp .9s ease both 1.2s;
+}
+/* Glass cards */
+.hud-card {
+  background:rgba(1,14,28,.65);
+  backdrop-filter:blur(20px) saturate(1.3);
+  -webkit-backdrop-filter:blur(20px) saturate(1.3);
+  border:1px solid rgba(160,212,232,.1);
+  border-radius:5px;
+  padding:1.1rem 1.3rem;
+  position:relative; overflow:hidden;
+  min-width:160px;
+}
+.hud-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(8,196,168,.35),transparent);
+}
+.hud-card.gold::before {
+  background:linear-gradient(90deg,transparent,rgba(232,184,48,.4),transparent);
+}
+.hc-label {
+  font-family:'Fira Code',monospace;
+  font-size:.46rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--teal);
+  margin-bottom:.35rem;
+}
+.hud-card.gold .hc-label { color:var(--gold2); }
+.hc-val {
+  font-family:'Fraunces',serif;
+  font-size:1.35rem; font-weight:200;
+  color:var(--white); line-height:1;
+  margin-bottom:.2rem;
+}
+.hc-sub {
+  font-family:'Fira Code',monospace;
+  font-size:.46rem; letter-spacing:.09em;
+  color:var(--muted);
+}
+/* Live dot */
+.hud-live {
+  display:flex; align-items:center; gap:.5rem;
+  background:rgba(1,14,28,.65);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(160,212,232,.08);
+  border-radius:5px; padding:.7rem 1rem;
+}
+.live-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--teal2); flex-shrink:0;
+  animation:hpulse 2s infinite;
+}
+.hud-live span {
+  font-family:'Fira Code',monospace;
+  font-size:.46rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--foam);
+}
+
+@media(max-width:1100px) { .hero-hud { display:none; } }
+
+/* ═══════════════════════════
+   SECTION SHARED
+═══════════════════════════ */
+.section-wrap {
+  padding:7rem 4rem;
+  position:relative;
+}
+@media(max-width:900px) { .section-wrap { padding:5rem 1.5rem; } }
+
+.eyebrow-sm {
+  font-family:'Fira Code',monospace;
+  font-size:.54rem; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--teal);
+  display:inline-flex; align-items:center; gap:.7rem;
+  margin-bottom:1.2rem;
+}
+.eyebrow-sm::before { content:''; width:18px; height:1px; background:var(--teal); opacity:.6; }
+.sec-h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.8rem,2.8vw,2.8rem);
+  font-weight:200; line-height:1.06;
+  letter-spacing:-.025em; margin-bottom:1rem;
+}
+.sec-h2 em { font-style:italic; color:var(--sky); }
+
+/* ═══════════════════════════
+   2. ABOUT STRIP — GLASS
+═══════════════════════════ */
+.about-strip {
+  background:linear-gradient(145deg, rgba(2,18,36,.95) 0%, rgba(1,11,20,.98) 100%);
+  border-top:1px solid rgba(160,212,232,.06);
+  border-bottom:1px solid rgba(160,212,232,.06);
+}
+.about-inner {
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:5rem; align-items:center;
+}
+.about-logo-wrap {
+  display:flex; align-items:center; gap:1.5rem;
+  margin-bottom:2rem;
+}
+.about-logo-img {
+  width:64px; height:64px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 12px rgba(8,196,168,.22));
+}
+.about-logo-text strong {
+  display:block;
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:1.25rem; font-weight:800;
+  color:var(--white); letter-spacing:.01em;
+}
+.about-logo-text span {
+  font-family:'Fira Code',monospace;
+  font-size:.52rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--teal);
+}
+.about-body {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:1.05rem; font-weight:300;
+  color:var(--foam); line-height:1.9;
+  margin-bottom:2rem;
+}
+.about-body strong { font-weight:700; color:var(--white); }
+
+/* ROV brand panel (replaces duplicate about-glass-grid) */
+.rov-brand-panel {
+  position:relative; border-radius:9px; overflow:hidden;
+  border:1px solid rgba(160,212,232,.08);
+  aspect-ratio:4/3;
+}
+.rov-brand-panel img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 20%;
+  display:block;
+  filter:brightness(.82) saturate(.75);
+  transition:filter .6s, transform .8s cubic-bezier(.16,1,.3,1);
+}
+.rov-brand-panel:hover img { filter:brightness(.95) saturate(.9); transform:scale(1.03); }
+.rov-brand-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(1,11,20,.75) 0%, transparent 55%);
+  pointer-events:none;
+}
+.rov-brand-tag {
+  position:absolute; bottom:1.4rem; left:1.4rem;
+  z-index:2; display:flex; align-items:center; gap:.55rem;
+  font-family:'Fira Code',monospace;
+  font-size:.5rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--foam);
+  background:rgba(1,11,20,.6);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(160,212,232,.1);
+  border-radius:3px; padding:.4rem .8rem;
+}
+.rov-dot {
+  width:5px; height:5px; border-radius:50%;
+  background:var(--teal2); flex-shrink:0;
+  animation:hpulse 2s infinite;
+}
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:rgba(160,212,232,.05);
+  border:1px solid rgba(160,212,232,.07);
+  border-radius:7px; overflow:hidden;
+}
+.agc {
+  padding:1.8rem 1.6rem;
+  background:rgba(1,11,20,.7);
+  backdrop-filter:blur(16px);
+  transition:background .3s; position:relative;
+}
+.agc::after {
+  content:''; position:absolute;
+  bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(8,196,168,.15),transparent);
+  transform:scaleX(0); transition:transform .4s;
+}
+.agc:hover { background:rgba(8,196,168,.05); }
+.agc:hover::after { transform:scaleX(1); }
+.agc-icon {
+  width:36px; height:36px;
+  border:1px solid rgba(8,196,168,.16);
+  border-radius:3px; display:flex;
+  align-items:center; justify-content:center;
+  margin-bottom:1rem;
+  background:rgba(8,196,168,.05);
+  transition:all .3s;
+}
+.agc:hover .agc-icon { border-color:rgba(8,196,168,.4); background:rgba(8,196,168,.1); }
+.agc-icon svg { width:16px;height:16px;stroke:var(--teal);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round; }
+.agc-title {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.88rem; font-weight:800;
+  color:var(--white); margin-bottom:.4rem;
+}
+.agc-sub {
+  font-family:'Fira Code',monospace;
+  font-size:.58rem; font-weight:300;
+  color:var(--muted); line-height:1.9;
+}
+
+@media(max-width:900px) {
+  .about-inner { grid-template-columns:1fr; gap:3rem; }
+}
+
+/* ═══════════════════════════
+   3. SERVICES GLANCE — GLASS ROW
+═══════════════════════════ */
+.svc-glance {
+  background:var(--void);
+  overflow:hidden; position:relative;
+}
+.svc-glance::before {
+  content:''; position:absolute;
+  right:-10%; top:50%; transform:translateY(-50%);
+  width:40vw; height:40vw; border-radius:50%;
+  background:radial-gradient(circle,rgba(8,78,112,.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.svc-glance-header {
+  display:flex; justify-content:space-between;
+  align-items:flex-end; margin-bottom:3rem; flex-wrap:wrap; gap:1rem;
+}
+.svc-view-all {
+  font-family:'Fira Code',monospace;
+  font-size:.55rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold2);
+  display:inline-flex; align-items:center; gap:.5rem;
+  border-bottom:1px solid rgba(232,184,48,.2);
+  padding-bottom:.2rem; text-decoration:none;
+  transition:all .25s;
+}
+.svc-view-all:hover { gap:.9rem; border-color:var(--gold2); }
+.svc-view-all svg { width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round; transition:transform .2s; }
+.svc-view-all:hover svg { transform:translateX(3px); }
+
+/* Horizontal glass cards */
+.svc-row {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  background:rgba(160,212,232,.04);
+  border:1px solid rgba(160,212,232,.06);
+  border-radius:7px; overflow:hidden;
+}
+.svc-item {
+  padding:2.2rem 1.8rem;
+  background:rgba(1,14,28,.7);
+  backdrop-filter:blur(18px);
+  position:relative; overflow:hidden;
+  transition:background .35s; cursor:pointer;
+  text-decoration:none; display:block;
+}
+.svc-item::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--teal),var(--sky),transparent);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.svc-item:hover { background:rgba(8,196,168,.05); }
+.svc-item:hover::before { transform:scaleX(1); }
+.svc-item-num {
+  font-family:'Fira Code',monospace;
+  font-size:.44rem; letter-spacing:.2em;
+  text-transform:uppercase; color:rgba(8,196,168,.45);
+  margin-bottom:.9rem;
+}
+.svc-item-icon {
+  width:38px; height:38px;
+  border:1px solid rgba(8,196,168,.14);
+  border-radius:3px; display:flex;
+  align-items:center; justify-content:center;
+  margin-bottom:1.2rem; background:rgba(8,196,168,.04);
+  transition:all .3s;
+}
+.svc-item:hover .svc-item-icon { border-color:rgba(8,196,168,.35); background:rgba(8,196,168,.09); }
+.svc-item-icon svg { width:16px;height:16px;stroke:var(--teal);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round; }
+.svc-item-title {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.95rem; font-weight:800;
+  color:var(--white); margin-bottom:.5rem;
+  line-height:1.2;
+}
+.svc-item-txt {
+  font-family:'Fira Code',monospace;
+  font-size:.58rem; font-weight:300;
+  color:var(--muted); line-height:1.9;
+}
+.svc-item-arrow {
+  display:inline-flex; align-items:center; gap:.35rem;
+  margin-top:1.2rem;
+  font-family:'Fira Code',monospace;
+  font-size:.48rem; letter-spacing:.12em;
+  text-transform:uppercase; color:rgba(8,196,168,.4);
+  transition:all .2s;
+}
+.svc-item:hover .svc-item-arrow { color:var(--teal); gap:.6rem; }
+.svc-item-arrow svg { width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round; }
+
+/* Thumbnail image inside each service card */
+.svc-thumb {
+  width:100%; height:140px;
+  border-radius:4px; overflow:hidden;
+  margin-bottom:1.2rem;
+  border:1px solid rgba(160,212,232,.07);
+  position:relative; flex-shrink:0;
+}
+.svc-thumb img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  display:block;
+  filter:brightness(.72) saturate(.65);
+  transition:filter .5s cubic-bezier(.16,1,.3,1),
+             transform .7s cubic-bezier(.16,1,.3,1);
+}
+.svc-item:hover .svc-thumb img {
+  filter:brightness(.88) saturate(.85);
+  transform:scale(1.06);
+}
+/* Subtle gradient over thumb */
+.svc-thumb::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(1,11,20,.55) 0%, transparent 55%);
+  pointer-events:none;
+}
+
+@media(max-width:1200px) { .svc-row { grid-template-columns:repeat(3,1fr); } }
+@media(max-width:800px)  { .svc-row { grid-template-columns:1fr 1fr; } }
+@media(max-width:600px)  { .svc-row { grid-template-columns:1fr; } .svc-thumb { height:120px; } }
+
+/* ═══════════════════════════
+   4. QUICK ENGINEERING DESK — GLASS PANEL
+═══════════════════════════ */
+.qed-section {
+  background:linear-gradient(140deg, var(--deep) 0%, rgba(1,11,20,.98) 100%);
+  border-top:1px solid rgba(160,212,232,.05);
+  position:relative; overflow:hidden;
+}
+.qed-section::before {
+  content:''; position:absolute;
+  right:-5%; top:50%; transform:translateY(-50%);
+  width:420px; height:420px; border-radius:50%;
+  border:1px solid rgba(8,196,168,.06);
+  animation:ringPulse 6s ease-in-out infinite;
+  pointer-events:none;
+}
+.qed-section::after {
+  content:''; position:absolute;
+  right:-5%; top:50%; transform:translateY(-50%);
+  width:600px; height:600px; border-radius:50%;
+  border:1px solid rgba(8,196,168,.03);
+  animation:ringPulse 6s .8s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes ringPulse {
+  0%,100%{opacity:.4;transform:translateY(-50%) scale(1)}
+  50%{opacity:1;transform:translateY(-50%) scale(1.04)}
+}
+.qed-inner {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem; align-items:center;
+}
+.qed-glass {
+  background:rgba(1,14,28,.65);
+  backdrop-filter:blur(24px) saturate(1.4);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid rgba(160,212,232,.1);
+  border-radius:9px; padding:3rem;
+  position:relative; overflow:hidden;
+}
+.qed-glass::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(8,196,168,.4),transparent);
+}
+.qed-badge {
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:'Fira Code',monospace;
+  font-size:.5rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--teal);
+  border:1px solid rgba(8,196,168,.2);
+  padding:.3rem .8rem; border-radius:2px;
+  background:rgba(8,196,168,.04);
+  margin-bottom:1.5rem;
+}
+.qbdot { width:4px;height:4px;border-radius:50%;background:var(--teal2);animation:hpulse 1.8s infinite; }
+.qed-h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.7rem,2.5vw,2.5rem);
+  font-weight:200; line-height:1.08;
+  letter-spacing:-.02em; margin-bottom:1rem;
+}
+.qed-h2 em { font-style:italic; color:var(--sky); }
+.qed-body {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:.95rem; font-weight:300;
+  color:var(--foam); line-height:1.85;
+  margin-bottom:1.4rem;
+}
+.qed-for {
+  font-family:'Fira Code',monospace;
+  font-size:.56rem; font-weight:300;
+  color:var(--muted); line-height:2.1;
+  padding-left:.8rem;
+  border-left:2px solid rgba(8,196,168,.2);
+  margin-bottom:2rem;
+}
+.qed-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
+
+/* Right image panel */
+.qed-img-panel {
+  border-radius:8px; overflow:hidden;
+  border:1px solid rgba(160,212,232,.07);
+  position:relative;
+}
+.qed-img-panel img {
+  width:100%; aspect-ratio:4/3;
+  object-fit:cover; display:block;
+  filter:brightness(.72) saturate(.65);
+  transition:filter .5s,transform .8s cubic-bezier(.16,1,.3,1);
+}
+.qed-img-panel:hover img { filter:brightness(.85) saturate(.8); transform:scale(1.03); }
+.qed-img-panel::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(1,11,20,.35),rgba(8,196,168,.04));
+  pointer-events:none;
+}
+.qed-img-float {
+  position:absolute; bottom:1.4rem; left:1.4rem; z-index:2;
+  font-family:'Fira Code',monospace; font-size:.48rem;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--teal); display:flex; align-items:center; gap:.45rem;
+}
+.qed-img-float::before { content:''; width:16px;height:1px;background:var(--teal);opacity:.7; }
+
+@media(max-width:900px) {
+  .qed-inner { grid-template-columns:1fr; gap:2.5rem; }
+  .qed-img-panel { display:none; }
+}
+
+/* ═══════════════════════════
+   5. FINAL CTA — CINEMATIC
+═══════════════════════════ */
+.home-cta {
+  padding:9rem 4rem;
+  background:linear-gradient(150deg, var(--deep) 0%, var(--abyss) 50%, rgba(8,196,168,.03) 100%);
+  text-align:center; position:relative; overflow:hidden;
+}
+.home-cta::before {
+  content:''; position:absolute;
+  left:0; right:0; top:50%; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(8,196,168,.08),rgba(232,184,48,.06),transparent);
+  transform:translateY(-50%); pointer-events:none;
+}
+.home-cta::after {
+  content:''; position:absolute;
+  bottom:-80px; left:50%; transform:translateX(-50%);
+  width:500px; height:260px; border-radius:50%;
+  background:radial-gradient(ellipse,rgba(8,196,168,.05) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-eyebrow {
+  font-family:'Fira Code',monospace;
+  font-size:.56rem; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--teal);
+  display:inline-flex; align-items:center; gap:.7rem;
+  margin-bottom:1.2rem;
+}
+.cta-eyebrow::before { content:''; width:20px;height:1px;background:var(--teal);opacity:.5; }
+.cta-h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:200; line-height:1.05;
+  letter-spacing:-.025em;
+  max-width:780px; margin:0 auto 1.4rem;
+}
+.cta-h2 em { font-style:italic; color:var(--sky); }
+.cta-sub {
+  font-family:'Cabinet Grotesk',sans-serif;
+  font-size:1rem; font-weight:300;
+  color:var(--foam); line-height:1.85;
+  max-width:520px; margin:0 auto 2.8rem;
+}
+.cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+@media(max-width:900px) { .home-cta { padding:6rem 1.5rem; } }
+
+/* ═══════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════ */
+.rv {
+  opacity:0; transform:translateY(20px);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),
+              transform .8s cubic-bezier(.16,1,.3,1);
+}
+.rv.d1 { transition-delay:.06s; }
+.rv.d2 { transition-delay:.13s; }
+.rv.d3 { transition-delay:.2s;  }
+.rv.d4 { transition-delay:.27s; }
+.rv.d4 { transition-delay:.34s; }
+.rv.on { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Cursors -->
+<div id="c1"></div>
+<div id="c2"></div>
+
+<!-- ═══════════════════════════════════
+     NAV
+═══════════════════════════════════ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="n-logo" aria-label="Bahari BlueTech home">
+    <img src="apple-touch-icon.png" alt="Bahari BlueTech logo" class="n-logo-img" width="40" height="40">
+    <div class="n-wordmark">
+      <strong>Bahari BlueTech</strong>
+      <span>Maritime Engineering · East Africa</span>
+    </div>
+  </a>
+
+  <ul class="n-links" role="list">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:.8rem;">
+    <a href="quick-engineering.html" class="n-cta"><span>Quick Engineering Desk</span></a>
+    <button class="mob-toggle-btn" id="mob-toggle" aria-expanded="false" aria-controls="mob-drawer" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="mob-overlay" id="mob-overlay" aria-hidden="true"></div>
+<div class="mob-drawer" id="mob-drawer" role="dialog" aria-label="Navigation" aria-modal="true">
+  <button class="mob-close" id="mob-close" aria-label="Close menu">
+    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <ul class="mob-links" role="list">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="innovation.html">Innovation</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="quick-engineering.html" class="mob-cta-link">→ Quick Engineering Desk</a>
+</div>
+
+<!-- ═══════════════════════════════════
+     1. HERO
+═══════════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-h1">
+
+  <!-- Background image -->
+  <div class="hero-bg" aria-hidden="true">
+    <img src="images/hero-vessel.png"
+         alt=""
+         width="1600" height="900"
+         fetchpriority="high">
+  </div>
+
+  <!-- Atmospheric -->
+  <div class="hero-scan" aria-hidden="true"></div>
+  <div class="hero-glow g1" aria-hidden="true"></div>
+  <div class="hero-glow g2" aria-hidden="true"></div>
+
+  <!-- Left content -->
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="htag-dot" aria-hidden="true"></span>
+      Mombasa, Kenya · Indian Ocean
+    </div>
+
+    <h1 class="hero-h1" id="hero-h1">
+      Engineering<br>
+      <em>East Africa's</em><br>
+      <span class="gd">Blue Economy.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Maritime engineering, vessel design, CAD drafting, fisheries infrastructure, and blue economy innovation — built for the East African coast.
+    </p>
+
+    <div class="hero-actions">
+      <a href="services.html" class="btn-prim">
+        Our Services
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a href="quick-engineering.html" class="btn-sec">
+        Quick Engineering Desk
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-chips" role="list" aria-label="Capabilities">
+      <span class="hchip" role="listitem">Vessel Design</span>
+      <span class="hchip" role="listitem">CAD Drafting</span>
+      <span class="hchip" role="listitem">Marine Engineering</span>
+      <span class="hchip" role="listitem">Fisheries</span>
+      <span class="hchip" role="listitem">Blue Economy</span>
+    </div>
+  </div>
+
+  <!-- HUD glass cards -->
+  <div class="hero-hud" aria-hidden="true">
+    <div class="hud-live">
+      <div class="live-dot"></div>
+      <span>Active · Mombasa, Kenya</span>
+    </div>
+    <div class="hud-card">
+      <div class="hc-label">Region</div>
+      <div class="hc-val">East Africa</div>
+      <div class="hc-sub">Indian Ocean Coast</div>
+    </div>
+    <div class="hud-card gold">
+      <div class="hc-label">Focus</div>
+      <div class="hc-val">Blue Economy</div>
+      <div class="hc-sub">Maritime · Engineering</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════
+     2. ABOUT STRIP
+═══════════════════════════════════ -->
+<section class="about-strip section-wrap" aria-labelledby="about-heading">
+  <div class="about-inner">
+
+    <div>
+      <div class="about-logo-wrap rv">
+        <img src="apple-touch-icon.png" alt="Bahari BlueTech logo mark" class="about-logo-img" width="64" height="64" loading="lazy">
+        <div class="about-logo-text">
+          <strong>Bahari BlueTech</strong>
+          <span>Maritime Engineering · East Africa</span>
+        </div>
+      </div>
+      <p class="about-body rv d1">
+        We are a <strong>Kenya-based maritime engineering and blue economy firm</strong> delivering vessel design, CAD drafting, fisheries infrastructure, marine engineering, and ocean innovation support across East Africa.
+      </p>
+      <p class="about-body rv d2" style="font-size:.9rem;">
+        From large government and NGO projects to a single boat owner who needs one drawing — Bahari BlueTech brings serious engineering to every scale of the maritime sector.
+      </p>
+      <div class="rv d3">
+        <a href="about.html" class="btn-sec" style="margin-top:.5rem;">
+          About us
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- ROV brand panel — replaces duplicate service icon grid -->
+    <div class="rov-brand-panel rv d2">
+      <img src="images/ROV_Concept.jpeg"
+           alt="Bahari BlueTech founder presenting the ROV concept — Engineered in Kenya, Built for the Ocean"
+           loading="lazy" width="700" height="525">
+      <div class="rov-brand-overlay" aria-hidden="true"></div>
+      <div class="rov-brand-tag" aria-hidden="true">
+        <span class="rov-dot"></span>
+        Innovation — ROV Concept · Engineered in Kenya
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     3. SERVICES GLANCE
+═══════════════════════════════════ -->
+<section class="svc-glance section-wrap" aria-labelledby="svc-heading">
+
+  <div class="svc-glance-header">
+    <div>
+      <div class="eyebrow-sm rv">What we do</div>
+      <h2 class="sec-h2 rv d1" id="svc-heading">
+        Built for the <em>ocean economy.</em>
+      </h2>
+    </div>
+    <a href="services.html" class="svc-view-all rv d2">
+      Full services page
+      <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+
+  <div class="svc-row">
+    <a href="services.html" class="svc-item rv">
+      <div class="svc-thumb">
+        <img src="images/marine-engineering.png" alt="Vessel and marine engineering at East African port" loading="lazy" width="400" height="200">
+      </div>
+      <div class="svc-item-num">01</div>
+      <div class="svc-item-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 18c0-3 3-5 6-5s6 2 6 5"/><path d="M12 8V4m0 4a4 4 0 000 8 4 4 0 000-8z"/></svg>
+      </div>
+      <div class="svc-item-title">Vessel Design & Marine Engineering</div>
+      <div class="svc-item-txt">Naval architecture, structural design, and systems integration for coastal and inland vessels.</div>
+      <div class="svc-item-arrow">Learn more <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    </a>
+    <a href="services.html" class="svc-item rv d1">
+      <div class="svc-thumb">
+        <img src="images/cad-drawing.png" alt="CAD engineer working on precision marine technical drawings" loading="lazy" width="400" height="200">
+      </div>
+      <div class="svc-item-num">02</div>
+      <div class="svc-item-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="svc-item-title">CAD Drafting & Technical Drawings</div>
+      <div class="svc-item-txt">Professional 2D and 3D drawings — buildable by fabricators, presentable to clients and regulators.</div>
+      <div class="svc-item-arrow">Learn more <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    </a>
+    <a href="services.html" class="svc-item rv d2">
+      <div class="svc-thumb">
+        <img src="images/fisheries.png" alt="Fisheries infrastructure with aquaculture cages on East African coast" loading="lazy" width="400" height="200">
+      </div>
+      <div class="svc-item-num">03</div>
+      <div class="svc-item-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+      </div>
+      <div class="svc-item-title">Fisheries & Aquaculture Infrastructure</div>
+      <div class="svc-item-txt">Landing sites, cage systems, jetties, and cold-chain infrastructure for Kenya's fishing sector.</div>
+      <div class="svc-item-arrow">Learn more <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    </a>
+    <a href="services.html" class="svc-item rv d3">
+      <div class="svc-thumb">
+        <img src="images/blue-economy.png" alt="Blue economy and ocean policy advisory for East Africa" loading="lazy" width="400" height="200">
+      </div>
+      <div class="svc-item-num">04</div>
+      <div class="svc-item-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="svc-item-title">Blue Economy Advisory & Policy</div>
+      <div class="svc-item-txt">Technical advisory and policy support for governments, NGOs, and institutions.</div>
+      <div class="svc-item-arrow">Learn more <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    </a>
+    <a href="innovation.html" class="svc-item rv d4">
+      <div class="svc-thumb">
+        <img src="images/ROV_Concept.jpeg" alt="Bahari BlueTech ROV concept — work-class submersible engineered in Kenya" loading="lazy" width="400" height="200">
+      </div>
+      <div class="svc-item-num">05</div>
+      <div class="svc-item-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="6"/><path d="M2 12c0 3.31 4.48 6 10 6s10-2.69 10-6"/><line x1="12" y1="6" x2="12" y2="18"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+      </div>
+      <div class="svc-item-title">Submersibles & ROV Systems</div>
+      <div class="svc-item-txt">Work-class ROV concepts, inspection systems, and underwater intervention technology for East African waters.</div>
+      <div class="svc-item-arrow">Explore innovation <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    </a>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════
+     4. QUICK ENGINEERING DESK
+═══════════════════════════════════ -->
+<section class="qed-section section-wrap" aria-labelledby="qed-heading">
+  <div class="qed-inner">
+
+    <div class="qed-glass rv">
+      <div class="qed-badge">
+        <span class="qbdot" aria-hidden="true"></span>
+        Fast-Track Engineering
+      </div>
+      <h2 class="qed-h2" id="qed-heading">
+        Quick<br><em>Engineering Desk</em>
+      </h2>
+      <p class="qed-body">
+        Need a drawing, CAD model, design review, or engineering concept — fast? Submit a request and get practical output you can actually use.
+      </p>
+      <p class="qed-for">
+        For: students · fabricators · contractors<br>
+        boat owners · SMEs · startups · individuals
+      </p>
+      <div class="qed-actions">
+        <a href="quick-engineering.html" class="btn-prim">
+          Submit a Request
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="contact.html" class="btn-sec">
+          Talk to us
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="qed-img-panel rv d2">
+      <img src="images/cad-drawing.png"
+           alt="CAD engineer working on precision marine technical drawings at dual-monitor workstation"
+           loading="lazy" width="700" height="525">
+      <div class="qed-img-float" aria-hidden="true">CAD · Fast Turnaround</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     5. FINAL CTA
+═══════════════════════════════════ -->
+<section class="home-cta" aria-labelledby="cta-heading">
+  <div class="cta-eyebrow rv">Let's build together</div>
+  <h2 class="cta-h2 rv d1" id="cta-heading">
+    Ready to start your<br><em>next marine project?</em>
+  </h2>
+  <p class="cta-sub rv d2">
+    Vessel design, CAD drawings, fisheries infrastructure, or blue economy strategy — your East African ocean engineering partner is here.
+  </p>
+  <div class="cta-actions rv d3">
+    <a href="contact.html" class="btn-prim">
+      Contact Bahari BlueTech
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+    <a href="quick-engineering.html" class="btn-sec">
+      Quick Engineering Desk
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer>
+  <div class="f-inner">
+    <div>
+      <div class="f-left">
+        <span class="f-copy">© 2025 Bahari BlueTech Limited · Mombasa, Kenya</span>
+        <div class="f-sep"></div>
+        <span class="f-copy">info@baharibluetech.co.ke</span>
+        <div class="f-sep"></div>
+        <span class="f-copy">+254 140 211 588</span>
+      </div>
+      <ul class="f-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="innovation.html">Innovation</a></li>
+        <li><a href="sustainability.html">Sustainability</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-tagline">Engineering Africa's ocean future, from the coast up.</div>
+  </div>
+</footer>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/254140211588" target="_blank" rel="noopener" class="wa-float" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+  <div class="wa-tooltip" aria-hidden="true">Chat on WhatsApp</div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="site.js"></script>
+<script>
+/* ── Particle canvas ── */
+initParticleCanvas && initParticleCanvas('hero-canvas');
+
+/* ── Reveal observer ── */
+(function(){
+  const els = document.querySelectorAll('.rv');
+  if(!els.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+  }, { threshold:.09 });
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ── Mobile nav ── */
+(function(){
+  const toggle  = document.getElementById('mob-toggle');
+  const drawer  = document.getElementById('mob-drawer');
+  const overlay = document.getElementById('mob-overlay');
+  const close   = document.getElementById('mob-close');
+  if(!toggle||!drawer) return;
+  function open(){ drawer.classList.add('open'); overlay.classList.add('open'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function shut(){ drawer.classList.remove('open'); overlay.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  toggle.addEventListener('click', open);
+  close  && close.addEventListener('click', shut);
+  overlay.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', e => { if(e.key==='Escape') shut(); });
+})();
+
+/* ── Subtle hero parallax ── */
+(function(){
+  const img = document.querySelector('.hero-bg img');
+  if(!img || window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  let t = false;
+  window.addEventListener('scroll', () => {
+    if(!t){ requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if(y < window.innerHeight) img.style.transform = `scale(1) translateY(${y * 0.1}px)`;
+      t = false;
+    }); t = true; }
+  }, { passive:true });
+})();
+</script>
+</body>
+</html>
